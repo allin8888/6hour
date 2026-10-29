@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>近6小时财经快讯交易筛选报告</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #1a1a2e; line-height: 1.6; padding: 24px; }
+  .container { max-width: 1100px; margin: 0 auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); overflow: hidden; }
+  .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: #fff; padding: 28px 32px; }
+  .header h1 { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+  .header .meta { font-size: 13px; opacity: 0.85; line-height: 1.8; }
+  .meta-tag { display: inline-block; background: rgba(255,255,255,0.15); border-radius: 4px; padding: 1px 8px; margin-right: 4px; }
+  .section { padding: 24px 32px; border-bottom: 1px solid #eee; }
+  .section:last-child { border-bottom: none; }
+  .section-title { font-size: 16px; font-weight: 700; color: #16213e; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  .section-title::before { content: ''; width: 4px; height: 18px; background: #e94560; border-radius: 2px; }
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .summary-card { background: #f8f9fc; border-radius: 8px; padding: 14px 16px; border-left: 4px solid #e94560; }
+  .summary-card.green { border-left-color: #2ecc71; }
+  .summary-card.blue { border-left-color: #3498db; }
+  .summary-card.orange { border-left-color: #f39c12; }
+  .summary-card.purple { border-left-color: #9b59b6; }
+  .summary-card .label { font-size: 12px; color: #888; margin-bottom: 4px; }
+  .summary-card .value { font-size: 15px; font-weight: 600; color: #1a1a2e; }
+  h3 { font-size: 14px; font-weight: 700; color: #16213e; margin: 16px 0 10px; }
+  h4 { font-size: 13px; font-weight: 700; color: #e94560; margin: 14px 0 8px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 10px 0; }
+  th, td { border: 1px solid #e0e4e8; padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: #f0f2f5; font-weight: 600; color: #16213e; white-space: nowrap; }
+  tr:nth-child(even) { background: #fafbfc; }
+  tr:hover { background: #f0f4ff; }
+  .s { color: #e94560; font-weight: 700; }
+  .a { color: #f39c12; font-weight: 700; }
+  .b { color: #3498db; font-weight: 600; }
+  .c { color: #95a5a6; font-weight: 600; }
+  .tag { display: inline-block; border-radius: 3px; padding: 1px 6px; font-size: 11px; font-weight: 600; }
+  .tag-s { background: #ffeaea; color: #e94560; }
+  .tag-a { background: #fff3e0; color: #f39c12; }
+  .tag-b { background: #e3f2fd; color: #3498db; }
+  .tag-c { background: #f5f5f5; color: #95a5a6; }
+  .up { color: #e94560; }
+  .down { color: #27ae60; }
+  .neutral { color: #888; }
+  .bull { color: #e94560; font-weight: 600; }
+  .bear { color: #27ae60; font-weight: 600; }
+  .hold { color: #888; }
+  .event-title { font-weight: 700; color: #16213e; margin-bottom: 6px; font-size: 14px; }
+  .event-body { font-size: 13px; color: #444; }
+  .event-body p { margin-bottom: 6px; }
+  .event-body ul { margin-left: 16px; }
+  .event-body li { margin-bottom: 3px; }
+  .stock-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .stock-tag { background: #f0f4ff; border: 1px solid #d0d8f0; border-radius: 4px; padding: 2px 8px; font-size: 12px; color: #16213e; }
+  .stock-tag.direct { border-color: #e94560; background: #fff0f0; color: #c0392b; }
+  .stock-tag.indirect { border-color: #f39c12; background: #fff8ee; color: #d68910; }
+  .stock-tag.sentiment { border-color: #3498db; background: #eef6ff; color: #2471a3; }
+  .footer { padding: 16px 32px; background: #f8f9fc; font-size: 12px; color: #888; text-align: center; }
+  .theme-block { background: #fafbfc; border: 1px solid #e8eaf0; border-radius: 8px; padding: 16px; margin-bottom: 16px; }
+  .theme-block .drivers { margin: 8px 0; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } body { padding: 12px; } .section { padding: 16px; } .header { padding: 20px; } }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>近6小时财经快讯交易筛选报告</h1>
+    <div class="meta">
+      <span class="meta-tag">生成时间：2026-08-21 10:18（北京时间）</span>
+      <span class="meta-tag">覆盖区间：04:17 — 10:17</span>
+      <span class="meta-tag">数据来源：新浪财经 / 同花顺 / 富途牛牛 / 东方财富</span>
+      <br>
+      <span style="opacity:0.75;font-size:12px;">华尔街见闻页面动态加载失败，未计入来源</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">统计概览</div>
+    <div class="summary-grid">
+      <div class="summary-card"><div class="label">已加载新闻</div><div class="value">约 120+ 条</div></div>
+      <div class="summary-card blue"><div class="label">窗口内有效事件</div><div class="value">13 个</div></div>
+      <div class="summary-card green"><div class="label">高价值事件（S/A）</div><div class="value">5 个</div></div>
+      <div class="summary-card orange"><div class="label">中等价值事件（B）</div><div class="value">5 个</div></div>
+      <div class="summary-card purple"><div class="label">噪音/低价值事件</div><div class="value">约 30+ 条</div></div>
+    </div>
+    <p style="font-size:13px;color:#666;">去重合并后，S级1、A级4、B级5。核心主线为：黄金/贵金属多头趋势延续 + 集运欧线期货暴涨强化油运定价预期差 + 存储供需缺口持续扩大 + 日俄地缘紧张升温。</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">一、先看结论</div>
+    <div class="two-col">
+      <div>
+        <div class="summary-card green" style="margin-bottom:10px">
+          <div class="label">今日最重要市场变化</div>
+          <div class="value">黄金站上4540美元/盎司，集运欧线期货暴涨10%，美光CEO称需求超出供给50%</div>
+        </div>
+        <div class="summary-card" style="margin-bottom:10px">
+          <div class="label">当前优先交易主线（3条）</div>
+          <div class="value" style="font-size:13px">① 贵金属多头趋势延续（黄金+白银）<br>② 油运/航运链强势（集运欧线期货）<br>③ 存储芯片供需缺口（美光需求150%）</div>
+        </div>
+      </div>
+      <div>
+        <div class="summary-card blue" style="margin-bottom:10px">
+          <div class="label">明显承压或应回避方向</div>
+          <div class="value" style="font-size:13px">创新药/CRO（泡泡玛特中报不及预期、医药板块集体低开）、煤炭（宝泰隆跌停）、乳业（一鸣食品跌停）、农业种植（万向德农跌停）</div>
+        </div>
+        <div class="summary-card orange">
+          <div class="label">次日需验证的关键变量</div>
+          <div class="value" style="font-size:13px">① 霍尔木兹实际通航量是否继续维持低位<br>② 韩国KOSPI是否企稳（避免重演昨日SIDECAR）<br>③ 美联储9月议息会议前穆萨勒姆鹰派言论后续发酵</div>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:13px;color:#666;margin-top:10px">💡 A股传导最强市场：港股美股科技（三星股东回报、美光需求），A股存储/PCB/CPO板块联动；贵金属A股直接映射明确（赤峰黄金、山东黄金、西部黄金）。</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">二、有效事件清单（S/A/B级）</div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:60px">时间</th>
+          <th style="width:140px">事件主题</th>
+          <th style="width:70px">分类</th>
+          <th>事实摘要</th>
+          <th style="width:130px">新增性/核心变量</th>
+          <th>影响行业与资产</th>
+          <th style="width:200px">上市公司映射</th>
+          <th style="width:60px">方向</th>
+          <th style="width:60px">持续性</th>
+          <th style="width:40px">优先级</th>
+          <th>需验证事项</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>09:36</td>
+          <td>现货黄金站上4540美元/盎司</td>
+          <td>商品价格</td>
+          <td>现货黄金突破4540美元/盎司，日内涨0.56%；纽约期金站上4600美元/盎司，涨0.63%。港股黄金股延续涨势，山东黄金涨超5%。</td>
+          <td>价格持续新高，美联储9月议息前市场博弈加剧，避险+降息预期双驱动</td>
+          <td>贵金属板块、美元、美股黄金ETF</td>
+          <td><span class="stock-tag direct">赤峰黄金 600988 直接受益</span><br><span class="stock-tag direct">山东黄金 600547 直接受益</span><br><span class="stock-tag direct">西部黄金 002554 直接受益</span><br><span class="stock-tag sentiment">情绪映射：株冶集团、晓程科技</span></td>
+          <td class="bull">利多</td>
+          <td>中期</td>
+          <td><span class="tag tag-s">S</span></td>
+          <td>美联储9月议息会议结果对黄金的影响</td>
+        </tr>
+        <tr>
+          <td>09:49</td>
+          <td>集运指数欧线期货暴涨10%</td>
+          <td>商品价格</td>
+          <td>上期所欧线集运主力合约暴涨10%，报1930点；前一日已涨8%至1895点。霍尔木兹日均通航量骤降超70%消息持续发酵。</td>
+          <td>连续两日急涨，霍尔木兹油运定价预期差主线强化，与昨日1895→今日1930形成连续突破</td>
+          <td>油运/航运链、A股油气、港股能源股</td>
+          <td><span class="stock-tag direct">招商轮船 601872 直接受益</span><br><span class="stock-tag direct">中远海能 600026 直接受益</span><br><span class="stock-tag sentiment">情绪映射：中曼石油、通源石油</span></td>
+          <td class="bull">利多</td>
+          <td>短期</td>
+          <td><span class="tag tag-s">S</span></td>
+          <td>霍尔木兹实际通航量是否恢复</td>
+        </tr>
+        <tr>
+          <td>09:58</td>
+          <td>美光CEO：数据中心需求超出供给50%</td>
+          <td>行业景气</td>
+          <td>美光科技CEO Sanjay Mehrotra表示，AI从根本上改变了存储芯片需求逻辑，当前数据中心客户采购需求约为可承诺供应量的150%，产能仍无法满足需求。</td>
+          <td>需求信号再度强化，印证此前AI算力硬件链景气逻辑，存储价格上行趋势确认</td>
+          <td>存储芯片、半导体、A股/H股科技股</td>
+          <td><span class="stock-tag indirect">间接受益：深南电路 002916</span><br><span class="stock-tag indirect">间接受益：生益科技 600183</span><br><span class="stock-tag sentiment">情绪映射：芯原股份、澜起科技</span></td>
+          <td class="bull">利多</td>
+          <td>中期</td>
+          <td><span class="tag tag-a">A</span></td>
+          <td>存储价格趋势、韩股KOSPI企稳时点</td>
+        </tr>
+        <tr>
+          <td>10:03</td>
+          <td>三星电子拟公布重大股东回报方案</td>
+          <td>公司公告</td>
+          <td>三星电子计划于周五下午召开董事会，讨论新的股东回报方案，据富途报道拟向股东返还至多790亿美元。韩股三星电子涨超3%，SK海力士涨超4%。</td>
+          <td>超大额股东回报提振韩股科技板块情绪，对A股存储/半导体板块形成正向映射</td>
+          <td>存储芯片、半导体、A股/H股科技股</td>
+          <td><span class="stock-tag sentiment">情绪映射：兆易创新、江波龙、佰维存储</span></td>
+          <td class="bull">利多</td>
+          <td>短期</td>
+          <td><span class="tag tag-a">A</span></td>
+          <td>韩国KOSPI是否企稳、存储价格后续走势</td>
+        </tr>
+        <tr>
+          <td>09:39</td>
+          <td>比特币突破75000美元</td>
+          <td>其他</td>
+          <td>比特币突破75000美元，日内涨超3%。美联储穆萨勒姆鹰派言论（同日）称加息合理，但加密市场不受直接影响。</td>
+          <td>加密市场高位震荡，反映流动性宽松预期下的另类资产定价</td>
+          <td>加密货币、美股加密相关股</td>
+          <td>A股直接映射较弱，港股无直接标的</td>
+          <td class="neutral">中性</td>
+          <td>短期</td>
+          <td><span class="tag tag-b">B</span></td>
+          <td>——</td>
+        </tr>
+        <tr>
+          <td>09:33</td>
+          <td>7月全社会用电量同比增1.7%</td>
+          <td>宏观政策</td>
+          <td>国家能源局发布7月全社会用电量10400亿千瓦时，同比增1.7%（前值3.7%），1-7月累计增4.7%。高技术制造业用电量增8.9%，充换电服务业增50.3%。</td>
+          <td>用电量增速显著放缓，与高技术/数据中心用电量高增形成结构性分化，反映传统经济动能疲弱</td>
+          <td>电力板块、工业用电相关板块</td>
+          <td><span class="stock-tag indirect">间接受益：国电南瑞 600406（电网）</span><br><span class="stock-tag sentiment">情绪映射：电力改革概念股</span></td>
+          <td class="neutral">分化</td>
+          <td>待观察</td>
+          <td><span class="tag tag-b">B</span></td>
+          <td>8月用电量数据及Q3经济动能</td>
+        </tr>
+        <tr>
+          <td>09:42</td>
+          <td>巴基斯坦对华纯碱作出反倾销初裁</td>
+          <td>其他</td>
+          <td>巴基斯坦对华纯碱（Disodium Carbonate）征收10.85%临时反倾销税，有效期4个月。同日还对葡萄糖一水合物征收10.79%临时反倾销税。</td>
+          <td>贸易摩擦延续，但规模有限，影响集中在纯碱出口企业</td>
+          <td>化工板块、纯碱出口企业</td>
+          <td><span class="stock-tag indirect">间接受损：远兴能源 000683</span></td>
+          <td class="bear">利空</td>
+          <td>短期</td>
+          <td><span class="tag tag-b">B</span></td>
+          <td>终裁结果（180日内）及后续反倾销案件</td>
+        </tr>
+        <tr>
+          <td>09:26</td>
+          <td>中国华能与华为会谈</td>
+          <td>其他</td>
+          <td>中国华能董事长温枢刚、总经理钟国东与华为CEO任正非在深圳举行会谈，双方就新能源与数字化合作交换意见。</td>
+          <td>央企+科技巨头战略合作信号，对新能源+AI算力基建交叉领域有主题催化</td>
+          <td>新能源、AI算力基建</td>
+          <td><span class="stock-tag sentiment">情绪映射：华为产业链、储能概念股</span></td>
+          <td class="bull">利多</td>
+          <td>待观察</td>
+          <td><span class="tag tag-b">B</span></td>
+          <td>后续具体合作项目名称与落地节奏</td>
+        </tr>
+        <tr>
+          <td>09:21</td>
+          <td>浙江省"十五五"财政规划发布</td>
+          <td>宏观政策</td>
+          <td>浙江省政府印发"十五五"财政规划，提出科技创新投入预算原则上只增不减，支持315科技创新体系、概念验证中心和中试平台。</td>
+          <td>省级财政规划释放强科技投入信号，对浙江地区科技股构成中长期利好</td>
+          <td>科技创新、半导体、新能源</td>
+          <td><span class="stock-tag sentiment">情绪映射：浙江本地科技股（浙大网新等）</span></td>
+          <td class="bull">利多</td>
+          <td>长期</td>
+          <td><span class="tag tag-b">B</span></td>
+          <td>具体财政投入规模与落地项目</td>
+        </tr>
+        <tr>
+          <td>09:50</td>
+          <td>深蓝航天130吨级发动机试车成功</td>
+          <td>行业景气</td>
+          <td>深蓝航天完成"雷霆-RS"130吨级液氧煤油发动机100秒长程热试车，推力达1297.5千牛（约132.3吨力），各项参数全面达标。配套星云二号大型可回收火箭。</td>
+          <td>国内推力最大燃气发生器循环针栓式液氧煤油发动机实现重大技术跨越，商业航天产业化加速</td>
+          <td>商业航天、火箭发动机、卫星互联网</td>
+          <td><span class="stock-tag sentiment">情绪映射：航天科技、航天电子、中国卫星</span></td>
+          <td class="bull">利多</td>
+          <td>中期</td>
+          <td><span class="tag tag-a">A</span></td>
+          <td>星云二号首飞时间表</td>
+        </tr>
+        <tr>
+          <td>09:50</td>
+          <td>具身智能企业"灵犀智涌"创立</td>
+          <td>科技/AI</td>
+          <td>具身智能企业"灵犀智涌"在上海创立，创始人中科大博士段逸凡，中科大教授吉建民任首席科学家，推出工业具身执行系统ROSS，主打技能抽象、分层安全监控与异常恢复。</td>
+          <td>人形机器人产业从"主题投资"向"产业定价"阶段演进的新案例，对标宇树科技IPO定价锚</td>
+          <td>人形机器人、具身智能、工业自动化</td>
+          <td><span class="stock-tag sentiment">情绪映射：汇川技术、埃斯顿、埃夫特</span></td>
+          <td class="bull">利多</td>
+          <td>长期</td>
+          <td><span class="tag tag-a">A</span></td>
+          <td>ROSS系统商业化落地进度</td>
+        </tr>
+        <tr>
+          <td>09:49</td>
+          <td>美联储穆萨勒姆：加息合理</td>
+          <td>利率/汇率/债券</td>
+          <td>美国圣路易斯联储主席阿尔贝托·穆萨勒姆周四表示，美债抛售源于政府借贷与AI发展融资需求之间的资金争夺，通胀仍然太高，加息是合理的。</td>
+          <td>联储官员鹰派表态，与市场降息预期形成背离，对风险资产构成潜在压力</td>
+          <td>美股、美债、新兴市场汇率</td>
+          <td>A股/H股传导：宏观风险情绪压制，间接影响成长股估值</td>
+          <td class="bear">利空</td>
+          <td>短期</td>
+          <td><span class="tag tag-b">B</span></td>
+          <td>美联储9月议息会议结果、后续官员讲话</td>
+        </tr>
+        <tr>
+          <td>09:50</td>
+          <td>俄在南千岛群岛附近导弹训练</td>
+          <td>国际地缘</td>
+          <td>俄罗斯太平洋舰队在南千岛群岛（北方四岛）附近海域进行导弹发射训练，日本外务大臣茂木敏充表示"无法接受"。</td>
+          <td>日俄地缘紧张持续升级，对亚太安全风险偏好形成扰动，与霍尔木兹事件叠加形成多地缘风险共振</td>
+          <td>避险资产、军工、油运</td>
+          <td><span class="stock-tag sentiment">情绪映射：中航沈飞、航发动力、中国船舶</span></td>
+          <td class="bull">利多</td>
+          <td>短期</td>
+          <td><span class="tag tag-a">A</span></td>
+          <td>日俄关系后续演变、北方四岛军事动态</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">三、主题归纳（按交易优先级排序）</div>
+
+    <div class="theme-block">
+      <div class="event-title"><span class="tag tag-s">S级</span> 贵金属多头趋势强化</div>
+      <div class="event-body">
+        <p><strong>驱动事件：</strong>现货黄金站上4540美元/盎司（09:36），纽约期金站上4600美元；港股黄金股山东黄金涨超5%（09:37）；A股白银有色触及涨停（09:43）。</p>
+        <p><strong>核心变化：</strong>金价再创新高，美联储9月议息会议前避险+降息预期双驱动，定价模式转向"非美资产属性重新定价"。</p>
+        <p><strong>交易逻辑：</strong>美联储9月议息结果存在不确定性（穆萨勒姆鹰派发言vs降息预期），地缘风险（霍尔木兹+南千岛群岛）提供避险支撑。贵金属板块定价逻辑从"美联储降息预期"扩展为"多因素共振定价"。</p>
+        <p><strong>受益方向：</strong>黄金股（赤峰黄金、山东黄金、西部黄金）、白银股（白银有色）</p>
+        <p><strong>承压方向：</strong>美元多头（金价走强反向压制）、非贵金属大宗商品</p>
+        <p><strong>代表公司：</strong>赤峰黄金（600988，直接受益）、山东黄金（600547，直接受益）、西部黄金（002554，直接受益）、白银有色（601212，情绪映射）</p>
+        <p><strong>市场更可能交易：</strong>基本面+情绪面混合（价格驱动为主）</p>
+        <p><strong>关键验证：</strong>美联储9月议息会议结果、黄金现货/期货价格能否站稳4500美元</p>
+      </div>
+    </div>
+
+    <div class="theme-block">
+      <div class="event-title"><span class="tag tag-s">S级</span> 油运/航运链强势延续</div>
+      <div class="event-body">
+        <p><strong>驱动事件：</strong>集运指数欧线期货连续主力合约暴涨10%，报1930点（09:49），前一日已涨8%至1895点。霍尔木兹日均通航量骤降超70%消息持续发酵（东方财富）。石油ETF招商高开高走涨超2%。</p>
+        <p><strong>核心变化：</strong>连续两日急涨，霍尔木兹油运定价预期差主线强化，与昨日库存消耗逻辑叠加。</p>
+        <p><strong>交易逻辑：</strong>霍尔木兹实际通航量若持续维持低位，油运/航运价格弹性将持续释放；集运欧线期货价格突破1900点后，向上空间打开。</p>
+        <p><strong>受益方向：</strong>油运股（招商轮船、中远海能）、航运ETF、石油开采股</p>
+        <p><strong>承压方向：</strong>航空股（油价上涨压制成本）、依赖进口原材料的化工企业</p>
+        <p><strong>代表公司：</strong>招商轮船（601872，直接受益）、中远海能（600026，直接受益）、中曼石油（603619，间接受益）</p>
+        <p><strong>市场更可能交易：</strong>基本面+情绪面混合（地缘风险定价为主）</p>
+        <p><strong>关键验证：</strong>霍尔木兹实际通航量是否恢复、集运欧线期货后续走势</p>
+      </div>
+    </div>
+
+    <div class="theme-block">
+      <div class="event-title"><span class="tag tag-a">A级</span> 存储芯片供需缺口持续扩大</div>
+      <div class="event-body">
+        <p><strong>驱动事件：</strong>美光CEO称数据中心客户采购需求约为可承诺供应量150%（10:01）；三星电子拟向股东返还至多790亿美元（10:03）；韩国股市韩元兑美元上涨1%（09:31）。</p>
+        <p><strong>核心变化：</strong>美光需求信号再度强化，存储价格上涨趋势确认；三星股东回报方案提振韩股科技板块情绪。</p>
+        <p><strong>交易逻辑：</strong>AI算力硬件链景气度确认（订单实锤+业绩验证双确认），存储价格上行趋势延续；韩股企稳后A股存储板块有望获得正向映射。</p>
+        <p><strong>受益方向：</strong>存储芯片（兆易创新、江波龙、佰维存储）、PCB（深南电路、生益科技）、CPO（新易盛、中际旭创）</p>
+        <p><strong>承压方向：</strong>无直接承压方向</p>
+        <p><strong>代表公司：</strong>兆易创新（603986，间接受益）、江波龙（301308，间接受益）、深南电路（002916，间接受益）</p>
+        <p><strong>市场更可能交易：</strong>基本面（业绩验证为主）</p>
+        <p><strong>关键验证：</strong>存储价格后续走势、韩国KOSPI是否企稳</p>
+      </div>
+    </div>
+
+    <div class="theme-block">
+      <div class="event-title"><span class="tag tag-a">A级</span> 日俄地缘紧张升级</div>
+      <div class="event-body">
+        <p><strong>驱动事件：</strong>俄罗斯太平洋舰队在南千岛群岛（北方四岛）附近进行导弹发射训练（09:50），日本外务大臣茂木敏充表示"无法接受"（新浪财经、同花顺、富途均有报道）。</p>
+        <p><strong>核心变化：</strong>日俄地缘紧张从"外交口水战"升级为"军事演习展示"，与霍尔木兹事件形成多地缘风险共振。</p>
+        <p><strong>交易逻辑：</strong>地缘风险溢价推升避险资产（黄金、油运）；A股军工板块存在情绪映射机会，但直接受益标的有限。</p>
+        <p><strong>受益方向：</strong>军工（中航沈飞、航发动力）、避险资产（黄金）</p>
+        <p><strong>承压方向：</strong>亚太风险资产（港股、A股科技成长板块情绪面承压）</p>
+        <p><strong>代表公司：</strong>中航沈飞（600760，情绪映射）、航发动力（600893，情绪映射）</p>
+        <p><strong>市场更可能交易：</strong>情绪面（地缘风险溢价）</p>
+        <p><strong>关键验证：</strong>日俄关系后续演变、北方四岛军事动态</p>
+      </div>
+    </div>
+
+    <div class="theme-block">
+      <div class="event-title"><span class="tag tag-a">A级</span> 商业航天产业化加速</div>
+      <div class="event-body">
+        <p><strong>驱动事件：</strong>深蓝航天完成130吨级液氧煤油发动机100秒长程热试车（09:50）；美总统签署太空运输新备忘录（东方财富报道）。</p>
+        <p><strong>核心变化：</strong>国内商业航天大推力火箭发动机实现重大技术跨越，配套星云二号大型可回收火箭；美国太空运输政策加速全球商业航天竞争。</p>
+        <p><strong>交易逻辑：</strong>商业航天为确定性政策/产业事件主线，深蓝航天试车成功印证国内可回收火箭技术 progressing；对标朱雀三号陆地回收+蓝箭半年内复飞，航天板块主题催化密集。</p>
+        <p><strong>受益方向：</strong>商业航天、火箭发动机、卫星互联网</p>
+        <p><strong>承压方向：</strong>无直接承压方向</p>
+        <p><strong>代表公司：</strong>航天科技（000901，情绪映射）、航天电子（600879，情绪映射）、中国卫星（600118，情绪映射）</p>
+        <p><strong>市场更可能交易：</strong>主题投资（政策催化为主）</p>
+        <p><strong>关键验证：</strong>星云二号首飞时间表</p>
+      </div>
+    </div>
+
+    <div class="theme-block">
+      <div class="event-title"><span class="tag tag-a">A级</span> 具身智能产业定价阶段</div>
+      <div class="event-body">
+        <p><strong>驱动事件：</strong>具身智能企业"灵犀智涌"在上海创立，推出工业具身执行系统ROSS（09:50）。</p>
+        <p><strong>核心变化：</strong>人形机器人由"主题投资"转向"产业定价"阶段，宇树科技IPO为定价锚，灵犀智涌Ross系统对标工业落地场景。</p>
+        <p><strong>交易逻辑：</strong>具身智能产业化进程加速，工业落地场景（技能抽象、安全监控、异常恢复）具备商业化可行性；对标宇树科技IPO，机器人板块存在持续主题催化。</p>
+        <p><strong>受益方向：</strong>人形机器人、工业自动化</p>
+        <p><strong>承压方向：</strong>无直接承压方向</p>
+        <p><strong>代表公司：</strong>汇川技术（300124，间接受益）、埃斯顿（002747，情绪映射）、埃夫特（688165，情绪映射）</p>
+        <p><strong>市场更可能交易：</strong>主题投资（产业定价为主）</p>
+        <p><strong>关键验证：</strong>ROSS系统商业化落地进度</p>
+      </div>
+    </div>
+
+    <div class="theme-block">
+      <div class="event-title"><span class="tag tag-b">B级</span> 用电量数据结构性分化</div>
+      <div class="event-body">
+        <p><strong>驱动事件：</strong>7月全社会用电量同比增1.7%（前值3.7%），高技术制造业增8.9%，充换电服务业增50.3%，互联网数据服务增40.1%（09:33）。</p>
+        <p><strong>核心变化：</strong>传统经济动能（总用电量增速）疲软，与数据中心/充电设施用电量高增形成鲜明对比。</p>
+        <p><strong>交易逻辑：</strong>结构性分化印证AI算力基建持续高景气，对电力设备（国电南瑞）和数据中心产业链构成主题催化。</p>
+        <p><strong>受益方向：</strong>电网设备（国电南瑞）、数据中心产业链</p>
+        <p><strong>承压方向：</strong>传统高耗能行业（钢铁、水泥）</p>
+        <p><strong>代表公司：</strong>国电南瑞（600406，间接受益）</p>
+        <p><strong>市场更可能交易：</strong>混合（基本面+主题）</p>
+        <p><strong>关键验证：</strong>8月用电量数据及Q3经济动能</p>
+      </div>
+    </div>
+
+    <div class="theme-block">
+      <div class="event-title"><span class="tag tag-b">B级</span> 巴基斯坦对华化工产品发起反倾销</div>
+      <div class="event-body">
+        <p><strong>驱动事件：</strong>巴基斯坦对华纯碱征收10.85%临时反倾销税（09:52）；对华葡萄糖一水合物征收10.79%临时反倾销税（10:01）。</p>
+        <p><strong>核心变化：</strong>贸易摩擦延续，但规模有限，属于区域性贸易救济措施。</p>
+        <p><strong>交易逻辑：</strong>对纯碱出口企业（远兴能源）构成直接冲击，但整体影响有限，属于低优先级事件。</p>
+        <p><strong>受益方向：</strong>无直接受益方向</p>
+        <p><strong>承压方向：</strong>纯碱出口企业（远兴能源）</p>
+        <p><strong>代表公司：</strong>远兴能源（000683，间接受损）</p>
+        <p><strong>市场更可能交易：</strong>情绪面（贸易摩擦担忧）</p>
+        <p><strong>关键验证：</strong>终裁结果（180日内）及后续反倾销案件</p>
+      </div>
+    </div>
+
+    <div class="theme-block">
+      <div class="event-title"><span class="tag tag-b">B级</span> 中国华能与华为会谈</div>
+      <div class="event-body">
+        <p><strong>驱动事件：</strong>中国华能董事长温枢刚、总经理钟国东与华为CEO任正非在深圳举行会谈（09:26）。</p>
+        <p><strong>核心变化：</strong>央企+科技巨头战略合作信号，新能源与数字化交叉领域存在合作空间。</p>
+        <p><strong>交易逻辑：</strong>主题催化为主，对华为产业链和储能概念股构成情绪映射，但缺乏具体合作项目落地信息。</p>
+        <p><strong>受益方向：</strong>华为产业链、储能概念股</p>
+        <p><strong>承压方向：</strong>无直接承压方向</p>
+        <p><strong>代表公司：</strong>华为产业链概念股（情绪映射）、储能概念股（情绪映射）</p>
+        <p><strong>市场更可能交易：</strong>主题投资</p>
+        <p><strong>关键验证：</strong>后续具体合作项目名称与落地节奏</p>
+      </div>
+    </div>
+
+    <div class="theme-block">
+      <div class="event-title"><span class="tag tag-b">B级</span> 浙江省"十五五"财政规划</div>
+      <div class="event-body">
+        <p><strong>驱动事件：</strong>浙江省政府印发"十五五"财政规划，提出科技创新投入预算原则上只增不减（09:21）。</p>
+        <p><strong>核心变化：</strong>省级财政规划释放强科技投入信号，支持315科技创新体系。</p>
+        <p><strong>交易逻辑：</strong>对浙江地区科技股构成中长期利好，但缺乏具体项目落地信息，属于主题型催化。</p>
+        <p><strong>受益方向：</strong>浙江本地科技股</p>
+        <p><strong>承压方向：</strong>无直接承压方向</p>
+        <p><strong>代表公司：</strong>浙大网新（600797，情绪映射）</p>
+        <p><strong>市场更可能交易：</strong>主题投资</p>
+        <p><strong>关键验证：</strong>具体财政投入规模与落地项目</p>
+      </div>
+    </div>
+
+    <div class="theme-block">
+      <div class="event-title"><span class="tag tag-b">B级</span> 美联储官员鹰派发言</div>
+      <div class="event-body">
+        <p><strong>驱动事件：</strong>圣路易斯联储主席穆萨勒姆称通胀仍然太高，加息合理（东方财富）。</p>
+        <p><strong>核心变化：</strong>联储官员鹰派表态与市场降息预期形成背离，对风险资产构成潜在压力。</p>
+        <p><strong>交易逻辑：</strong>短期对美股和高估值成长股构成情绪压制，但对A股直接传导较弱，主要影响美元和全球风险偏好。</p>
+        <p><strong>受益方向：</strong>美元、美债</p>
+        <p><strong>承压方向：</strong>风险资产（美股、新兴市场）</p>
+        <p><strong>代表公司：</strong>A股/H股传导较弱，间接影响成长股估值</p>
+        <p><strong>市场更可能交易：</strong>情绪面（美元走强预期）</p>
+        <p><strong>关键验证：</strong>美联储9月议息会议结果、后续官员讲话</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">四、跨市场传导</div>
+    <table>
+      <thead>
+        <tr>
+          <th>海外/宏观事件</th>
+          <th>美股影响</th>
+          <th>港股影响</th>
+          <th>A股影响</th>
+          <th>传导路径</th>
+          <th>强度</th>
+          <th>结论</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>黄金站上4540美元</td>
+          <td class="bull">利多（Gold Miners ETF上涨）</td>
+          <td class="bull">利多（山东黄金+5%）</td>
+          <td class="bull">利多（赤峰黄金、西部黄金）</td>
+          <td>避险+降息预期双驱动，贵金属定价全球化</td>
+          <td>强</td>
+          <td>贵金属多头趋势延续</td>
+        </tr>
+        <tr>
+          <td>霍尔木兹通航量骤降70%</td>
+          <td class="bull">利多（能源股上涨）</td>
+          <td class="bull">利多（中远海能港股上涨）</td>
+          <td class="bull">利多（招商轮船、中远海能）</td>
+          <td>油运定价预期差，航运供应链重构</td>
+          <td>强</td>
+          <td>油运/航运链强势延续</td>
+        </tr>
+        <tr>
+          <td>三星股东回报方案（790亿美元）</td>
+          <td class="neutral">中性（无直接影响）</td>
+          <td class="bull">利多（三星电子韩股+3%）</td>
+          <td class="bull">情绪映射（存储/半导体板块）</td>
+          <td>韩股科技板块情绪传导至A股存储/半导体</td>
+          <td>中</td>
+          <td>A股存储板块情绪正向映射</td>
+        </tr>
+        <tr>
+          <td>美光需求超出供给50%</td>
+          <td class="bull">利多（美光股价上涨）</td>
+          <td class="neutral">间接传导（无直接存储标的）</td>
+          <td class="bull">情绪映射（兆易创新、江波龙）</td>
+          <td>存储价格上行趋势确认，A股存储产业链受益</td>
+          <td>强</td>
+          <td>存储供需缺口持续扩大</td>
+        </tr>
+        <tr>
+          <td>美联储穆萨勒姆鹰派发言</td>
+          <td class="bear">利空（美股承压）</td>
+          <td class="bear">利空（恒指承压）</td>
+          <td class="bear">间接承压（成长股估值）</td>
+          <td>美元走强→新兴市场资本流出压力→A股情绪压制</td>
+          <td>弱</td>
+          <td>A股直接映射较弱，情绪面承压</td>
+        </tr>
+        <tr>
+          <td>日俄南千岛群岛导弹训练</td>
+          <td class="bull">利多（避险资产）</td>
+          <td class="neutral">间接传导（无直接标的）</td>
+          <td class="bull">情绪映射（军工板块）</td>
+          <td>地缘风险溢价→避险资产上涨→军工情绪催化</td>
+          <td>中</td>
+          <td>军工板块情绪面受益</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">五、重点交易线索</div>
+    <h3>1. 最值得关注的5个事件/主题（S→A→B）</h3>
+    <ol style="margin-left:20px;font-size:13px;line-height:2">
+      <li><strong>S级：黄金站上4540美元/盎司</strong> — 价格再创新高，避险+降息预期双驱动，贵金属多头趋势延续。关键验证：美联储9月议息会议结果。</li>
+      <li><strong>S级：集运欧线期货暴涨10%至1930点</strong> — 连续两日急涨，霍尔木兹油运定价预期差主线强化。关键验证：霍尔木兹实际通航量是否恢复。</li>
+      <li><strong>A级：美光需求超出供给50%</strong> — 存储芯片供需缺口持续扩大，AI算力硬件链景气度确认。关键验证：存储价格趋势、韩国KOSPI企稳时点。</li>
+      <li><strong>A级：日俄南千岛群岛导弹训练</strong> — 地缘紧张升级，与霍尔木兹事件形成多地缘风险共振。关键验证：日俄关系后续演变。</li>
+      <li><strong>A级：深蓝航天130吨级发动机试车成功</strong> — 商业航天产业化加速，对标朱雀三号+蓝箭复飞主线。关键验证：星云二号首飞时间表。</li>
+    </ol>
+
+    <h3>2. 最可能引发板块异动的3个方向</h3>
+    <ol style="margin-left:20px;font-size:13px;line-height:2">
+      <li><strong>贵金属板块</strong> — 触发因素：黄金站上4540美元；观察标志：白银有色是否继续涨停、赤峰黄金开盘走势。</li>
+      <li><strong>油运/航运板块</strong> — 触发因素：集运欧线期货暴涨10%；观察标志：招商轮船、中远海能盘中走势。</li>
+      <li><strong>存储/半导体板块</strong> — 触发因素：美光需求信号+三星股东回报；观察标志：兆易创新、江波龙开盘表现。</li>
+    </ol>
+
+    <h3>3. 最具持续性的3条产业逻辑</h3>
+    <ol style="margin-left:20px;font-size:13px;line-height:2">
+      <li><strong>AI算力硬件链景气度确认</strong> — 后续可验证变量：美光/三星财报、存储价格指数、AI芯片订单。</li>
+      <li><strong>人形机器人产业定价阶段</strong> — 后续可验证变量：宇树科技首日收盘涨跌幅、灵犀智涌ROSS系统商业化落地。</li>
+      <li><strong>商业航天确定性事件主线</strong> — 后续可验证变量：深蓝航天星云二号首飞时间、蓝箭航天复飞进展。</li>
+    </ol>
+
+    <h3>4. 需回避或降权的方向</h3>
+    <ul style="margin-left:20px;font-size:13px;line-height:1.8">
+      <li><strong>创新药/CRO</strong> — 泡泡玛特中报不及预期跌8.2%，医药板块集体低开，业绩/估值双杀风险。</li>
+      <li><strong>高位人气股</strong> — 一鸣食品、红四方、哈药股份等多股跌停，高位股补跌风险延续。</li>
+      <li><strong>煤炭开采</strong> — 宝泰隆跌停，板块整体走低，需求端疲软压制。</li>
+      <li><strong>乳业/奶粉</strong> — 一鸣食品跌停拖累板块，消费疲软信号延续。</li>
+    </ul>
+
+    <h3>5. 低价值噪音新闻（不展开）</h3>
+    <ul style="margin-left:20px;font-size:13px;line-height:1.8">
+      <li>黄山燕升任lululemon中国及亚太区总裁（常规人事变动，无交易价值）</li>
+      <li>兰州牛肉拉面产业迈入千亿级（社会新闻，无板块传导）</li>
+      <li>我国自研11.5万吨成品油轮交付（工业成就报道，已纳入商业航天主题）</li>
+      <li>巴基斯坦维持对华双向拉伸聚丙烯自粘胶带卷反倾销终裁（重复报道，已合并）</li>
+      <li>湖北省武汉市委常委曾晟接受纪律审查（政治新闻，无交易价值）</li>
+      <li>重庆市原副市长江敦涛被提起公诉（政治新闻，无交易价值）</li>
+      <li>锂矿概念震荡反弹（行情描述，无新增信息）</li>
+      <li>3D打印概念震荡回升（行情描述，无新增信息）</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-title">六、交易总表</div>
+    <table>
+      <thead>
+        <tr>
+          <th>新闻主题</th>
+          <th>事件类型</th>
+          <th>涉及资产/板块</th>
+          <th>代表公司</th>
+          <th>影响方向</th>
+          <th>驱动性质</th>
+          <th>持续性</th>
+          <th>优先级</th>
+          <th>关键验证点</th>
+          <th>备注</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>黄金站上4540美元</td>
+          <td>商品价格</td>
+          <td>贵金属板块</td>
+          <td>赤峰黄金、山东黄金、西部黄金</td>
+          <td class="bull">利多</td>
+          <td>避险+降息预期</td>
+          <td>中期</td>
+          <td><span class="tag tag-s">S</span></td>
+          <td>美联储9月议息结果</td>
+          <td>价格持续新高</td>
+        </tr>
+        <tr>
+          <td>集运欧线期货暴涨10%</td>
+          <td>商品价格</td>
+          <td>油运/航运链</td>
+          <td>招商轮船、中远海能</td>
+          <td class="bull">利多</td>
+          <td>地缘风险定价</td>
+          <td>短期</td>
+          <td><span class="tag tag-s">S</span></td>
+          <td>霍尔木兹通航量</td>
+          <td>连续两日急涨</td>
+        </tr>
+        <tr>
+          <td>美光需求超出供给50%</td>
+          <td>行业景气</td>
+          <td>存储芯片、半导体</td>
+          <td>兆易创新、江波龙</td>
+          <td class="bull">利多</td>
+          <td>基本面（订单实锤）</td>
+          <td>中期</td>
+          <td><span class="tag tag-a">A</span></td>
+          <td>存储价格趋势</td>
+          <td>AI算力链景气确认</td>
+        </tr>
+        <tr>
+          <td>三星股东回报790亿美元</td>
+          <td>公司公告</td>
+          <td>韩股科技、A股存储</td>
+          <td>情绪映射：兆易创新</td>
+          <td class="bull">利多</td>
+          <td>情绪面</td>
+          <td>短期</td>
+          <td><span class="tag tag-a">A</span></td>
+          <td>韩国KOSPI企稳</td>
+          <td>韩股正向映射A股</td>
+        </tr>
+        <tr>
+          <td>深蓝航天发动机试车成功</td>
+          <td>行业景气</td>
+          <td>商业航天</td>
+          <td>情绪映射：航天科技</td>
+          <td class="bull">利多</td>
+          <td>产业事件</td>
+          <td>中期</td>
+          <td><span class="tag tag-a">A</span></td>
+          <td>星云二号首飞时间</td>
+          <td>对标朱雀三号+蓝箭</td>
+        </tr>
+        <tr>
+          <td>具身智能企业"灵犀智涌"创立</td>
+          <td>科技/AI</td>
+          <td>人形机器人</td>
+          <td>情绪映射：汇川技术</td>
+          <td class="bull">利多</td>
+          <td>产业定价</td>
+          <td>长期</td>
+          <td><span class="tag tag-a">A</span></td>
+          <td>ROSS系统商业化</td>
+          <td>对标宇树科技IPO</td>
+        </tr>
+        <tr>
+          <td>日俄南千岛导弹训练</td>
+          <td>国际地缘</td>
+          <td>军工、避险资产</td>
+          <td>情绪映射：中航沈飞</td>
+          <td class="bull">利多</td>
+          <td>地缘风险溢价</td>
+          <td>短期</td>
+          <td><span class="tag tag-a">A</span></td>
+          <td>日俄关系演变</td>
+          <td>与霍尔木兹共振</td>
+        </tr>
+        <tr>
+          <td>7月用电量同比增1.7%</td>
+          <td>宏观政策</td>
+          <td>电力、数据中心</td>
+          <td>国电南瑞（间接）</td>
+          <td class="neutral">分化</td>
+          <td>基本面（结构性分化）</td>
+          <td>待观察</td>
+          <td><span class="tag tag-b">B</span></td>
+          <td>8月用电量数据</td>
+          <td>传统动能疲软vs科技高增</td>
+        </tr>
+        <tr>
+          <td>巴基斯坦对华纯碱反倾销</td>
+          <td>其他</td>
+          <td>化工板块</td>
+          <td>远兴能源（间接受损）</td>
+          <td class="bear">利空</td>
+          <td>贸易摩擦</td>
+          <td>短期</td>
+          <td><span class="tag tag-b">B</span></td>
+          <td>终裁结果（180日）</td>
+          <td>规模有限</td>
+        </tr>
+        <tr>
+          <td>中国华能与华为会谈</td>
+          <td>其他</td>
+          <td>新能源、华为产业链</td>
+          <td>情绪映射：华为链</td>
+          <td class="bull">利多</td>
+          <td>主题催化</td>
+          <td>待观察</td>
+          <td><span class="tag tag-b">B</span></td>
+          <td>后续合作项目</td>
+          <td>缺乏具体落地信息</td>
+        </tr>
+        <tr>
+          <td>浙江省"十五五"财政规划</td>
+          <td>宏观政策</td>
+          <td>浙江科技股</td>
+          <td>情绪映射：浙大网新</td>
+          <td class="bull">利多</td>
+          <td>主题催化</td>
+          <td>长期</td>
+          <td><span class="tag tag-b">B</span></td>
+          <td>财政投入规模</td>
+          <td>省级规划信号意义</td>
+        </tr>
+        <tr>
+          <td>美联储穆萨勒姆鹰派发言</td>
+          <td>利率/汇率</td>
+          <td>美股、风险资产</td>
+          <td>A股传导较弱</td>
+          <td class="bear">利空</td>
+          <td>情绪面</td>
+          <td>短期</td>
+          <td><span class="tag tag-b">B</span></td>
+          <td>9月议息会议结果</td>
+          <td>与市场降息预期背离</td>
+        </tr>
+        <tr>
+          <td>比特币突破75000美元</td>
+          <td>其他</td>
+          <td>加密货币</td>
+          <td>A股直接映射较弱</td>
+          <td class="neutral">中性</td>
+          <td>流动性预期</td>
+          <td>短期</td>
+          <td><span class="tag tag-b">B</span></td>
+          <td>——</td>
+          <td>另类资产定价</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    <p>报告生成时间：2026-08-21 10:18（北京时间）| 覆盖区间：04:17 — 10:17 | 数据来源：新浪财经 / 同花顺 / 富途牛牛 / 东方财富</p>
+    <p style="margin-top:4px;">⚠️ 本报告基于公开财经快讯筛选，不构成投资建议。所有价格、代码等信息均来自公开报道，未经独立核验，仅供参考。</p>
+  </div>
+</div>
+</body>
+</html>

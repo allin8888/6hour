@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>近6小时财经快讯交易筛选报告</title>
+<style>
+:root{--bg:#f7f8fa;--card:#ffffff;--text:#1f2328;--muted:#5b6570;--line:#e3e6ea;--accent:#1a56db;--head:#f0f3f8;}
+*{box-sizing:border-box;}
+body{margin:0;padding:28px 16px 60px;background:var(--bg);color:var(--text);
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+font-size:15px;line-height:1.75;}
+.wrap{max-width:1500px;margin:0 auto;background:var(--card);border:1px solid var(--line);
+border-radius:10px;padding:32px 34px 48px;box-shadow:0 1px 3px rgba(16,24,40,.05);}
+h1{font-size:26px;margin:0 0 18px;padding-bottom:14px;border-bottom:3px solid var(--accent);letter-spacing:.5px;}
+h2{font-size:20px;margin:34px 0 14px;padding-left:11px;border-left:5px solid var(--accent);}
+h3{font-size:17px;margin:26px 0 10px;color:#243b7a;}
+h4{font-size:15px;margin:18px 0 8px;color:var(--muted);}
+p{margin:9px 0;}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0;}
+ul,ol{margin:9px 0 9px 22px;padding:0;}
+li{margin:5px 0;}
+code{background:#f2f4f7;border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:13px;}
+strong{color:#0b2f6b;}
+/* MP-3/MP-4 引用块与链接 */
+blockquote{margin:10px 0;padding:8px 14px;border-left:4px solid var(--accent);background:#f8fafc;color:var(--muted);border-radius:0 6px 6px 0;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;}
+/* P1-1 目录导航 */
+.toc{background:#f8fafc;border:1px solid var(--line);border-radius:8px;padding:14px 18px;margin:0 0 26px;}
+.toc-title{font-weight:600;margin-bottom:8px;color:var(--accent);}
+.toc ul{list-style:none;margin:0;padding-left:0;}
+.toc li{margin:4px 0;}
+.toc li.lv1{font-weight:600;}
+.toc li.lv3{padding-left:18px;font-size:13.5px;color:var(--muted);}
+.toc a{color:var(--accent);text-decoration:none;}
+.toc a:hover{text-decoration:underline;}
+/* P1-2 宽表横向滚动 + 首列冻结 + 可滚动阴影提示 */
+.tw{overflow-x:auto;margin:16px 0;border:1px solid var(--line);border-radius:8px;
+box-shadow:inset -14px 0 12px -14px rgba(16,24,40,.18);}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:900px;}
+th{background:var(--head);font-weight:600;text-align:left;padding:10px 12px;border-bottom:2px solid var(--line);
+white-space:nowrap;color:#1c2b45;}
+td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;}
+table th:first-child,table td:first-child{position:sticky;left:0;z-index:2;background:var(--card);}
+table th:first-child{background:var(--head);z-index:3;}
+tbody tr:nth-child(even){background:#fafbfc;}
+tbody tr:hover{background:#f0f5ff;}
+em{color:var(--muted);font-style:italic;}
+/* P2-4 移动端：表格不再强制 900px 最小宽度，表头允许换行（table 规则须置于块首） */
+@media(max-width:768px){table{min-width:0;font-size:12.5px;}th{white-space:normal;}body{padding:12px 6px;}.wrap{padding:18px 12px 32px;}h1{font-size:21px;}h2{font-size:17px;}.toc{padding:10px 12px;}}
+/* P2-2 深色模式（跟随系统） */
+@media(prefers-color-scheme:dark){
+:root{--bg:#15181d;--card:#1c2027;--text:#e6e9ef;--muted:#9aa4b2;--line:#2c323c;--accent:#6aa2ff;--head:#232a34;}
+code{background:#252b34;border-color:var(--line);}
+strong{color:#a9c6ff;}
+h3{color:#b9cdff;}
+.toc{background:#1a1f27;}
+blockquote{background:#1a1f27;}
+tbody tr:nth-child(even){background:#20252d;}
+tbody tr:hover{background:#26303d;}
+}
+/* P2-2 打印 / 导出 PDF */
+@media print{
+body{background:#fff;padding:0;}
+.wrap{border:0;box-shadow:none;max-width:none;padding:0;}
+.tw{overflow:visible;border:0;box-shadow:none;}
+table{min-width:0;font-size:11px;}
+th,td{padding:6px 8px;}
+table th:first-child,table td:first-child{position:static;}
+.toc{display:none;}
+h2{page-break-after:avoid;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="toc"><div class="toc-title">目录</div><ul><li class="lv1"><a href="#s1">近6小时财经快讯交易筛选报告</a></li><li class="lv2"><a href="#s2">一、先看结论</a></li><li class="lv2"><a href="#s3">二、主题演进闭环表（上期验证项 × 本窗结果）</a></li><li class="lv2"><a href="#s4">三、有效事件清单</a></li><li class="lv2"><a href="#s5">四、主题归纳（按交易优先级排序）</a></li><li class="lv3"><a href="#s6">主题：能源与大宗商品（霍尔木兹升级）</a></li><li class="lv3"><a href="#s7">主题：华为汽车链（智界独立资质 + 广汽 Ray7）</a></li><li class="lv3"><a href="#s8">主题：人形机器人产业化兑现</a></li><li class="lv3"><a href="#s9">主题：PCB/CCL 高多层化</a></li><li class="lv3"><a href="#s10">主题：A 股解禁供给冲击</a></li><li class="lv2"><a href="#s11">五、跨市场传导</a></li><li class="lv2"><a href="#s12">六、重点交易线索</a></li></ul></nav>
+<h1 id="s1">近6小时财经快讯交易筛选报告</h1>
+<p><strong>生成时间：</strong> 2026-10-17 23:15（北京时间）</p>
+<p><strong>覆盖区间：</strong> 2026-10-17 17:10 至 23:10（北京时间）</p>
+<p><strong>模板版本：</strong> v2（2026-10-13 生效：有效事件清单 11→8 列；删除「六、交易总表」整节；新增「二、主题演进闭环表」）</p>
+<p><strong>已读取来源：</strong> 新浪财经 / 同花顺 / 富途 / 华尔街见闻 / 东方财富（五源全部存活；周六更新频率偏低，见闻 in-window 36 条系更新频率非失败；无缺失源）</p>
+<p><strong>统计：</strong> 已加载新闻 680 条；时间窗口内 296 条；去重后 226 个事件；高/中价值事件 10（S0/A4/B6）；噪音及 C 级 216。</p>
+<blockquote>⚠️ <strong>上期缺口</strong>：上次执行时刻（2026-10-17 15:51）至本窗起点（17:10）之间约 1h19m 的新闻未被采集（两次执行间隔逾 6h，按规则采用完整 6h 窗口；缺口以地缘/周末低频内容为主，影响极小）。<br>📌 <strong>窗口类型</strong>：① 休市窗口（周六）——A 股/港股/内盘商品均休市，所有硬信号落点下周一（10/19）开盘；本窗无实时成交，结论以下周一开盘验证为准，休市窗严禁全面地缘受益扩散。</blockquote>
+<h2 id="s2">一、先看结论</h2>
+<ul>
+<li><strong>近 6 小时最重要市场变化</strong>：霍尔木兹<strong>第二艘</strong>超级油轮（载 200 万桶原油）触雷起火，伊朗革命卫队再称「海峡已关闭」（4 源）；布伦特原油暗盘突破 <strong>107 美元、日内 +3.9%</strong>，较上窗 98 美元显著上破。油价 risk premium 升级获「第二艘事件 + 价格破 107」双确认，但特朗普放松对俄制裁（俄柴油供给宽松）与胡塞释放 159 人、伊朗表态愿斡旋沙特-胡塞形成对冲。
+</li>
+<li><strong>当前优先交易主线（落点下周一）</strong>：① 油气/油服（内盘 SC 原油/燃油周一开盘验证）；② 华为汽车链（智界独立资质 + 广汽埃安 Ray7 首发华为 DriveONE EMB）；③ 人形机器人产业化（全球收入前五全中国、深圳出口 +1200%）。
+</li>
+<li><strong>明显承压 / 应回避方向</strong>：下周 46 股解禁合计 <strong>1004.25 亿元</strong>（中船特气 595.58 亿居首）形成个股供给冲击；算力硬件延续上窗八连跌承压待周一确认；碳酸锂上窗夜盘 -4.20% 破位后待周一广期所开盘。
+</li>
+<li><strong>需次日（下周一）继续验证的关键变量</strong>：内盘 SC 原油/燃油开盘、费半是否延续连跌、碳酸锂广期所开盘（上窗夜盘破位后首次日盘）、离岸人民币是否破 6.6862。
+</li>
+<li><strong>哪市场传导最强</strong>：油价 → 内盘商品（A/H 油气）传导最直接；但本窗为周六休市，所有硬信号落点下周一开盘，<strong>A 股直接映射弱（休市）</strong>，周一结构分化（油气强势 vs 算力硬件承压 vs ETF 回购托底）。
+</li>
+</ul>
+<h2 id="s3">二、主题演进闭环表（上期验证项 × 本窗结果）</h2>
+<blockquote>将 15:51 窗口「待跟进」与 MEMORY.md 长期跟踪项逐条对照；本期无新增「已推翻判断」。</blockquote>
+<div class="tw"><table><thead><tr>
+<th>上期窗口</th>
+<th>待验证项</th>
+<th>本窗证据（时间 + 事实）</th>
+<th>裁定</th>
+<th>对交易判断的影响</th>
+</tr></thead><tbody>
+<tr>
+<td>2026-10-17 15:51</td>
+<td>油价双线遇袭后内盘 SC 原油/燃油周一开盘净价裁定</td>
+<td>周六休市无内盘成交；但布伦特暗盘破 107（+3.9%）、第二艘超级油轮触雷起火（4 源）、「霍尔木兹已关闭」再称——risk premium 升级获价格+事件双强化</td>
+<td>延续待验</td>
+<td>油价方向待周一净价裁定；本窗信号偏多（破 107 高于上窗 98），俄柴油豁免对冲仍在</td>
+</tr>
+<tr>
+<td>2026-10-17 15:51</td>
+<td>美军实质介入 + 伊朗停战回应</td>
+<td>无美军实质介入新证据；伊朗再称「海峡关闭」（约 19:18）但同日伊朗表态愿斡旋沙特-胡塞（19:50）、胡塞释放 159 名被拘留者（20:28）——信号矛盾</td>
+<td>延续待验</td>
+<td>地缘升温与降温信号并存，方向未定</td>
+</tr>
+<tr>
+<td>2026-10-17 15:51</td>
+<td>俄柴油实际运到（特朗普豁免对俄制裁）</td>
+<td>俄总统特别代表德米特里耶夫称特朗普放松制裁「具有历史意义」（19:40），俄美经济对话延续</td>
+<td>延续待验</td>
+<td>俄柴油供给宽松对冲油价上行，是油价单边判断 ≤1-2 窗的关键约束</td>
+</tr>
+<tr>
+<td>2026-10-17 15:51</td>
+<td>费半九连跌与否（下周一 A/H 算力硬件低开）</td>
+<td>周六休市，无美股/内盘成交；无新 SK/美光财报</td>
+<td>延续待验</td>
+<td>落点周一；上窗八连跌坐实，本窗无新证据</td>
+</tr>
+<tr>
+<td>2026-10-17 15:51</td>
+<td>碳酸锂广期所开盘（上窗夜盘 -4.20% 破位后首次日盘）</td>
+<td>周六休市无交易</td>
+<td>延续待验</td>
+<td>落点周一广期所开盘为关键验证</td>
+</tr>
+<tr>
+<td>2026-10-17 15:51</td>
+<td>离岸人民币破 6.6862（2022-07 低位）</td>
+<td>周六无离岸人民币新报价</td>
+<td>延续待验</td>
+<td>落点周一</td>
+</tr>
+<tr>
+<td>2026-10-17 15:51</td>
+<td>苹果 Duo 双 11 GMV 战报</td>
+<td>Duo 首批秒空、市场溢价超 7000 元、发货排至明年（20:16）——延续上窗「极端缺货」闭环成立，无新双 11 GMV 战报</td>
+<td>延续待验</td>
+<td>折叠屏供应链（凯盛/精研/长盈/京东方）利多延续，双 11 GMV 待战报</td>
+</tr>
+<tr>
+<td>2026-10-17 15:51</td>
+<td>晶科组件价/硅料库存/减产执行</td>
+<td>无新光伏价格/库存新闻</td>
+<td>证据不足</td>
+<td>光伏供给侧改革主线无新增，维持上窗「制造端盈利承压」判断</td>
+</tr>
+<tr>
+<td>2026-10-17 15:51</td>
+<td>蔚来小鹏月度交付 + 中东发运 + 欧盟细则</td>
+<td>无新（上窗蔚来 Q3 超 BBA、小鹏 GX 中东 3000 辆）</td>
+<td>证据不足</td>
+<td>汽车出海主线无新增</td>
+</tr>
+<tr>
+<td>2026-10-17 15:51</td>
+<td>核电新机组核准节奏</td>
+<td>无新</td>
+<td>证据不足</td>
+<td>维持上窗「审批提速预期」</td>
+</tr>
+<tr>
+<td>2026-10-17 15:51</td>
+<td>电价月度/现货持续</td>
+<td>无新</td>
+<td>证据不足</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-10-17 15:51</td>
+<td>RISC-V 峰会订单/国产测试机中标</td>
+<td>RISC-V 峰会 10/18-20 深圳（未来，本窗未开）</td>
+<td>证据不足</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-10-17 15:51</td>
+<td>森蒂内拉铜矿罢工结束 → Escondida 动向</td>
+<td>无新</td>
+<td>证据不足</td>
+<td>铜供给中断缓和维持（Escondida 待核实）</td>
+</tr>
+<tr>
+<td>MEMORY 长期项</td>
+<td>存储景气分歧（长鑫 DRAM 强 vs 板块弱）</td>
+<td>无新长鑫/江波龙/美光财报</td>
+<td>证据不足</td>
+<td>分歧未裁定</td>
+</tr>
+<tr>
+<td>MEMORY 长期项</td>
+<td>两部门技术出口管制清单细则</td>
+<td>无新</td>
+<td>证据不足</td>
+<td>—</td>
+</tr>
+<tr>
+<td>MEMORY 长期项</td>
+<td>氢能 5 城试点订单</td>
+<td>无新</td>
+<td>证据不足</td>
+<td>—</td>
+</tr>
+<tr>
+<td>MEMORY 长期项</td>
+<td>中欧汽车双轨/受管贸易（欧盟细则）</td>
+<td>无新（华为链为国内）</td>
+<td>证据不足</td>
+<td>—</td>
+</tr>
+</tbody></table></div>
+<blockquote>「证据不足」「延续待验」条目全部原样带入下期闭环表继续跟踪（油价/费半/碳酸锂/人民币/苹果 Duo 等核心变量落点下周一）。</blockquote>
+<h2 id="s4">三、有效事件清单</h2>
+<div class="tw"><table><thead><tr>
+<th>时间</th>
+<th>事件主题</th>
+<th>分类</th>
+<th>事实摘要（不照抄）</th>
+<th>新增性/核心变量</th>
+<th>上市公司映射（含逻辑）</th>
+<th>影响方向/持续性</th>
+<th>优先级/需验证事项</th>
+</tr></thead><tbody>
+<tr>
+<td>20:18</td>
+<td>霍尔木兹第二艘超级油轮触雷起火 + 布伦特暗盘破 107</td>
+<td>国际地缘 / 商品价格</td>
+<td>伊朗革命卫队称第二艘载 200 万桶原油超级油轮在霍尔木兹触雷爆炸起火，再称「海峡已关闭」（4 源）；布伦特原油暗盘突破 107 美元、日内 +3.9%</td>
+<td>上窗「油价 risk premium 偏升级」获<strong>第二艘 + 价格破 107</strong>双确认（高于上窗 98）；对冲=特朗普放松对俄制裁（俄柴油宽松）+ 胡塞释放 159 人/伊朗斡旋</td>
+<td>直接受益：油气开采/油服（中国石油 601857 / 中国海油 600938 / 中海油服 601808，情绪映射）；内盘 SC 原油/燃油周一开盘验证</td>
+<td>利多/短期（待周一净价裁定）</td>
+<td>A｜周一内盘 SC 原油/燃油开盘 + 美军介入 + 俄柴油实际运到</td>
+</tr>
+<tr>
+<td>17:44</td>
+<td>智界获独立造车资质、计划独立上市</td>
+<td>新能源/汽车</td>
+<td>工信部第 412 批公示智界（奇瑞）列入拟发布新准入清单，内部人士确认获批后取独立资质并计划上市（3 源）</td>
+<td>华为智选车版图扩围，奇瑞系资本化预期；新增=独立资质实锤 + 上市计划</td>
+<td>直接：奇瑞汽车（市场 + 代码待核实，拟上市）；情绪映射：华为智选车链——赛力斯 601127 / 江淮汽车 600418 / 北汽蓝谷 600733；奇瑞供应链</td>
+<td>利多/中期</td>
+<td>A｜公示期至 10/23 获批 + 奇瑞上市节奏</td>
+</tr>
+<tr>
+<td>18:46</td>
+<td>全球人形机器人收入前五全中国、深圳出口 +1200%</td>
+<td>科技/AI</td>
+<td>沙利文报告：上半年全球人形机器人销 3.6 万台、收入 5.4 亿美元，收入前五全中国（深圳占两席）；前 8 月深圳机器人出口 111.3 亿元同比 +12.2 倍（3 源）</td>
+<td>机器人产业化从主题转向出货兑现；新增=收入排名 + 出口增速硬数据</td>
+<td>情绪映射：机器人产业链——拓普集团 601689 / 三花智控 002050 / 鸣志电器 603728 / 绿的谐波 688017 / 兆威机电 003021</td>
+<td>利多/中期</td>
+<td>A｜量产订单/出口持续性</td>
+</tr>
+<tr>
+<td>18:09</td>
+<td>俄对乌能源设施大规模袭击（320+ 无人机）</td>
+<td>国际地缘</td>
+<td>泽连斯基称俄 12 小时内动用 320+ 架无人机及导弹袭乌 15+ 处发电输电设施，试图冬季前破坏能源供应（3 源）</td>
+<td>冬季能源战延续，支撑欧洲天然气/油价 risk premium；新增=本周末袭击规模量化</td>
+<td>间接：欧洲天然气 TTF / 油价（无直接 A 股标的）；军工情绪映射（待核实）</td>
+<td>利多能源/短期</td>
+<td>A｜欧洲天然气 TTF / 乌能源修复进度</td>
+</tr>
+<tr>
+<td>22:26</td>
+<td>广汽埃安 Ray7 预售 首发华为 DriveONE EMB</td>
+<td>新能源/汽车</td>
+<td>广汽埃安 Ray7 纯电轿车预售 12.88 万起，全球首搭芯片级驱制融合架构、首发华为 DriveONE EMB 全电线控制动（3 源）</td>
+<td>华为汽车链再添量产车型；新增=Ray7 + 华为 DriveONE</td>
+<td>直接：广汽集团 601238；情绪映射：华为汽车链（华为 DriveONE 供应商待核实）</td>
+<td>利多/短期</td>
+<td>B｜Ray7 订单/华为链供应商</td>
+</tr>
+<tr>
+<td>19:27</td>
+<td>嘉立创：高多层板/HDI 是未来重要方向</td>
+<td>行业景气</td>
+<td>嘉立创（001232）分析师会议称高多层板和 HDI 是公司未来发展重要方向，PCBA 业务增长快（2 源）</td>
+<td>延续上窗 PCB/CCL 涨价主线（建滔/沪电/生益）；新增=嘉立创战略确认</td>
+<td>直接：嘉立创 001232；板块：PCB/CCL（沪电股份 002463 / 生益科技 600183 / 胜宏科技 300476）</td>
+<td>利多/中期</td>
+<td>B｜PCB/CCL 机构上修持续性</td>
+</tr>
+<tr>
+<td>18:36</td>
+<td>下周 46 股解禁 合计 1004.25 亿</td>
+<td>股东增减持/资本运作</td>
+<td>下周 A 股 46 股解禁，市值 1004.25 亿；中船特气（688146）595.58 亿居首，颀中科技（688352）/ 润本股份（603193）等 6 股解禁比例超 50%（2 源）</td>
+<td>个股下周供给冲击；新增=解禁规模与个股清单</td>
+<td>承压：中船特气 688146 / 颀中科技 688352 / 润本股份 603193 / 索辰科技 688507 / 锦华新材 / 光大同创 / 天元智能</td>
+<td>利空/短期</td>
+<td>B｜解禁实际抛压/承接</td>
+</tr>
+<tr>
+<td>20:16</td>
+<td>苹果 Duo 秒空 + 市场溢价超 7000 元</td>
+<td>消费</td>
+<td>苹果首款折叠屏 iPhone Duo 预购首批秒空，市场溢价超 7000 元、发货排至明年（1 源东财）</td>
+<td>延续上窗「极端缺货」闭环成立（上窗二手涨 7143）；新增=溢价超 7000 量化</td>
+<td>直接受益：折叠屏供应链——凯盛科技 600552 / 精研科技 300709 / 长盈精密 300115 / 京东方 A 000725</td>
+<td>利多/短期</td>
+<td>B｜双 11 GMV 战报</td>
+</tr>
+<tr>
+<td>22:39</td>
+<td>天正电气首台固态变压器（SST）量产下线</td>
+<td>科技/AI/电力系统</td>
+<td>天正电气（605066）首台固态变压器 10/16 量产下线，集成半导体功率器件，适配 AI 算力/新能源/新型电力系统（1 源）</td>
+<td>新=AI 算力供电/SST 量产落地</td>
+<td>直接：天正电气 605066；板块情绪：电力设备/AI 供电（待核实）</td>
+<td>利多/短期</td>
+<td>B｜SST 订单/量产爬坡</td>
+</tr>
+<tr>
+<td>19:50</td>
+<td>日美大规模军演 + 日本增税筹措防卫费</td>
+<td>国际地缘</td>
+<td>日美「利剑 27」军演（近 6 万人，10/19-29）多国参与（3 源）；日本考虑提高法人税筹措 70-80 万亿日元防卫费（2 源）</td>
+<td>地缘 + 日本财政扩张（日元 158 背景）；新增=军演规模 + 增税计划</td>
+<td>情绪映射：军工（待核实）/ 日元相关（日元 158）；A 股直接映射较弱</td>
+<td>中性/短期</td>
+<td>B｜日元走势/军演后续</td>
+</tr>
+</tbody></table></div>
+<h2 id="s5">四、主题归纳（按交易优先级排序）</h2>
+<h3 id="s6">主题：能源与大宗商品（霍尔木兹升级）</h3>
+<ul>
+<li><strong>驱动事件：</strong> 第二艘超级油轮触雷起火（20:18，4 源）+ 布伦特暗盘破 107（+3.9%）（17:36/18:35）；俄对乌能源设施大规模袭击（18:09，3 源）。
+</li>
+<li><strong>核心变化：</strong> 较上窗（第一艘 + 纽约原油暗盘破 98）再升级——出现<strong>第二艘</strong>油轮遇袭且布伦特上破 107；风险溢价获事件 + 价格双确认。
+</li>
+<li><strong>交易逻辑：</strong> 地缘 risk premium + 冬季能源战；但特朗普放松对俄制裁（俄柴油宽松）与胡塞释放 159 人/伊朗斡旋构成对冲，油价单边判断 ≤1-2 窗。
+</li>
+<li><strong>受益方向：</strong> 油气开采/油服（中海油/中石油/中海油服，情绪映射）、内盘 SC 原油/燃油。
+</li>
+<li><strong>承压方向：</strong> 航空/化工下游（油价上行成本端）；A 股直接映射弱（休市，落点周一）。
+</li>
+<li><strong>市场更可能交易：</strong> 基本面（油价定价） + 情绪面（地缘）。
+</li>
+<li><strong>关键验证：</strong> 下周一（10/19）内盘 SC 原油/燃油开盘、美军是否实质介入、俄柴油实际运到、伊朗停战回应。
+</li>
+<li><strong>优先级：</strong> A。
+</li>
+</ul>
+<h3 id="s7">主题：华为汽车链（智界独立资质 + 广汽 Ray7）</h3>
+<ul>
+<li><strong>驱动事件：</strong> 智界（奇瑞）获独立造车资质并计划上市（17:44，3 源）；广汽埃安 Ray7 预售首发华为 DriveONE EMB（22:26，3 源）。
+</li>
+<li><strong>核心变化：</strong> 华为智选车版图再扩——智界独立资质实锤 + 奇瑞资本化预期；Ray7 落地华为 DriveONE 全电线控制动。
+</li>
+<li><strong>交易逻辑：</strong> 华为生态链车型密集量产 + 奇瑞上市预期催化。
+</li>
+<li><strong>受益方向：</strong> 广汽集团 601238、赛力斯 601127、江淮汽车 600418、北汽蓝谷 600733（华为智选情绪映射）；奇瑞供应链（待核实）。
+</li>
+<li><strong>承压方向：</strong> 无明确。
+</li>
+<li><strong>市场更可能交易：</strong> 情绪面 + 基本面（车型放量）。
+</li>
+<li><strong>关键验证：</strong> 智界公示期至 10/23 获批、奇瑞上市节奏、Ray7 订单。
+</li>
+<li><strong>优先级：</strong> A。
+</li>
+</ul>
+<h3 id="s8">主题：人形机器人产业化兑现</h3>
+<ul>
+<li><strong>驱动事件：</strong> 全球人形机器人收入前五全中国、深圳出口 +12.2 倍（18:46，3 源）。
+</li>
+<li><strong>核心变化：</strong> 从「主题预期」转向「出货/出口硬数据」——上半年销量超 2025 全年、收入排名中国包揽前五。
+</li>
+<li><strong>交易逻辑：</strong> 产业化提速 + 出口竞争力。
+</li>
+<li><strong>受益方向：</strong> 机器人产业链情绪映射——拓普集团 601689 / 三花智控 002050 / 鸣志电器 603728 / 绿的谐波 688017 / 兆威机电 003021。
+</li>
+<li><strong>承压方向：</strong> 无明确。
+</li>
+<li><strong>市场更可能交易：</strong> 情绪面（主题重估） + 基本面（订单）。
+</li>
+<li><strong>关键验证：</strong> 量产订单与出口持续性。
+</li>
+<li><strong>优先级：</strong> A。
+</li>
+</ul>
+<h3 id="s9">主题：PCB/CCL 高多层化</h3>
+<ul>
+<li><strong>驱动事件：</strong> 嘉立创称高多层板/HDI 是未来重要方向（19:27，2 源）。
+</li>
+<li><strong>核心变化：</strong> 延续上窗 PCB/CCL 涨价主线（建滔/沪电/生益），单一厂商战略确认高多层 + HDI 方向。
+</li>
+<li><strong>交易逻辑：</strong> AI 服务器高多层/HDI 需求驱动，机构上修持续性。
+</li>
+<li><strong>受益方向：</strong> 嘉立创 001232、沪电股份 002463、生益科技 600183、胜宏科技 300476。
+</li>
+<li><strong>承压方向：</strong> 无明确。
+</li>
+<li><strong>市场更可能交易：</strong> 基本面（需求结构升级）。
+</li>
+<li><strong>关键验证：</strong> PCB/CCL 机构上修持续性。
+</li>
+<li><strong>优先级：</strong> B。
+</li>
+</ul>
+<h3 id="s10">主题：A 股解禁供给冲击</h3>
+<ul>
+<li><strong>驱动事件：</strong> 下周 46 股解禁合计 1004.25 亿，中船特气 595.58 亿居首（18:36，2 源）。
+</li>
+<li><strong>核心变化：</strong> 下周集中解禁规模较大，6 股解禁比例超 50%。
+</li>
+<li><strong>交易逻辑：</strong> 个股供给增加，短期抛压。
+</li>
+<li><strong>承压方向：</strong> 中船特气 688146、颀中科技 688352、润本股份 603193、索辰科技 688507 等。
+</li>
+<li><strong>受益方向：</strong> 无。
+</li>
+<li><strong>市场更可能交易：</strong> 情绪面（供给冲击）。
+</li>
+<li><strong>关键验证：</strong> 解禁实际抛压与承接。
+</li>
+<li><strong>优先级：</strong> B。
+</li>
+</ul>
+<h2 id="s11">五、跨市场传导</h2>
+<div class="tw"><table><thead><tr>
+<th>海外/宏观事件</th>
+<th>美股影响</th>
+<th>港股影响</th>
+<th>A 股影响</th>
+<th>传导路径</th>
+<th>强度</th>
+<th>结论</th>
+</tr></thead><tbody>
+<tr>
+<td>霍尔木兹第二艘油轮遇袭 + 布伦特破 107</td>
+<td>能源 ETF 偏强</td>
+<td>油气股周一高开预期</td>
+<td>内盘 SC 原油/燃油 + 油气开采油服周一开盘验证</td>
+<td>地缘 risk premium → 油价 → 内盘商品/能源股</td>
+<td>强（事件+价格双确认，但休市落点周一）</td>
+<td>周一内盘油气高开待验证，方向仍受俄柴油豁免对冲</td>
+</tr>
+<tr>
+<td>俄对乌能源设施大规模袭击</td>
+<td>欧洲能源股偏强</td>
+<td>直接映射较弱</td>
+<td>直接映射较弱</td>
+<td>冬季能源战 → 欧洲天然气 TTF</td>
+<td>弱（无直接 A 股标的）</td>
+<td>A 股直接映射较弱</td>
+</tr>
+<tr>
+<td>日美大规模军演 + 日本增税防卫费</td>
+<td>日元/日经波动</td>
+<td>直接映射较弱</td>
+<td>直接映射较弱</td>
+<td>地缘 + 日本财政扩张（日元 158）</td>
+<td>弱</td>
+<td>A 股直接映射较弱</td>
+</tr>
+<tr>
+<td>上窗费半八连跌（延续）</td>
+<td>半导体承压</td>
+<td>恒生科技/中际旭创承压</td>
+<td>算力硬件周一映射承压</td>
+<td>美股半导体 → A/H 算力硬件</td>
+<td>中（延续，落点周一）</td>
+<td>周一 A/H 算力硬件承压最强，待美股周一确认</td>
+</tr>
+<tr>
+<td>苹果 Duo 缺货溢价超 7000</td>
+<td>苹果偏强</td>
+<td>直接映射较弱</td>
+<td>折叠屏供应链（凯盛/精研/长盈/京东方）利多</td>
+<td>苹果需求 → 折叠屏供应链</td>
+<td>中</td>
+<td>折叠屏供应链利多延续，双 11 GMV 待战报</td>
+</tr>
+</tbody></table></div>
+<h2 id="s12">六、重点交易线索</h2>
+<ol>
+<li><strong>最值得关注的 3—5 个事件/主题（按 S→A→B）：</strong>
+<ul>
+<li>A① 霍尔木兹第二艘油轮遇袭 + 布伦特破 107——油价 risk premium 升级双确认（落点周一内盘）。
+</li>
+<li>A② 智界独立资质 + 计划上市——华为汽车链 + 奇瑞资本化预期。
+</li>
+<li>A③ 人形机器人收入前五全中国 + 深圳出口 +1200%——产业化兑现。
+</li>
+<li>B 广汽 Ray7 华为 DriveONE / 嘉立创高多层 HDI（PCB 主线延续）/ 苹果 Duo 溢价超 7000（折叠屏供应链）。
+</li>
+</ul>
+</li>
+</ol>
+<ol>
+<li><strong>最可能引发板块异动的 3 个方向：</strong>
+<ul>
+<li>油气/油服：触发=周一内盘 SC 原油/燃油高开；观察标志=开盘涨幅与成交量。
+</li>
+<li>华为汽车链：触发=智界资质获批预期 + Ray7 预售；观察标志=赛力斯/江淮/广汽量价。
+</li>
+<li>人形机器人：触发=出口 +1200% 数据；观察标志=产业链标的资金流入。
+</li>
+</ul>
+</li>
+</ol>
+<ol>
+<li><strong>最具持续性的 3 条产业逻辑（有后续可验证变量）：</strong>
+<ul>
+<li>华为汽车链：智界独立资质（10/23 公示截止）+ 奇瑞上市节奏 + Ray7 订单。
+</li>
+<li>人形机器人产业化：量产订单与出口持续性（沙利文数据已验证出货）。
+</li>
+<li>PCB/CCL 高多层/HDI：AI 服务器需求结构升级 + 机构上修持续性。
+</li>
+</ul>
+</li>
+</ol>
+<ol>
+<li><strong>需回避或降权的方向：</strong>
+<ul>
+<li>下周解禁 1004 亿个股（中船特气 595 亿居首、颀中科技/润本股份等 6 股解禁比例超 50%）——供给冲击。
+</li>
+<li>算力硬件：上窗费半八连跌坐实，周一 A/H 映射承压待确认。
+</li>
+<li>碳酸锂：上窗夜盘 -4.20% 破位，待周一广期所开盘验证。
+</li>
+</ul>
+</li>
+</ol>
+<ol>
+<li><strong>低价值噪音新闻（仅列主题，不展开）：</strong>
+<ul>
+<li>蓝色起源 2030 每周发射计划（太空，无 A/H 直接映射）。
+</li>
+<li>医用外骨骼纳入多地医保（医疗，低交易价值）。
+</li>
+<li>潘功胜 IMFC 常规发言（反保护主义重申，无新增）。
+</li>
+<li>特斯拉 Roadster 冷气反推 / 穿越者载人航天（主题性，无 A 股直接标的）。
+</li>
+<li>印尼林火烟霾、李强出访乌兹别克斯坦、塞内加尔退选联合国秘书长、StartLux 决策模型 SOTA（无直接上市公司映射）。
+</li>
+<li>义乌跨境电商进口破 1 亿单（消费跨境，低边际）。
+</li>
+</ul>
+</li>
+</ol>
+</div>
+</body>
+</html>

@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6小时财经快讯交易筛选报告</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background: #f5f7fa; color: #333; line-height: 1.6; padding: 20px; }
+.container { max-width: 1200px; margin: 0 auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); padding: 30px; }
+h1 { font-size: 24px; color: #1a1a1a; margin-bottom: 10px; }
+.meta { color: #666; font-size: 14px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #eee; }
+h2 { font-size: 18px; color: #1a1a1a; margin: 25px 0 15px; padding-left: 10px; border-left: 4px solid #2563eb; }
+h3 { font-size: 16px; color: #333; margin: 20px 0 10px; }
+table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 13px; }
+th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #e5e7eb; }
+th { background: #f9fafb; font-weight: 600; color: #374151; }
+tr:hover { background: #f9fafb; }
+.priority-s { background: #fef2f2; color: #dc2626; font-weight: 600; padding: 4px 8px; border-radius: 4px; font-size: 12px; }
+.priority-a { background: #fff7ed; color: #ea580c; font-weight: 600; padding: 4px 8px; border-radius: 4px; font-size: 12px; }
+.priority-b { background: #eff6ff; color: #2563eb; font-weight: 600; padding: 4px 8px; border-radius: 4px; font-size: 12px; }
+.conclusion-box { background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 6px; padding: 15px; margin: 15px 0; }
+.conclusion-box h3 { margin-top: 0; color: #0369a1; }
+.conclusion-box ul { margin-left: 20px; }
+.conclusion-box li { margin: 8px 0; }
+.theme-box { background: #fafafa; border: 1px solid #e5e7eb; border-radius: 6px; padding: 15px; margin: 15px 0; }
+.theme-box h3 { margin-top: 0; color: #374151; }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin-right: 5px; }
+.tag-red { background: #fee2e2; color: #991b1b; }
+.tag-green { background: #d1fae5; color: #065f46; }
+.tag-blue { background: #dbeafe; color: #1e40af; }
+.tag-yellow { background: #fef3c7; color: #92400e; }
+.tag-gray { background: #f3f4f6; color: #4b5563; }
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin: 20px 0; }
+.stat-card { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px; padding: 15px; text-align: center; }
+.stat-card .num { font-size: 28px; font-weight: 700; color: #2563eb; }
+.stat-card .label { font-size: 13px; color: #6b7280; margin-top: 5px; }
+.highlight { background: #fef3c7; padding: 2px 4px; border-radius: 2px; }
+.warning { color: #dc2626; }
+.success { color: #16a34a; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>近6小时财经快讯交易筛选报告</h1>
+<div class="meta">
+<p><strong>生成时间：</strong>2026-08-25 22:09（北京时间）</p>
+<p><strong>覆盖区间：</strong>2026-08-25 16:09 至 22:09（北京时间）</p>
+<p><strong>已读取来源：</strong>新浪财经 / 同花顺 / 富途牛牛 / 华尔街见闻 / 东方财富</p>
+</div>
+
+<div class="stat-grid">
+<div class="stat-card">
+<div class="num">150+</div>
+<div class="label">已加载新闻</div>
+</div>
+<div class="stat-card">
+<div class="num">45</div>
+<div class="label">窗口内新闻</div>
+</div>
+<div class="stat-card">
+<div class="num">18</div>
+<div class="label">去重后事件</div>
+</div>
+<div class="stat-card">
+<div class="num">12</div>
+<div class="label">高/中价值事件</div>
+</div>
+</div>
+
+<h2>一、先看结论</h2>
+<div class="conclusion-box">
+<h3>核心要点</h3>
+<ul>
+<li><strong>近6小时最重要变化：</strong>现货黄金失守4600-4610美元/盎司关口，日内跌近1%，贵金属多头趋势首次出现实质性松动信号。</li>
+<li><strong>当前优先交易主线：</strong>①AI算力硬件链涨价逻辑实证（OpenAI自研芯片超越英伟达GB300）；②美股存储芯片板块强势反弹（费城半导体指数涨2%+）；③中科曙光H1业绩超预期（扣非净利+48%）。</li>
+<li><strong>明显承压方向：</strong>贵金属（金价跌破关键技术支撑）、高位AI大模型概念股、对美出口依赖型制造业。</li>
+<li><strong>需次日验证关键变量：</strong>英伟达Q2财报（8/26盘后）是否超预期、金价能否在4600美元企稳、霍尔木兹持续通航量变化。</li>
+<li><strong>传导最强市场：</strong>A股/港股，以中科曙光业绩硬兑现为锚，存储芯片产业链情绪传导清晰。</li>
+</ul>
+</div>
+
+<h2>二、有效事件清单</h2>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>事件主题</th>
+<th>分类</th>
+<th>事实摘要</th>
+<th>新增性/核心变量</th>
+<th>影响行业与资产</th>
+<th>上市公司映射</th>
+<th>影响方向</th>
+<th>持续性</th>
+<th>优先级</th>
+<th>需验证事项</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>22:04</td>
+<td>OpenAI自研芯片超越英伟达</td>
+<td>科技/AI</td>
+<td>OpenAI称与博通联合开发的Jalapeno芯片在速度和功耗方面超越英伟达GB300</td>
+<td>自研芯片首次公开宣示性能优势，挑战英伟达算力垄断叙事</td>
+<td>AI算力、半导体、光通信</td>
+<td>直接受益：OpenAI产业链（待核验）<br>情绪映射：寒武纪、海光信息等AI芯片概念股<br>间接受益：博通(AVGO) 美股</td>
+<td>利多</td>
+<td>待观察</td>
+<td><span class="priority-s">S</span></td>
+<td>英伟达Q2财报（8/26盘后）表现</td>
+</tr>
+<tr>
+<td>21:52</td>
+<td>美股芯片股大涨 费城半导体指数涨2%</td>
+<td>科技/AI</td>
+<td>英伟达涨近3%，AMD涨近5%，英特尔涨超3%，迈威尔科技涨超7%</td>
+<td>存储芯片涨价逻辑从预期走向实证，板块估值修复</td>
+<td>半导体、存储芯片、AI硬件</td>
+<td>情绪映射：兆易创新、澜起科技、德明利<br>直接受益：SK海力士(000660.KS)、美光(MU) 美股</td>
+<td>利多</td>
+<td>短期</td>
+<td><span class="priority-a">A</span></td>
+<td>存储芯片价格走势（DRAMeXchange）</td>
+</tr>
+<tr>
+<td>21:25</td>
+<td>现货黄金失守4600美元</td>
+<td>商品价格</td>
+<td>现货黄金报4606.54美元/盎司，日内跌0.97%；纽约期金失守4660美元</td>
+<td>2026-08-25 现货金失守4650美元后继续下探，多头趋势首次出现松动信号</td>
+<td>贵金属、黄金股、避险资产</td>
+<td>承压映射：中金黄金、山东黄金、西部黄金<br>情绪映射：紫金矿业</td>
+<td>利空</td>
+<td>短期</td>
+<td><span class="priority-a">A</span></td>
+<td>金价能否在4600美元企稳</td>
+</tr>
+<tr>
+<td>21:26</td>
+<td>中科曙光H1业绩超预期</td>
+<td>公司公告</td>
+<td>H1营收74.66亿元（+27.62%），净利9.71亿元（+33.31%），扣非净利8.44亿元（+48.45%）</td>
+<td>AI算力硬件链业绩硬兑现，验证"业绩硬、股价软"背离仍在延续</td>
+<td>AI算力、服务器、半导体</td>
+<td>直接受益：中科曙光(603019.SH)</td>
+<td>利多</td>
+<td>中期</td>
+<td><span class="priority-a">A</span></td>
+<td>订单规模与量产良率</td>
+</tr>
+<tr>
+<td>22:03</td>
+<td>美联储柯林斯讲话 通胀担忧</td>
+<td>宏观政策</td>
+<td>柯林斯称通胀仍然过高，对物价稳定职责表示担忧；劳动力市场与充分就业一致</td>
+<td>美联储内部鹰派声音，降息预期可能推迟</td>
+<td>美元、美债、利率敏感资产</td>
+<td>承压映射：高估值成长股、REITs</td>
+<td>利空</td>
+<td>中期</td>
+<td><span class="priority-a">A</span></td>
+<td>美联储9月议息结果</td>
+</tr>
+<tr>
+<td>22:00</td>
+<td>美国7月新屋销售不及预期</td>
+<td>宏观政策</td>
+<td>新屋销售年化60.7万户，预期62万户；环比-10.5%，前值+1.6%</td>
+<td>房地产市场降温信号，叠加利率高位承压</td>
+<td>房地产、建材、家居</td>
+<td>A股直接映射较弱</td>
+<td>利空</td>
+<td>短期</td>
+<td><span class="priority-b">B</span></td>
+<td>后续房地产政策动向</td>
+</tr>
+<tr>
+<td>21:45</td>
+<td>华创云信股权变更</td>
+<td>并购重组</td>
+<td>贵州金控收购茅台集团等省属国企持有的5%股份，与一致行动人合计持股13.11%，成为第一大股东</td>
+<td>省属金融平台整合信号，茅台系资本运作延续</td>
+<td>券商、地方金融</td>
+<td>直接受益：华创云信(600155.SH)</td>
+<td>中性</td>
+<td>待观察</td>
+<td><span class="priority-b">B</span></td>
+<td>国资整合后续动作</td>
+</tr>
+<tr>
+<td>21:27</td>
+<td>国瑞科技股权重组</td>
+<td>并购重组</td>
+<td>浙江省机电集团通过增资扩股成为间接控股股东，作价53.95亿元</td>
+<td>地方国企战略性重组落地</td>
+<td>军工、高端装备</td>
+<td>直接受益：国瑞科技(300600.SZ)</td>
+<td>中性</td>
+<td>待观察</td>
+<td><span class="priority-b">B</span></td>
+<td>工商变更登记进度</td>
+</tr>
+<tr>
+<td>21:31</td>
+<td>内塔尼亚胡下令拆除联合国设施</td>
+<td>国际地缘</td>
+<td>以色列开始拆除耶路撒冷北部联合国近东救济工程处培训营地</td>
+<td>以巴冲突升级风险，人道主义危机发酵</td>
+<td>中东局势、避险资产</td>
+<td>承压映射：中东地区相关企业</td>
+<td>利空</td>
+<td>短期</td>
+<td><span class="priority-b">B</span></td>
+<td>后续冲突演化</td>
+</tr>
+<tr>
+<td>21:56</td>
+<td>上海发布网约车行业自律公约</td>
+<td>行业景气</td>
+<td>17家平台企业集体签约，规范运力管控、价格监管、数据治理</td>
+<td>网约车行业规范化提速，平台竞争格局优化</td>
+<td>出行服务、互联网平台</td>
+<td>情绪映射：滴滴（未上市）、美团（3690.HK）</td>
+<td>中性</td>
+<td>中期</td>
+<td><span class="priority-b">B</span></td>
+<td>行业运营成本变化</td>
+</tr>
+<tr>
+<td>20:44</td>
+<td>鼎龙股份H1业绩强劲</td>
+<td>公司公告</td>
+<td>H1净利5.29亿元（+70.21%），营收19.25亿元（+11.15%）</td>
+<td>半导体材料赛道景气验证</td>
+<td>半导体材料、光刻胶</td>
+<td>直接受益：鼎龙股份(300054.SZ)</td>
+<td>利多</td>
+<td>中期</td>
+<td><span class="priority-b">B</span></td>
+<td>订单持续性</td>
+</tr>
+<tr>
+<td>20:35</td>
+<td>软通动力H1亏损扩大</td>
+<td>公司公告</td>
+<td>H1净亏损2.65亿元，同比由亏1.43亿扩大；营收186.07亿元（+17.91%）</td>
+<td>IT服务行业竞争加剧，研发投入增加压制利润</td>
+<td>IT服务、软件外包</td>
+<td>直接受影响：软通动力(301236.SZ)</td>
+<td>利空</td>
+<td>短期</td>
+<td><span class="priority-b">B</span></td>
+<td>成本优化进展</td>
+</tr>
+</tbody>
+</table>
+
+<h2>三、主题归纳</h2>
+
+<div class="theme-box">
+<h3>主题1：AI算力硬件链涨价逻辑实证</h3>
+<p><strong>驱动事件：</strong>OpenAI自研Jalapeno芯片超越英伟达GB300（22:04）+ 美股芯片股大涨（21:52）</p>
+<p><strong>核心变化：</strong>自研芯片首次公开宣示性能优势，挑战英伟达算力垄断叙事；中科曙光H1扣非净利+48%验证业绩硬兑现</p>
+<p><strong>交易逻辑：</strong>基本面+估值修复双击，订单实锤+业绩验证双确认</p>
+<p><strong>受益方向：</strong>AI芯片设计、服务器、光通信、存储芯片</p>
+<p><strong>承压方向：</strong>传统GPU厂商估值承压、AI大模型概念股</p>
+<p><strong>代表公司：</strong>中科曙光(603019.SH) 直接受益；寒武纪(688256.SH) 情绪映射；SK海力士(000660.KS) 直接受益；美光(MU) 美股 直接受益</p>
+<p><strong>市场更可能交易：</strong>基本面</p>
+<p><strong>关键验证：</strong>英伟达Q2财报（8/26盘后）是否超预期</p>
+<p><strong>优先级：</strong><span class="priority-s">S</span></p>
+</div>
+
+<div class="theme-box">
+<h3>主题2：贵金属多头趋势松动</h3>
+<p><strong>驱动事件：</strong>现货黄金失守4600-4610美元/盎司（21:25-21:49）</p>
+<p><strong>核心变化：</strong>金价跌破关键技术支撑位，多头趋势首次出现实质性松动信号</p>
+<p><strong>交易逻辑：</strong>技术破位+美联储鹰派预期升温，避险需求边际减弱</p>
+<p><strong>受益方向：</strong>美元、美债</p>
+<p><strong>承压方向：</strong>黄金股、贵金属开采企业</p>
+<p><strong>代表公司：</strong>中金黄金(600489.SH)、山东黄金(600547.SH)、西部黄金(601069.SH) 承压映射</p>
+<p><strong>市场更可能交易：</strong>技术面</p>
+<p><strong>关键验证：</strong>金价能否在4600美元企稳</p>
+<p><strong>优先级：</strong><span class="priority-a">A</span></p>
+</div>
+
+<div class="theme-box">
+<h3>主题3：半导体材料赛道景气验证</h3>
+<p><strong>驱动事件：</strong>鼎龙股份H1净利+70%（20:44）+ 存储芯片涨价传导（21:52）</p>
+<p><strong>核心变化：</strong>从订单端到收入端的景气传导链条完整闭环</p>
+<p><strong>交易逻辑：</strong>业绩硬兑现+估值合理，资金向业绩确定性标的集中</p>
+<p><strong>受益方向：</strong>光刻胶、电子化学品、半导体设备</p>
+<p><strong>承压方向：</strong>无明显承压</p>
+<p><strong>代表公司：</strong>鼎龙股份(300054.SZ) 直接受益；南大光电(300346.SZ)、晶瑞电材(300655.SZ) 情绪映射</p>
+<p><strong>市场更可能交易：</strong>基本面</p>
+<p><strong>关键验证：</strong>订单持续性与产能利用率</p>
+<p><strong>优先级：</strong><span class="priority-b">B</span></p>
+</div>
+
+<h2>四、跨市场传导</h2>
+<table>
+<thead>
+<tr>
+<th>海外/宏观事件</th>
+<th>美股影响</th>
+<th>港股影响</th>
+<th>A股影响</th>
+<th>传导路径</th>
+<th>强度</th>
+<th>结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OpenAI自研芯片超越英伟达</td>
+<td>NVDA承压，AVGO受益</td>
+<td>港股科技股情绪分化</td>
+<td>AI芯片概念股活跃</td>
+<td>技术替代叙事→估值重估</td>
+<td>强</td>
+<td>A股传导最强</td>
+</tr>
+<tr>
+<td>美股芯片股大涨 费城半导体+2%</td>
+<td>半导体板块领涨</td>
+<td>港股半导体股跟涨</td>
+<td>存储芯片板块情绪修复</td>
+<td>涨价逻辑实证→业绩预期上修</td>
+<td>强</td>
+<td>A/H股联动明显</td>
+</tr>
+<tr>
+<td>现货黄金跌破4600美元</td>
+<td>黄金股承压</td>
+<td>港股黄金股调整</td>
+<td>A股黄金股下调</td>
+<td>技术破位→避险资金流出</td>
+<td>中</td>
+<td>三市同步承压</td>
+</tr>
+<tr>
+<td>美联储柯林斯鹰派讲话</td>
+<td>美债收益率上行</td>
+<td>港股高股息资产承压</td>
+<td>A股成长股估值承压</td>
+<td>降息预期推迟→利率敏感资产下调</td>
+<td>中</td>
+<td>间接传导为主</td>
+</tr>
+<tr>
+<td>美国新屋销售不及预期</td>
+<td>房地产板块承压</td>
+<td>A股直接映射较弱</td>
+<td>A股直接映射较弱</td>
+<td>美国房市降温→全球地产预期分化</td>
+<td>弱</td>
+<td>直接映射较弱</td>
+</tr>
+</tbody>
+</table>
+
+<h2>五、重点交易线索</h2>
+<ol>
+<li><strong>最值得关注的3个事件：</strong>
+<ul>
+<li>OpenAI自研芯片性能宣示（S级）→ 英伟达Q2财报前瞻博弈</li>
+<li>现货黄金跌破4600美元（A级）→ 贵金属多头趋势是否逆转</li>
+<li>中科曙光H1业绩超预期（A级）→ AI算力硬件链业绩硬兑现锚点</li>
+</ul>
+</li>
+<li><strong>最可能引发板块异动的3个方向：</strong>
+<ul>
+<li>AI算力/半导体：OpenAI芯片叙事 + 美股芯片股大涨共振</li>
+<li>存储芯片：涨价逻辑实证 + 业绩预期上修</li>
+<li>贵金属：技术破位 + 避险资金流出</li>
+</ul>
+</li>
+<li><strong>最具持续性的3条产业逻辑：</strong>
+<ul>
+<li>AI算力硬件链涨价传导（订单实锤→业绩验证→估值修复）</li>
+<li>半导体材料赛道景气延续（光刻胶、电子化学品需求刚性）</li>
+<li>存储芯片供需缺口持续（美光CEO称需求超供给50%）</li>
+</ul>
+</li>
+<li><strong>需回避或降权的方向：</strong>
+<ul>
+<li>贵金属：金价技术破位，4600美元为关键支撑，破位则趋势转弱</li>
+<li>高位AI大模型概念股：估值偏高，业绩验证期谨慎</li>
+<li>对美出口依赖型制造业：中美贸易摩擦不确定性仍存</li>
+</ul>
+</li>
+<li><strong>低价值噪音新闻：</strong>
+<ul>
+<li>国家药监局核查中心更名（行政事务，无交易价值）</li>
+<li>北京结束防汛应急响应（自然灾害恢复，无持续影响）</li>
+<li>美欧宇航员出舱（科技新闻，无资产传导路径）</li>
+<li>印度船只沉没搜救（人道主义事件，无市场影响）</li>
+</ul>
+</li>
+</ol>
+
+<h2>六、交易总表</h2>
+<table>
+<thead>
+<tr>
+<th>新闻主题</th>
+<th>事件类型</th>
+<th>涉及资产/板块</th>
+<th>代表公司</th>
+<th>影响方向</th>
+<th>驱动性质</th>
+<th>持续性</th>
+<th>优先级</th>
+<th>关键验证点</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OpenAI自研芯片超越英伟达</td>
+<td>科技突破</td>
+<td>AI芯片、半导体</td>
+<td>OpenAI产业链、寒武纪、海光信息</td>
+<td>利多（AI芯片）/ 利空（传统GPU）</td>
+<td>技术替代叙事</td>
+<td>待观察</td>
+<td><span class="priority-s">S</span></td>
+<td>英伟达Q2财报</td>
+<td>需验证性能数据真实性</td>
+</tr>
+<tr>
+<td>美股芯片股大涨</td>
+<td>业绩预期</td>
+<td>存储芯片、半导体</td>
+<td>SK海力士、美光、兆易创新</td>
+<td>利多</td>
+<td>涨价逻辑实证</td>
+<td>短期</td>
+<td><span class="priority-a">A</span></td>
+<td>存储芯片价格走势</td>
+<td>费城半导体指数+2%</td>
+</tr>
+<tr>
+<td>现货黄金跌破4600美元</td>
+<td>技术破位</td>
+<td>贵金属、黄金股</td>
+<td>中金黄金、山东黄金、西部黄金</td>
+<td>利空</td>
+<td>技术面+利率预期</td>
+<td>短期</td>
+<td><span class="priority-a">A</span></td>
+<td>4600美元支撑有效性</td>
+<td>多头趋势首次松动</td>
+</tr>
+<tr>
+<td>中科曙光H1业绩超预期</td>
+<td>业绩兑现</td>
+<td>AI算力、服务器</td>
+<td>中科曙光(603019.SH)</td>
+<td>利多</td>
+<td>基本面验证</td>
+<td>中期</td>
+<td><span class="priority-a">A</span></td>
+<td>订单规模与量产良率</td>
+<td>扣非净利+48%</td>
+</tr>
+<tr>
+<td>美联储柯林斯鹰派讲话</td>
+<td>政策预期</td>
+<td>美元、美债、成长股</td>
+<td>高估值成长股承压</td>
+<td>利空（利率敏感资产）</td>
+<td>货币政策预期</td>
+<td>中期</td>
+<td><span class="priority-a">A</span></td>
+<td>美联储9月议息结果</td>
+<td>降息预期可能推迟</td>
+</tr>
+<tr>
+<td>华创云信股权变更</td>
+<td>资本运作</td>
+<td>券商、地方金融</td>
+<td>华创云信(600155.SH)</td>
+<td>中性</td>
+<td>国资整合</td>
+<td>待观察</td>
+<td><span class="priority-b">B</span></td>
+<td>后续整合动作</td>
+<td>贵州金控成第一大股东</td>
+</tr>
+<tr>
+<td>国瑞科技股权重组</td>
+<td>资本运作</td>
+<td>军工、高端装备</td>
+<td>国瑞科技(300600.SZ)</td>
+<td>中性</td>
+<td>地方国企重组</td>
+<td>待观察</td>
+<td><span class="priority-b">B</span></td>
+<td>工商变更登记进度</td>
+<td>机电集团作价53.95亿</td>
+</tr>
+<tr>
+<td>内塔尼亚胡拆除联合国设施</td>
+<td>地缘政治</td>
+<td>中东局势、避险资产</td>
+<td>中东地区企业承压</td>
+<td>利空（避险情绪）</td>
+<td>冲突升级风险</td>
+<td>短期</td>
+<td><span class="priority-b">B</span></td>
+<td>后续冲突演化</td>
+<td>人道主义危机发酵</td>
+</tr>
+<tr>
+<td>鼎龙股份H1业绩强劲</td>
+<td>业绩兑现</td>
+<td>半导体材料、光刻胶</td>
+<td>鼎龙股份(300054.SZ)</td>
+<td>利多</td>
+<td>景气验证</td>
+<td>中期</td>
+<td><span class="priority-b">B</span></td>
+<td>订单持续性</td>
+<td>净利+70%</td>
+</tr>
+<tr>
+<td>软通动力H1亏损扩大</td>
+<td>业绩下滑</td>
+<td>IT服务、软件外包</td>
+<td>软通动力(301236.SZ)</td>
+<td>利空</td>
+<td>行业竞争加剧</td>
+<td>短期</td>
+<td><span class="priority-b">B</span></td>
+<td>成本优化进展</td>
+<td>净亏损2.65亿</td>
+</tr>
+</tbody>
+</table>
+
+<div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 12px;">
+<p>报告生成时间：2026-08-25 22:09（北京时间）</p>
+<p>数据来源：新浪财经、同花顺、富途牛牛、华尔街见闻、东方财富</p>
+<p>免责声明：本报告仅供参考，不构成投资建议。投资者据此操作，风险自担。</p>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>近6小时财经快讯交易筛选报告 2026-10-28 22:10</title>
+<style>
+:root{--bg:#f7f8fa;--card:#ffffff;--text:#1f2328;--muted:#5b6570;--line:#e3e6ea;--accent:#1a56db;--head:#f0f3f8;--up:#e0463e;--down:#1aa05a;--flat:#5b6570;}
+*{box-sizing:border-box;}
+body{margin:0;padding:28px 16px 60px;background:var(--bg);color:var(--text);
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+font-size:15px;line-height:1.75;}
+.wrap{max-width:1500px;margin:0 auto;background:var(--card);border:1px solid var(--line);
+border-radius:10px;padding:32px 34px 48px;box-shadow:0 1px 3px rgba(16,24,40,.05);}
+h1{font-size:26px;margin:0 0 18px;padding-bottom:14px;border-bottom:3px solid var(--accent);letter-spacing:.5px;}
+h2{font-size:20px;margin:34px 0 14px;padding-left:11px;border-left:5px solid var(--accent);}
+h3{font-size:17px;margin:26px 0 10px;color:#243b7a;}
+h4{font-size:15px;margin:18px 0 8px;color:var(--muted);}
+p{margin:9px 0;}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0;}
+ul,ol{margin:9px 0 9px 22px;padding:0;}
+li{margin:5px 0;}
+code{background:#f2f4f7;border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:13px;}
+strong{color:#0b2f6b;}
+/* MP-3/MP-4 引用块与链接 */
+blockquote{margin:10px 0;padding:8px 14px;border-left:4px solid var(--accent);background:#f8fafc;color:var(--muted);border-radius:0 6px 6px 0;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;}
+/* P1-1 目录导航 */
+.toc{background:#f8fafc;border:1px solid var(--line);border-radius:8px;padding:14px 18px;margin:0 0 26px;}
+.toc-title{font-weight:600;margin-bottom:8px;color:var(--accent);}
+.toc ul{list-style:none;margin:0;padding-left:0;}
+.toc li{margin:4px 0;}
+.toc li.lv1{font-weight:600;}
+.toc li.lv3{padding-left:18px;font-size:13.5px;color:var(--muted);}
+.toc a{color:var(--accent);text-decoration:none;}
+.toc a:hover{text-decoration:underline;}
+/* P1-2 宽表横向滚动 + 首列冻结 + 可滚动阴影提示 */
+.tw{overflow-x:auto;margin:16px 0;border:1px solid var(--line);border-radius:8px;
+box-shadow:inset -14px 0 12px -14px rgba(16,24,40,.18);}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:900px;}
+th{background:var(--head);font-weight:600;text-align:left;padding:10px 12px;border-bottom:2px solid var(--line);
+white-space:nowrap;color:#1c2b45;}
+td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;}
+table th:first-child,table td:first-child{position:sticky;left:0;z-index:2;background:var(--card);}
+table th:first-child{background:var(--head);z-index:3;}
+tbody tr:nth-child(even){background:#fafbfc;}
+tbody tr:hover{background:#f0f5ff;}
+em{color:var(--muted);font-style:italic;}
+/* P0 sparkline 价格迷你图（明暗自适应，SVG 用 var(--accent)） */
+.spark{margin:14px 0;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);}
+.spark svg{display:block;width:100%;}
+.spark-empty{color:var(--muted);font-size:13px;}
+/* P1-1 涨跌语义（A 股惯例：涨红跌绿），统一 token */
+.move-up{color:var(--up);font-weight:600;}
+.move-down{color:var(--down);font-weight:600;}
+.move-flat{color:var(--flat);}
+/* P0-2 决策卡：一眼可见的交易结论 */
+.decision-card{margin:16px 0;padding:16px 18px;border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:10px;background:linear-gradient(180deg,#fbfdff,#fff);}
+.decision-card.stance-up{border-left-color:var(--up);}
+.decision-card.stance-down{border-left-color:var(--down);}
+.decision-card.stance-flat,.decision-card.stance-watch{border-left-color:var(--muted);}
+.decision-card.stance-watch{border-left-color:#d98a00;}
+.dc-head{margin-bottom:6px;}
+.dc-stance{font-size:17px;font-weight:700;}
+.dc-stance.stance-up{color:var(--up);} .dc-stance.stance-down{color:var(--down);} .dc-stance.stance-flat,.dc-stance.stance-watch{color:var(--muted);} .dc-stance.stance-watch{color:#d98a00;}
+.dc-summary{margin:4px 0 10px;color:var(--text);}
+.dc-levels{display:flex;flex-wrap:wrap;gap:10px 18px;margin-bottom:8px;}
+.dc-kv{display:flex;flex-direction:column;}
+.dc-k{font-size:12px;color:var(--muted);}
+.dc-v{font-size:15px;font-weight:600;}
+.dc-tlabel{font-size:12px;color:var(--muted);margin:4px 0 6px;}
+.dc-tickers{display:flex;flex-wrap:wrap;gap:8px;}
+.dc-tag{background:#f2f4f7;border:1px solid var(--line);border-radius:999px;padding:2px 10px;font-size:13px;}
+.dc-tag i{color:var(--muted);font-style:normal;font-size:12px;}
+.decision-empty{color:var(--muted);border-left-color:var(--muted);}
+/* P0-2 数据不全横幅 */
+.banner-warn{margin:14px 0;padding:10px 14px;border:1px solid #f0c8c4;background:#fdf3f2;color:#b42318;border-radius:8px;font-weight:600;}
+/* P1-2 看板互链 */
+.dash-link{margin:14px 0;padding:9px 14px;border:1px solid var(--line);background:#f3f8ff;border-radius:8px;font-weight:600;}
+.dash-link a{color:var(--accent);}
+@media(prefers-color-scheme:dark){.banner-warn{background:#2a1c1b;border-color:#5b2a26;color:#ff9a8f;}.decision-card{background:linear-gradient(180deg,#1a2027,#1c2027);}.dash-link{background:#16202e;}}
+/* P2-4 移动端：表格不再强制 900px 最小宽度，表头允许换行（table 规则须置于块首） */
+@media(max-width:768px){table{min-width:0;font-size:12.5px;}th{white-space:normal;}body{padding:12px 6px;}.wrap{padding:18px 12px 32px;}h1{font-size:21px;}h2{font-size:17px;}.toc{padding:10px 12px;}}
+/* P2-2 深色模式（跟随系统） */
+@media(prefers-color-scheme:dark){
+:root{--bg:#15181d;--card:#1c2027;--text:#e6e9ef;--muted:#9aa4b2;--line:#2c323c;--accent:#6aa2ff;--head:#232a34;}
+code{background:#252b34;border-color:var(--line);}
+strong{color:#a9c6ff;}
+h3{color:#b9cdff;}
+.toc{background:#1a1f27;}
+blockquote{background:#1a1f27;}
+tbody tr:nth-child(even){background:#20252d;}
+tbody tr:hover{background:#26303d;}
+}
+/* P2-2 打印 / 导出 PDF */
+@media print{
+body{background:#fff;padding:0;}
+.wrap{border:0;box-shadow:none;max-width:none;padding:0;}
+.tw{overflow:visible;border:0;box-shadow:none;}
+table{min-width:0;font-size:11px;}
+th,td{padding:6px 8px;}
+table th:first-child,table td:first-child{position:static;}
+.toc{display:none;}
+h2{page-break-after:avoid;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="toc"><div class="toc-title">目录</div><ul><li class="lv1"><a href="#s1">近6小时财经快讯交易筛选报告</a></li><li class="lv2"><a href="#s2">关注池命中（10/28 22:10）</a></li><li class="lv2"><a href="#s3">闭环命中率统计（跨窗聚合）</a></li><li class="lv2"><a href="#s4">一、先看结论</a></li><li class="lv2"><a href="#s5">二、主题演进闭环表（上期验证项 × 本窗结果）</a></li><li class="lv2"><a href="#s6">三、有效事件清单</a></li><li class="lv2"><a href="#s7">四、主题归纳（按交易优先级排序）</a></li><li class="lv3"><a href="#s8">主题：存储上行周期（AI 硬件核心）</a></li><li class="lv3"><a href="#s9">主题：光模块/CPO 放量兑现</a></li><li class="lv3"><a href="#s10">主题：换电标准统一加速</a></li><li class="lv3"><a href="#s11">主题：欧洲能源危机定价重燃</a></li><li class="lv3"><a href="#s12">主题：黄金股业绩承压</a></li><li class="lv3"><a href="#s13">主题：新能源车需求走弱</a></li><li class="lv3"><a href="#s14">主题：利率债尾盘承压 + 国资/回购托底</a></li><li class="lv2"><a href="#s15">五、跨市场传导</a></li><li class="lv2"><a href="#s16">六、重点交易线索</a></li></ul></nav>
+<h1 id="s1">近6小时财经快讯交易筛选报告</h1>
+<p><strong>生成时间：</strong> 2026-10-28 22:10（北京时间）</p>
+<p><strong>覆盖区间：</strong> 2026-10-28 16:11 至 22:11（北京时间）</p>
+<p><strong>模板版本：</strong> v2（2026-10-13 生效；有效事件清单 11→8 列；删除「六、交易总表」；新增「二、主题演进闭环表」）</p>
+<p><strong>已读取来源：</strong> 新浪财经 / 同花顺 / 富途 / 华尔街见闻 / 东方财富（五源全部存活、无缺失）</p>
+<p><strong>统计：</strong> 已加载新闻 3158 条；时间窗口内 2678 条；去重后 2173 个事件；多源 460 个。高/中价值事件 19 个（S3 / A7 / B9，分析师评定）；噪音事件 2154 个。</p>
+<blockquote>⚠️ <strong>上期缺口：</strong> 上次执行时刻 2026-10-28 08:59 → 本窗起点 2026-10-28 16:11，约 <strong>7 小时 12 分</strong>未被采集（含 A 股/港股下午盘+收盘、美股盘前前半段、09:30 开盘结构与 09:00 内盘商品净价数据缺失）。本窗为 ④ 收盘后+美股盘中窗（A/港已收，美股 21:30 开盘，窗口内仅含约 41 分钟美股交易，强开盘数据在截口之后，见下文说明）。</blockquote>
+<h2 id="s2">关注池命中（10/28 22:10）</h2>
+<div class="tw"><table><thead><tr>
+<th>标的</th>
+<th>市场/代码</th>
+<th>命中数</th>
+<th>最近命中（时间 + 摘要）</th>
+</tr></thead><tbody>
+<tr>
+<td>中际旭创</td>
+<td>A股 300308</td>
+<td>49</td>
+<td>20:44【公募基金最新前十大重仓股出炉 中际旭创仍为头号重仓股】；21:27 天孚通信 CPO 2027 提量（光模块链情绪）</td>
+</tr>
+<tr>
+<td>宁德时代</td>
+<td>A股 300750</td>
+<td>97</td>
+<td>21:21 华为引望正式加入宁德时代巧克力换电生态；21:24 回购 348.86 万股金额 8 亿元</td>
+</tr>
+<tr>
+<td>苹果</td>
+<td>美股 AAPL</td>
+<td>184</td>
+<td>22:00 iPhone Duo 加价空间缩水（跨窗命中，本窗不展开）</td>
+</tr>
+<tr>
+<td>费城半导体指数</td>
+<td>美股 SOX</td>
+<td>43</td>
+<td>本窗仅盘前信号（闪迪+5.22% SK 带动、维谛+13%）；23:03 费半+3% 为截口外数据</td>
+</tr>
+<tr>
+<td>贵州茅台</td>
+<td>A股 600519</td>
+<td>10</td>
+<td>21:34 陈华调研茅台下沙生产</td>
+</tr>
+<tr>
+<td>中国海油</td>
+<td>A股 600938</td>
+<td>10</td>
+<td>18:52 海油发展 Q3 归母+4.38%；22:07 海油发展 Q3 归母+8.42%</td>
+</tr>
+<tr>
+<td>比亚迪</td>
+<td>A股 002594</td>
+<td>26</td>
+<td>19:24 比亚迪商用车×密尔克卫合作；19:49 订购 10 艘汽车运输船</td>
+</tr>
+<tr>
+<td>北方华创</td>
+<td>A股 002371</td>
+<td>7</td>
+<td>20:44 公募重仓科技板块延续</td>
+</tr>
+<tr>
+<td>兆易创新</td>
+<td>A股 603986</td>
+<td>21</td>
+<td>19:20 DeepSeek 约 1000 亿融资（待核实）；20:42 融资出逃 CPO/存储赛道</td>
+</tr>
+</tbody></table></div>
+<h2 id="s3">闭环命中率统计（跨窗聚合）</h2>
+<blockquote>数据源：judgments.json（权威判断库单一源）。净成立率 =（成立 + 0.5×部分成立）/（成立+部分成立+证伪+失效）。</blockquote>
+<div class="tw"><table><thead><tr>
+<th>维度</th>
+<th>成立</th>
+<th>部分成立</th>
+<th>证伪</th>
+<th>失效</th>
+<th>未知</th>
+<th>合计</th>
+<th>净成立率</th>
+</tr></thead><tbody>
+<tr>
+<td>全部</td>
+<td>2</td>
+<td>1</td>
+<td>4</td>
+<td>0</td>
+<td>0</td>
+<td>7</td>
+<td>36%</td>
+</tr>
+<tr>
+<td>油价/能源</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>3</td>
+<td>50%</td>
+</tr>
+<tr>
+<td>算力/AI/半导体</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+<td>50%</td>
+</tr>
+<tr>
+<td>汇率/利率/贵金属</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>其他</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0%</td>
+</tr>
+</tbody></table></div>
+<blockquote>⚠️ 样本量 7 &lt; 10，命中率仅供参考，不宜过度解读（待积累更多窗口）。</blockquote>
+<h2 id="s4">一、先看结论</h2>
+<ul>
+<li><strong>近 6 小时最重要变化：</strong> ① 欧洲天然气价格触及 <strong>100 欧元/MWh（2022 年能源危机以来首次）</strong>、世界银行称受中东战争影响 2026 年全球能源价格将涨 32%（四年最高）——能源危机定价重新升温；② 存储上行周期再获机构背书（高盛：DRAM 涨至 2028H1、2027 HBM 收入+230%）；③ 华为引望正式加入宁德巧克力换电生态，换电标准统一加速。
+</li>
+<li><strong>优先交易主线（1—3 条）：</strong> ① <strong>存储/AI 硬件链</strong>（高盛 HBM 上调 + 闪迪盘前+5.22% 受 SK 带动 + 江丰电子/三环/亨通业绩高增）；② <strong>光模块/CPO</strong>（天孚通信 2027 起逐步提量、核心物料紧张缓解）；③ <strong>换电/宁德生态</strong>（华为引望入局）。
+</li>
+<li><strong>明显承压/应回避方向：</strong> ① 黄金股（山东黄金 Q3 亏损、前三季度-19.60%，金价成本压力）；② 新能源车零售（10/1-25 零售同比-13%，需求偏弱）；③ 券商（申万宏源 Q3 环比-58%）；④ 长端利率债（尾盘收益率加速上行）。
+</li>
+<li><strong>需次日继续验证的关键变量：</strong> ① 10/28-29 FOMC 决议与 12 月加息路径（本窗无决议，进行中）；② 美股强开盘（标普+1%/费半+3% 出现在 23:03，超出本窗）能否延续至次日；③ 内盘能化/贵金属夜盘对欧洲天然气破 100 欧的定价反应（本窗内盘夜盘 21:00-22:11 数据缺失）；④ 碳酸锂能否站稳 10 万（湖南海利采购均价 13.36 万/吨暗示高位，但为单一买方数据）。
+</li>
+<li><strong>A 股、港股、美股中传导最强：</strong> <strong>美股 → A 股</strong> 的存储/光模块/AI 硬件传导最强（高盛 call + 盘前存储强势 → A 股存储/CPO 情绪映射明确）；港股直接映射弱（仅电池/换电、中芯/华虹情绪）；中东能源风险对 A 股以情绪扰动为主。
+</li>
+</ul>
+<h2 id="s5">二、主题演进闭环表（上期验证项 × 本窗结果）</h2>
+<blockquote>对照对象：上一期（2026-10-28 08:59）报告「新增待验证项 R1-R5」+ 工作区 MEMORY.md 第 6 节 standing 验证项。本窗为 16:11-22:11，不覆盖 09:30 开盘与 09:00 内盘净价（缺口未采集）。</blockquote>
+<div class="tw"><table><thead><tr>
+<th>上期窗口</th>
+<th>待验证项</th>
+<th>本窗证据（时间 + 事实）</th>
+<th>裁定</th>
+<th>对交易判断的影响</th>
+</tr></thead><tbody>
+<tr>
+<td>2026-10-28 08:59</td>
+<td>R1 09:30 A 股开盘结构（科技vs红利/能源）</td>
+<td>本窗无 09:30 数据（缺口 08:59→16:11 未采集）</td>
+<td>证据不足</td>
+<td>开盘结构未验证，下期补</td>
+</tr>
+<tr>
+<td>2026-10-28 08:59</td>
+<td>R2 09:00 内盘 SC/燃油净价</td>
+<td>本窗无内盘日盘/夜盘净价数据（21:00-22:11 夜盘未采到）</td>
+<td>证据不足</td>
+<td>油价/能化内盘定价待夜盘重验</td>
+</tr>
+<tr>
+<td>2026-10-28 08:59</td>
+<td>R3 10/28-29 FOMC 措辞 + 12 月加息路径</td>
+<td>本窗无 FOMC 决议/声明（会议进行中）</td>
+<td>证据不足</td>
+<td>利率定价待决议落地</td>
+</tr>
+<tr>
+<td>2026-10-28 08:59</td>
+<td>R4 美光/SK 盘后+3% 对 A 股存储映射</td>
+<td>高盛 17:05 DRAM 涨至 2028H1、2027 HBM 收入+230%；闪迪盘前+5.22% 受 SK 带动（19:00）；江丰电子 Q3+83.20%（19:35）</td>
+<td>成立强化</td>
+<td>存储链上行周期确认，A 股映射偏强</td>
+</tr>
+<tr>
+<td>2026-10-28 08:59</td>
+<td>R5 韩国 SIDECAR 后 KOSPI 波动</td>
+<td>本窗韩市休市，无新数据</td>
+<td>证据不足</td>
+<td>待韩市开盘</td>
+</tr>
+<tr>
+<td>2026-10-28 08:59</td>
+<td>Q1 中东升级后 Brent/内盘 SC 风险溢价</td>
+<td>欧洲天然气破 100 欧（21:36，2022 来首次）；世界银行全球能源+32%（21:30）；NYMEX 取暖油+1%（20:54）；Brent 见 sparkline</td>
+<td>延续待验偏强</td>
+<td>能源 risk premium 重燃，但主因天然气非原油</td>
+</tr>
+<tr>
+<td>2026-10-28 08:59</td>
+<td>⑤ / Q7 存储景气</td>
+<td>同 R4（高盛 call + 闪迪盘前）</td>
+<td>成立强化</td>
+<td>维持存储超配判断</td>
+</tr>
+<tr>
+<td>2026-10-28 08:59</td>
+<td>③ / ㉓ / N7 黄金 4000 守否</td>
+<td>山东黄金 Q3 亏损 3.63 亿、前三季度净利-19.60%（18:24）；无现货新价</td>
+<td>延续待验偏承压</td>
+<td>黄金股业绩承压，现货 4000 未破但压力未消</td>
+</tr>
+<tr>
+<td>2026-10-28 08:59</td>
+<td>⑨ / Q6 引望+宁德换电</td>
+<td>华为引望正式加入宁德巧克力换电生态（21:21，3 源）</td>
+<td>成立</td>
+<td>换电标准统一加速，宁德直接受益</td>
+</tr>
+<tr>
+<td>2026-10-28 08:59</td>
+<td>⑩ 特斯拉/SpaceX/铜</td>
+<td>特斯拉 Optimus 为 Robotaxi 充电（18:33）；普京称与马斯克就低轨卫星保持接触（21:12）；江西铜业 Q3+65.22%（18:07）</td>
+<td>强化</td>
+<td>人形机器人+星链+铜景气延续</td>
+</tr>
+<tr>
+<td>2026-10-28 08:59</td>
+<td>N3 欧洲天然气破 97 欧持续性</td>
+<td>本窗破 100 欧（21:36，2022 来首次）</td>
+<td>成立强化</td>
+<td>欧洲能源危机定价升级</td>
+</tr>
+<tr>
+<td>2026-10-28 08:59</td>
+<td>⑥ 国家算力网/物理 AI</td>
+<td>天孚通信 CPO 2027 提量（21:27）；PCB 钻针 AI 服务器需求爆发（21:03）；北京新增 6 款 AI 备案累计 325（21:19）</td>
+<td>延续待验偏强</td>
+<td>算力硬件链条景气延续</td>
+</tr>
+<tr>
+<td>2026-10-28 08:59</td>
+<td>⑬ capex/AI 融资潮</td>
+<td>高盛 HBM + 天孚 CPO + 维谛 Q3 超预期盘前+13%（17:58）</td>
+<td>成立维持</td>
+<td>AI 硬件 capex 延续</td>
+</tr>
+<tr>
+<td>2026-10-28 08:59</td>
+<td>N2 / ④ 美打击伊朗/霍尔木兹尾部</td>
+<td>也门焦夫省空袭 14 死（20:30）+ 亚丁机场导弹袭击（20:20）vs 卡塔尔向伊朗提交停战协议草案（19:22）+ 伊朗批美方外交空洞（19:22）</td>
+<td>延续待验偏强</td>
+<td>缓和与升级并存，尾部风险未消</td>
+</tr>
+<tr>
+<td>2026-10-28 08:59</td>
+<td>P5 券商整合</td>
+<td>申万宏源 Q3 环比-58%（19:23，承压）；友阿股份拟收购尚阳通 100%、深交所重组委近期审核（19:17）</td>
+<td>部分</td>
+<td>券商业绩承压，但重组活跃</td>
+</tr>
+<tr>
+<td>2026-10-28 08:59</td>
+<td>⑭ 创新药出海</td>
+<td>方盛制药受让三花清解临床前 70%（19:04）；北京先通国际医药-B 通过港交所聆讯（21:58）</td>
+<td>部分</td>
+<td>创新药边际改善但非强催化</td>
+</tr>
+<tr>
+<td>2026-10-28 08:59</td>
+<td>P2 碳酸锂站稳 10 万</td>
+<td>湖南海利碳酸锂采购均价 13.36 万/吨同比+109.73%（16:26，单一买方数据）</td>
+<td>部分成立</td>
+<td>锂价高位企稳迹象，待市场价验证</td>
+</tr>
+<tr>
+<td>2026-10-28 08:59</td>
+<td>Q3 A 股开盘映射 / Q4·P9 巴西 / Q2 国开</td>
+<td>本窗无巴西新闻；国开 4850 亿上窗已成立无新增</td>
+<td>Q3·Q4·P9 证据不足；Q2 成立维持</td>
+<td>巴西外溢待察；国开托底维持</td>
+</tr>
+<tr>
+<td>2026-10-28 08:59</td>
+<td>② 内盘能化背离</td>
+<td>本窗无内盘能化数据</td>
+<td>证据不足</td>
+<td>待内盘夜盘/次日日盘</td>
+</tr>
+</tbody></table></div>
+<blockquote>其余 standing 项（①A/H 映射、⑦中国稀土、⑧长鑫、⑪波音、⑫法/欧动荡、⑮亿纬、⑯印尼天然气、⑰南方电力、⑱西安奕材、⑲氦气、⑳新能源退税、㉑指数修订、㉒内盘背离、㉔债市、㉕卫星细则、N1 巴西传导、N4 AI 融资、N5 债券 ETF、N6 沥青/燃油、N7 白银、P1 LPR 双定价、P3 SIDECAR、P4 中金上市、P6 风电、P7 RTX5090、P8 创强沪弱、P10 城堡风险、Q8 美债脏点）本窗均无新增证据，维持原裁定（证据不足/延续待验），原样带入下期闭环。</blockquote>
+<h2 id="s6">三、有效事件清单</h2>
+<div class="tw"><table><thead><tr>
+<th>时间</th>
+<th>事件主题</th>
+<th>分类</th>
+<th>事实摘要（不照抄）</th>
+<th>新增性/核心变量</th>
+<th>上市公司映射（含逻辑）</th>
+<th>影响方向/持续性</th>
+<th>优先级/需验证事项</th>
+</tr></thead><tbody>
+<tr>
+<td>21:36</td>
+<td>欧洲天然气破 100 欧（2022 来首次）</td>
+<td>商品价格/国际地缘</td>
+<td>TTF 触及 100 欧元/MWh，为 2022 年能源危机以来首次；世界银行 21:30 称受中东战争影响 2026 全球能源价+32%</td>
+<td>欧洲能源危机定价重燃，独立于油价的天然气风险溢价升温</td>
+<td>A 股直接映射较弱；关注欧洲化工/化肥成本传导（情绪映射）</td>
+<td>利多欧洲气价/利空欧洲化工·中期</td>
+<td>S｜验证 N3/R3</td>
+</tr>
+<tr>
+<td>17:05</td>
+<td>高盛：DRAM 涨至 2028H1，2027 HBM 收入+230%</td>
+<td>科技/AI/半导体</td>
+<td>高盛预计服务器需求+供给有限推动 DRAM 涨至 2028H1；2027 HBM 综合均价+122%至 3.7 美元/Gb，全球 HBM 收入破 2000 亿美元（+230%）；重申三星/SK 买入</td>
+<td>存储上行周期获顶级投行背书，强化上窗 SK 海力士双超预期逻辑</td>
+<td>SK 海力士/三星（直接受益）；兆易创新/江波龙/长鑫（情绪映射）；A 股存储链</td>
+<td>利多/长期</td>
+<td>S｜验证 ⑤/Q7/R4</td>
+</tr>
+<tr>
+<td>21:21</td>
+<td>华为引望加入宁德巧克力换电生态</td>
+<td>新能源/汽车</td>
+<td>华为引望、宁德时代与时代电服正式签署战略合作，引望加入巧克力换电生态（3 源）</td>
+<td>换电标准统一加速，由上窗「成立」进入实质落子</td>
+<td>宁德时代（直接受益，300750）；换电运营商/电池资产（间接受益）</td>
+<td>利多/中期</td>
+<td>S｜验证 ⑨/Q6 成立</td>
+</tr>
+<tr>
+<td>21:27</td>
+<td>天孚通信：CPO 产品 2027 起逐步提量</td>
+<td>科技/AI</td>
+<td>天孚通信 IR 记录：CPO 配套已批量交付，预计 2027 起逐步提量成新增长驱动；核心物料供应紧张较前期明显缓解（4 源）</td>
+<td>光模块从「缺料制约」转向「放量兑现」，上窗物理 AI/算力逻辑落地</td>
+<td>天孚通信（直接受益，300394）；中际旭创/新易盛（情绪映射，CPO/光模块）</td>
+<td>利多/中期</td>
+<td>A｜验证 ⑥</td>
+</tr>
+<tr>
+<td>16:45</td>
+<td>新能源乘用车零售同比-13%</td>
+<td>新能源/汽车</td>
+<td>乘联分会：10/1-25 全国新能源乘用车零售 75.3 万辆，同比-13%、环比-1%；批发 100.8 万同比+3%</td>
+<td>终端需求走弱信号，与「以旧换新」预期形成背离</td>
+<td>比亚迪/蔚小理（承压，情绪映射）；锂电（情绪承压）</td>
+<td>利空/短期-中期</td>
+<td>A｜待 10 月全月数据</td>
+</tr>
+<tr>
+<td>18:24</td>
+<td>山东黄金 Q3 亏损、前三季度-19.60%</td>
+<td>商品价格/贵金属</td>
+<td>山东黄金 Q3 净利亏损 3.63 亿、扣非亏 3.31 亿；前三季度归母 31.81 亿同比-19.60%、扣非-18.55%</td>
+<td>金价高位但矿企成本/减值压力显现，印证黄金股承压</td>
+<td>山东黄金（承压，600547）；中金黄金/赤峰黄金（情绪映射）</td>
+<td>利空/中期</td>
+<td>A｜验证 ③/N7</td>
+</tr>
+<tr>
+<td>18:07</td>
+<td>江西铜业 Q3 +65.22%</td>
+<td>商品价格/铜</td>
+<td>江铜 Q3 净利 30.55 亿同比+65.22%、扣非+40.42%；前三季度 116.87 亿+94.02%</td>
+<td>铜景气延续，共振上窗 COMEX 铜+1.76%</td>
+<td>江西铜业（直接受益，600362）；铜陵有色/紫金矿业（情绪映射）</td>
+<td>利多/中期</td>
+<td>A｜验证 ⑩</td>
+</tr>
+<tr>
+<td>17:00</td>
+<td>银行间利率债收益率尾盘加速上行</td>
+<td>利率/汇率/债券</td>
+<td>10Y 国债活跃券 260016 上行 0.7bp 报 1.622%；30Y 2600004 +1.3bp 报 2.059%；10Y 国开 260205 +0.95bp 报 1.665%</td>
+<td>债市止盈/供给压力，长端承压</td>
+<td>长久期利率债（承压）；银行/保险（小幅）；A 股成长估值（情绪承压）</td>
+<td>利空/短期</td>
+<td>A｜利率 regime</td>
+</tr>
+<tr>
+<td>17:51</td>
+<td>美国向俄抛经济合作提议（结束俄乌前提）</td>
+<td>国际地缘</td>
+<td>多方消息：美方通过威特科夫、库什纳等与俄方商讨美俄经济合作，前提为结束俄乌冲突（3 源）</td>
+<td>俄乌缓和信号增强，但欧洲未直接参与</td>
+<td>A 股直接映射较弱；欧洲资产/风险偏好（情绪映射）</td>
+<td>利多缓和/待观察</td>
+<td>A｜验证 N2 缓和面</td>
+</tr>
+<tr>
+<td>21:10</td>
+<td>以色列大选无多数、不与阿裔组阁</td>
+<td>国际地缘</td>
+<td>初步计票两阵营均未获多数；内塔尼亚胡称建「强大右翼政府」、不与阿拉伯政党组阁（3 源）</td>
+<td>中东政治不确定性延续，与胡塞/伊朗尾部风险共振</td>
+<td>A 股直接映射较弱；油气（情绪映射）</td>
+<td>利空/中期</td>
+<td>A｜验证 ④/N2</td>
+</tr>
+<tr>
+<td>19:31</td>
+<td>国资增持延续：中国石油第四大股东增仓 3.73 亿股</td>
+<td>股东增减持</td>
+<td>国新宏盛三季度增仓中国石油 3.73 亿股至 13.86 亿股（0.76%）；华大九天中电金投增持 1% 完成（19:39）</td>
+<td>国有资本运营公司托底 A 股延续（呼应上窗 600 亿增持）</td>
+<td>中国石油（直接受益，601857）；华大九天（直接受益，301269）</td>
+<td>利多/中期</td>
+<td>B</td>
+</tr>
+<tr>
+<td>20:35 起</td>
+<td>回购潮延续（中天精装/世纪华通/卡莱特/龙迅/宏景/沐曦等）</td>
+<td>回购/分红</td>
+<td>多家公司披露回购/增持预案：中天精装 7500 万-1.5 亿、世纪华通 3-6 亿、卡莱特 5000 万-1 亿、龙迅 2000-4000 万、沐曦实控人提议 1-2 亿等</td>
+<td>ETF+回购托底资金面延续（呼应上窗 ETF 净流入）</td>
+<td>相关个股（直接受益）；整体托底（情绪）</td>
+<td>利多/短期</td>
+<td>B</td>
+</tr>
+<tr>
+<td>19:35 起</td>
+<td>半导体材料/设备业绩高增</td>
+<td>科技/AI</td>
+<td>江丰电子 Q3+83.20%、三环集团+167.97%（16:25）、纳微科技+90.44%、亨通光电+299.10%（17:05）、复旦微电+54.63%（17:45）</td>
+<td>AI 链+国产替代业绩兑现，与上窗半导体强势共振</td>
+<td>江丰电子（直接受益，300666）；三环集团（300408）；亨通光电（600487）；复旦微电（688385）</td>
+<td>利多/中期</td>
+<td>B｜验证 ⑬</td>
+</tr>
+<tr>
+<td>19:17</td>
+<td>友阿股份拟收购尚阳通 100%</td>
+<td>并购重组</td>
+<td>友阿股份拟发行股份+现金收购深圳尚阳通（功率半导体）100%，深交所重组委近期审核</td>
+<td>传统零售转型半导体，重组活跃度提升</td>
+<td>友阿股份（待核实，002277）；尚阳通（未上市，功率器件）</td>
+<td>利多/待观察</td>
+<td>B</td>
+</tr>
+<tr>
+<td>19:20</td>
+<td>DeepSeek 约 1000 亿融资（待核实）</td>
+<td>科技/AI</td>
+<td>多个一级投资人确认 DeepSeek 完成约 1000 亿元人民币融资（待核实）</td>
+<td>AI 融资潮延续（呼应上窗 Anthropic/SK），但金额待核</td>
+<td>待核实；A 股 AI 算力（情绪映射）</td>
+<td>利多/待观察</td>
+<td>B｜待核实</td>
+</tr>
+<tr>
+<td>18:33 / 21:12</td>
+<td>特斯拉 Optimus 充电 + 普京-马斯克低轨卫星</td>
+<td>科技/AI/汽车</td>
+<td>特斯拉拟用 Optimus 为 Robotaxi 插拔充电枪；普京称与马斯克就低轨卫星保持接触</td>
+<td>人形机器人+星链叙事延续</td>
+<td>特斯拉（美股）；A 股机器人/星链（情绪映射）</td>
+<td>利多/中期</td>
+<td>B｜验证 ⑩</td>
+</tr>
+<tr>
+<td>21:19</td>
+<td>北京新增 6 款生成式 AI 服务备案（累计 325）</td>
+<td>科技/AI</td>
+<td>截至 10/28 北京新增 6 款备案，累计 325 款</td>
+<td>AI 监管常态化，应用侧扩容</td>
+<td>A 股 AI 应用（情绪映射）</td>
+<td>中性/长期</td>
+<td>B</td>
+</tr>
+<tr>
+<td>19:23</td>
+<td>申万宏源 Q3 环比-58%</td>
+<td>其他/金融</td>
+<td>申万宏源 Q3 净利 14.1 亿，Q2 为 33.74 亿，环比-58%；前三季度-10.92%</td>
+<td>券商业绩承压，与市场成交/投资收益波动相关</td>
+<td>申万宏源（承压，000166）；券商板块（情绪承压）</td>
+<td>利空/短期</td>
+<td>B｜验证 P5</td>
+</tr>
+<tr>
+<td>16:26</td>
+<td>湖南海利碳酸锂采购均价 13.36 万/吨（+109.73%）</td>
+<td>新能源/商品价格</td>
+<td>湖南海利披露 1-9 月锂电材料类碳酸锂平均采购单价 13.36 万/吨，同比+109.73%</td>
+<td>锂价高位企稳迹象（单一买方数据）</td>
+<td>碳酸锂/锂矿（受益企稳，情绪映射）</td>
+<td>利多/待观察</td>
+<td>B｜验证 P2</td>
+</tr>
+</tbody></table></div>
+<h2 id="s7">四、主题归纳（按交易优先级排序）</h2>
+<h3 id="s8">主题：存储上行周期（AI 硬件核心）</h3>
+<ul>
+<li><strong>驱动事件：</strong> 高盛 17:05 DRAM 涨至 2028H1、2027 HBM 收入+230%；闪迪盘前+5.22% 受 SK 海力士带动（19:00）；江丰电子 Q3+83.20%（19:35）；上窗 SK 海力士 Q3 双超预期+盘后+3%
+</li>
+<li><strong>核心变化：</strong> 顶级投行将存储上行周期延长至 2028H1，HBM 收入预期大幅上修，验证上窗「存储确定性强化」判断
+</li>
+<li><strong>交易逻辑：</strong> 基本面（AI Capex + LTA 锁产能）+ 估值（景气上行）+ 海外传导（美股存储盘前强势）
+</li>
+<li><strong>受益方向：</strong> SK 海力士/三星、A 股存储链（兆易创新/江波龙/长鑫科技）、半导体材料（江丰电子）
+</li>
+<li><strong>承压方向：</strong> 无明确承压
+</li>
+<li><strong>市场更可能交易：</strong> 基本面 + 情绪面（混合）
+</li>
+<li><strong>关键验证：</strong> 美光财报（待 10/28 盘后）、A 股存储链次日开盘映射
+</li>
+<li><strong>优先级：</strong> S
+</li>
+</ul>
+<h3 id="s9">主题：光模块/CPO 放量兑现</h3>
+<ul>
+<li><strong>驱动事件：</strong> 天孚通信 21:27 CPO 2027 起逐步提量、核心物料紧张缓解（4 源）；PCB 钻针 AI 服务器需求爆发（21:03）；中际旭创仍为公募头号重仓股（20:44）
+</li>
+<li><strong>核心变化：</strong> 从「缺料制约」转向「放量兑现」，增长驱动更清晰
+</li>
+<li><strong>交易逻辑：</strong> 基本面（1.6T/CPO 迭代）+ 海外传导（美股光模块链）
+</li>
+<li><strong>受益方向：</strong> 天孚通信、中际旭创、新易盛、太辰光（情绪映射）
+</li>
+<li><strong>承压方向：</strong> 无
+</li>
+<li><strong>市场更可能交易：</strong> 基本面
+</li>
+<li><strong>关键验证：</strong> 2027 年 CPO 实际提量节奏、客户导入进展
+</li>
+<li><strong>优先级：</strong> A
+</li>
+</ul>
+<h3 id="s10">主题：换电标准统一加速</h3>
+<ul>
+<li><strong>驱动事件：</strong> 华为引望正式加入宁德时代巧克力换电生态（21:21，3 源）
+</li>
+<li><strong>核心变化：</strong> 上窗「华为引望+宁德换电成立」进入实质落子，标准统一加速
+</li>
+<li><strong>交易逻辑：</strong> 政策/产业（换电网络规模效应）+ 估值
+</li>
+<li><strong>受益方向：</strong> 宁德时代（直接）、换电运营商/电池资产（间接）
+</li>
+<li><strong>承压方向：</strong> 无
+</li>
+<li><strong>市场更可能交易：</strong> 情绪面 + 基本面（混合）
+</li>
+<li><strong>关键验证：</strong> 换电车型扩容、第三方接入进度
+</li>
+<li><strong>优先级：</strong> S
+</li>
+</ul>
+<h3 id="s11">主题：欧洲能源危机定价重燃</h3>
+<ul>
+<li><strong>驱动事件：</strong> 欧洲天然气破 100 欧（21:36，2022 来首次）；世界银行全球能源+32%（21:30）；NYMEX 取暖油+1%（20:54）&lt;!--sparkline:brent--&gt;
+</li>
+<li><strong>核心变化：</strong> 天然气（非原油）率先破位，能源危机定价独立于油价的尾部风险升温
+</li>
+<li><strong>交易逻辑：</strong> 商品价格（供给地缘溢价）+ 海外传导
+</li>
+<li><strong>受益方向：</strong> 欧洲本土能源/LNG；A 股映射弱（仅情绪）
+</li>
+<li><strong>承压方向：</strong> 欧洲化工/化肥/高耗能制造
+</li>
+<li><strong>市场更可能交易：</strong> 情绪面
+</li>
+<li><strong>关键验证：</strong> 内盘能化夜盘（SC/燃油）对天然气破位的反应、Brent 是否跟涨
+</li>
+<li><strong>优先级：</strong> S（能源）/ A（对 A 股传导弱）
+</li>
+</ul>
+<h3 id="s12">主题：黄金股业绩承压</h3>
+<ul>
+<li><strong>驱动事件：</strong> 山东黄金 Q3 亏损 3.63 亿、前三季度-19.60%（18:24）
+</li>
+<li><strong>核心变化：</strong> 印证上窗「黄金 4000 得而复失/加息压倒避险」regime，金价高位但矿企成本压力显现
+</li>
+<li><strong>交易逻辑：</strong> 商品价格（金价成本背离）+ 基本面（矿企利润承压）
+</li>
+<li><strong>受益方向：</strong> 无
+</li>
+<li><strong>承压方向：</strong> 山东黄金、中金黄金、赤峰黄金（黄金股）
+</li>
+<li><strong>市场更可能交易：</strong> 基本面
+</li>
+<li><strong>关键验证：</strong> 现货金能否守住 4000、美联储 FOMC 后实际利率走向
+</li>
+<li><strong>优先级：</strong> A
+</li>
+</ul>
+<h3 id="s13">主题：新能源车需求走弱</h3>
+<ul>
+<li><strong>驱动事件：</strong> 乘联分会 10/1-25 新能源零售 75.3 万同比-13%（16:45）
+</li>
+<li><strong>核心变化：</strong> 终端需求环比/同比转弱，与以旧换新政策预期形成背离
+</li>
+<li><strong>交易逻辑：</strong> 基本面（需求侧）+ 估值（景气下修）
+</li>
+<li><strong>受益方向：</strong> 无
+</li>
+<li><strong>承压方向：</strong> 比亚迪/蔚小理（情绪）、锂电中游
+</li>
+<li><strong>市场更可能交易：</strong> 基本面
+</li>
+<li><strong>关键验证：</strong> 10 月全月零售、厂商批发能否续强
+</li>
+<li><strong>优先级：</strong> A
+</li>
+</ul>
+<h3 id="s14">主题：利率债尾盘承压 + 国资/回购托底</h3>
+<ul>
+<li><strong>驱动事件：</strong> 银行间利率债尾盘加速上行（17:00）；国资增持（中国石油/华大九天）；多公司回购潮
+</li>
+<li><strong>核心变化：</strong> 长端利率小幅上行，但产业资本+国资托底资金面延续
+</li>
+<li><strong>交易逻辑：</strong> 利率（供给/止盈）+ 资金面（回购托底）
+</li>
+<li><strong>受益方向：</strong> 回购/增持个股、红利防御
+</li>
+<li><strong>承压方向：</strong> 长久期利率债、高估值成长
+</li>
+<li><strong>市场更可能交易：</strong> 混合
+</li>
+<li><strong>关键验证：</strong> FOMC 后国内利率走向、ETF 净流入持续性
+</li>
+<li><strong>优先级：</strong> A / B
+</li>
+</ul>
+<h2 id="s15">五、跨市场传导</h2>
+<div class="tw"><table><thead><tr>
+<th>海外/宏观事件</th>
+<th>美股影响</th>
+<th>港股影响</th>
+<th>A股影响</th>
+<th>传导路径</th>
+<th>强度</th>
+<th>结论</th>
+</tr></thead><tbody>
+<tr>
+<td>高盛 DRAM/HBM 上调 + 闪迪盘前+5.22%</td>
+<td>存储/半导体强（费半盘前强势）</td>
+<td>中芯/华虹情绪正面</td>
+<td>存储链/材料（兆易/江丰/长鑫）情绪偏强</td>
+<td>机构 call → 美股存储 → A 股映射</td>
+<td>强</td>
+<td>A 股映射明确，优先交易</td>
+</tr>
+<tr>
+<td>天孚通信 CPO 2027 提量</td>
+<td>光模块链正面</td>
+<td>中性</td>
+<td>中际旭创/新易盛/天孚 情绪强</td>
+<td>产业兑现 → A 股 CPO</td>
+<td>强</td>
+<td>直接映射，基本面驱动</td>
+</tr>
+<tr>
+<td>华为引望+宁德换电</td>
+<td>弱</td>
+<td>电池/换电正面</td>
+<td>宁德时代直接受益</td>
+<td>产业合作 → A 股宁德链</td>
+<td>中</td>
+<td>A 股直接受益</td>
+</tr>
+<tr>
+<td>欧洲天然气破 100 欧</td>
+<td>能源/公用事业情绪</td>
+<td>弱</td>
+<td>直接映射较弱（仅情绪）</td>
+<td>天然气独立定价，A 股无直接标的</td>
+<td>中（欧股强/A股弱）</td>
+<td>A 股情绪扰动，非交易主线</td>
+</tr>
+<tr>
+<td>美俄缓和提议</td>
+<td>风险偏好正面</td>
+<td>欧股/欧债正面</td>
+<td>直接映射较弱</td>
+<td>地缘缓和 → 全球风险偏好</td>
+<td>中</td>
+<td>A 股情绪正面但弱</td>
+</tr>
+<tr>
+<td>以色列无多数+胡塞袭击</td>
+<td>能源/军工情绪</td>
+<td>弱</td>
+<td>油气情绪映射</td>
+<td>中东风险 → 原油/Brent</td>
+<td>中偏强</td>
+<td>待 Brent 跟涨确认</td>
+</tr>
+</tbody></table></div>
+<h2 id="s16">六、重点交易线索</h2>
+<ol>
+<li><strong>最值得关注的 3—5 个事件/主题（S→A→B）：</strong>
+<ul>
+<li>S 存储上行周期（高盛 DRAM/HBM 上调 + 闪迪盘前 + 江丰业绩）
+</li>
+<li>S 华为引望加入宁德换电生态（标准统一加速）
+</li>
+<li>S/A 欧洲天然气破 100 欧（能源危机定价重燃，A 股弱映射）
+</li>
+<li>A 天孚通信 CPO 2027 提量（光模块放量兑现）
+</li>
+<li>A 山东黄金 Q3 亏损 / 新能源零售-13%（承压方向）
+</li>
+</ul>
+</li>
+</ol>
+<ol>
+<li><strong>最可能引发板块异动的 3 个方向：</strong>
+<ul>
+<li><strong>存储/半导体材料</strong>：高盛 call + 美股盘前存储强势 → 观察 A 股存储链次日开盘（兆易/江丰/长鑫）
+</li>
+<li><strong>光模块/CPO</strong>：天孚通信提量 → 中际旭创/新易盛/天孚
+</li>
+<li><strong>换电/宁德链</strong>：华为引望入局 → 宁德时代及换电运营商
+</li>
+</ul>
+</li>
+</ol>
+<ol>
+<li><strong>最具持续性的 3 条产业逻辑（有后续可验证变量）：</strong>
+<ul>
+<li>存储上行周期至 2028H1（验证：美光 10/28 财报、HBM 均价、LTA 覆盖率）
+</li>
+<li>AI 硬件 Capex（验证：天孚 CPO 提量节奏、维谛/英伟达业绩、FOMC 后利率）
+</li>
+<li>换电标准统一（验证：华为/宁德生态车型扩容、第三方接入）
+</li>
+</ul>
+</li>
+</ol>
+<ol>
+<li><strong>需回避或降权的方向：</strong>
+<ul>
+<li>黄金股（山东黄金业绩亏损，加息压倒避险 regime 延续）
+</li>
+<li>新能源车终端（零售同比-13%，需求偏弱）
+</li>
+<li>券商（申万宏源 Q3 环比-58%）
+</li>
+<li>长久期利率债（尾盘收益率上行）
+</li>
+<li>巴西资产（上窗外溢扩散后本窗无新数据，延续待察，不盲目抄底）
+</li>
+</ul>
+</li>
+</ol>
+<ol>
+<li><strong>低价值噪音新闻（仅列主题，不逐条展开）：</strong>
+<ul>
+<li>英国财政大臣预算讲话（减税/AI 投资，非 A 股直接变量）
+</li>
+<li>大量非主线三季报（出版/旅游/区域基建等，单公司无板块带动）
+</li>
+<li>西班牙列车事故、印尼地震等社会新闻
+</li>
+<li>香港 9 月贸易数据（逆差但出口+64.9%，单一区域）
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<blockquote>说明：本报告由脚本 <code>fetch_6h.js</code> → <code>condense2.js</code>（→<code>events.json</code>）→ <code>run_enhance.py</code> 链路生成；统计字段照抄脚本真实输出（已加载 3158 / 窗口内 2678 / 去重 2173 / 多源 460）。美国股指强开（标普+1%/费半+3% @23:03）出现在本窗截口（22:11）之后，仅盘前信号纳入。火花线占位：<code>brent</code>、<code>lithium</code> 由 <code>sparklines.json</code> 渲染，其余 KEY 无数据已省略。</blockquote>
+</div>
+</body>
+</html>

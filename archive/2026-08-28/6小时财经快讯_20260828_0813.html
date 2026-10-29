@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6小时财经快讯交易筛选报告</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, "Microsoft YaHei", "PingFang SC", sans-serif; background: #f5f7fa; color: #1a1a1a; line-height: 1.6; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 24px 20px; }
+  .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: #fff; padding: 28px 32px; border-radius: 12px; margin-bottom: 24px; }
+  .header h1 { font-size: 22px; font-weight: 700; margin-bottom: 10px; }
+  .header .meta { font-size: 13px; color: #a0aec0; display: flex; flex-wrap: wrap; gap: 16px; }
+  .header .meta span { display: inline-flex; align-items: center; gap: 4px; }
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 24px; }
+  .stat-card { background: #fff; border-radius: 10px; padding: 16px; text-align: center; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .stat-card .num { font-size: 26px; font-weight: 700; color: #1a1a2e; }
+  .stat-card .label { font-size: 12px; color: #718096; margin-top: 4px; }
+  .stat-card.highlight .num { color: #e53e3e; }
+  .section { background: #fff; border-radius: 12px; padding: 24px; margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .section-title { font-size: 16px; font-weight: 700; color: #1a1a2e; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid #e2e8f0; display: flex; align-items: center; gap: 8px; }
+  .section-title .icon { width: 20px; height: 20px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; }
+  .conclusion-list { list-style: none; }
+  .conclusion-list li { padding: 10px 0 10px 32px; position: relative; border-bottom: 1px solid #f0f0f0; font-size: 14px; }
+  .conclusion-list li:last-child { border-bottom: none; }
+  .conclusion-list li::before { content: attr(data-num); position: absolute; left: 0; top: 10px; width: 22px; height: 22px; border-radius: 50%; background: #2d3748; color: #fff; font-size: 11px; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+  .tag-s { background: #fed7d7; color: #c53030; }
+  .tag-a { background: #feebc8; color: #c05621; }
+  .tag-b { background: #bee3f8; color: #2b6cb0; }
+  .tag-c { background: #e2e8f0; color: #4a5568; }
+  .tag-macro { background: #e9d8fd; color: #553c9a; }
+  .tag-tech { background: #c6f6d5; color: #276749; }
+  .tag-geo { background: #fed7d7; color: #c53030; }
+  .tag-company { background: #fefcbf; color: #975a16; }
+  .tag-commodity { background: #feebc8; color: #c05621; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 8px; }
+  th { background: #f7fafc; color: #2d3748; font-weight: 600; text-align: left; padding: 10px 8px; border: 1px solid #e2e8f0; white-space: nowrap; }
+  td { padding: 10px 8px; border: 1px solid #e2e8f0; vertical-align: top; }
+  tr:hover td { background: #f7fafc; }
+  .theme-card { background: #f7fafc; border-radius: 10px; padding: 18px; margin-bottom: 16px; border-left: 4px solid #2d3748; }
+  .theme-card.s-level { border-left-color: #e53e3e; }
+  .theme-card.a-level { border-left-color: #dd6b20; }
+  .theme-card.b-level { border-left-color: #3182ce; }
+  .theme-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 10px; color: #1a1a2e; }
+  .theme-card .meta-line { font-size: 12px; color: #718096; margin-bottom: 8px; }
+  .theme-card ul { margin: 8px 0; padding-left: 18px; font-size: 13px; }
+  .theme-card ul li { margin-bottom: 4px; }
+  .传导-table { font-size: 12px; }
+  .传导-table th { white-space: normal; font-size: 12px; }
+  .noise-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .noise-item { background: #f0f0f0; border-radius: 6px; padding: 6px 12px; font-size: 12px; color: #718096; }
+  .highlight-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 12px 0; font-size: 13px; }
+  .highlight-box strong { color: #92400e; }
+  .footer { text-align: center; font-size: 11px; color: #a0aec0; padding: 16px 0; }
+  .stock-tag { display: inline-block; background: #edf2f7; border-radius: 3px; padding: 1px 6px; font-size: 11px; color: #4a5568; margin-right: 4px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <h1>📊 近6小时财经快讯交易筛选报告</h1>
+  <div class="meta">
+    <span>🕐 生成时间：2026-08-28 08:13（北京时间）</span>
+    <span>📅 覆盖区间：2026-08-28 02:13 至 08:13</span>
+    <span>📡 已读取来源：新浪财经 / 同花顺 / 富途牛牛 / 华尔街见闻 / 东方财富</span>
+  </div>
+</div>
+
+<div class="stat-grid">
+  <div class="stat-card"><div class="num">6+</div><div class="label">已加载新闻源</div></div>
+  <div class="stat-card"><div class="num">~85</div><div class="label">时间窗口内新闻</div></div>
+  <div class="stat-card"><div class="num">12</div><div class="label">去重后独立事件</div></div>
+  <div class="stat-card highlight"><div class="num">4</div><div class="label">S/A级高价值事件</div></div>
+  <div class="stat-card"><div class="num">5</div><div class="label">B级中价值事件</div></div>
+  <div class="stat-card"><div class="num">3</div><div class="label">C级噪音/低价值</div></div>
+</div>
+
+<!-- 一、先看结论 -->
+<div class="section">
+  <div class="section-title">一、先看结论</div>
+  <ol class="conclusion-list">
+    <li data-num="1"><strong>英伟达Q2财报超预期效应延续，AI算力硬件链进入"业绩硬兑现"阶段</strong>——瑞杰金融喊出515美元目标价，至少13家机构集体上调，NVDA Q3指引1080亿美元，市场开始定价"AI算力景气延伸至2028财年"长逻辑；A股科创50+3.77%，CPO/PCB/液冷板块联动。</li>
+    <li data-num="2"><strong>人形机器人从"主题投资"转向"量产交付+资本定价"双轮驱动</strong>——全球双足人形机器人上半年出货量破3000台（同比+150%），宇树科技"A股上市+天才少年计划"确立估值参照系；政策面两部门发文推进AI数据资源开发利用提供增量催化。</li>
+    <li data-num="3"><strong>霍尔木兹海峡油轮遇袭、伊朗谈判无实质进展，油运/航运链风险溢价再升</strong>——英国外军称两艘货船周一遭袭，伊朗外长致信联合国安理会，但当前通航量约600-1000万桶/日（约为战前一半），运输量持续回升抑制油价涨幅。</li>
+    <li data-num="4"><strong>金价高位松动，多头趋势首次实质性承压</strong>——纽约期金失守4650美元/盎司（0.33%跌幅），现货金跌破4600美元，美联储9月维持利率不变概率63.5%，短期回调趋势明确，关键支撑4600美元。</li>
+    <li data-num="5"><strong>A股传导最强、港股次之、美股已部分定价</strong>——英伟达财报利好在A股科创板块发酵（科创50+3.77%），港股CXO/创新药延续景气（药明合联涨+11%），美股NVDA已创历史新高。</li>
+  </ol>
+</div>
+
+<!-- 二、有效事件清单 -->
+<div class="section">
+  <div class="section-title">二、有效事件清单</div>
+  <table>
+    <thead>
+      <tr><th>时间</th><th>事件主题</th><th>分类</th><th>事实摘要</th><th>新增性/核心变量</th><th>影响行业与资产</th><th>上市公司映射</th><th>方向</th><th>持续性</th><th>优先级</th><th>需验证事项</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>07:49</td><td>英伟达Q2财报效应延续</td><td><span class="tag tag-tech">科技/AI</span></td>
+        <td>Q2营收962亿美元(+106%)，Q3指引1080亿美元超预期，至少13家机构上调目标价，瑞杰金融喊出515美元</td>
+        <td>机构目标价上修潮验证AI算力景气延续至2028财年，A股连锁反应</td>
+        <td>AI算力、CPO、PCB、液冷、半导体设备</td>
+        <td><span class="stock-tag">中际旭创 300308.SZ 直接受益</span><span class="stock-tag">工业富联 601138.SH 直接受益</span><span class="stock-tag">沪电股份 002463.SZ 直接受益</span><span class="stock-tag">润建股份 002929.SZ 直接受益</span></td>
+        <td>利多</td>
+        <td>中期</td>
+        <td><span class="tag tag-s">S</span></td>
+        <td>Q3营收1080亿指引是否兑现；Hugging Face收购案审批进度</td>
+      </tr>
+      <tr>
+        <td>07:48</td>
+        <td>人形机器人产业验证+政策催化</td>
+        <td><span class="tag tag-tech">科技/AI</span></td>
+        <td>全球双足人形机器人上半年出货量破3000台（超越2025全年）；宇树科技上市确立估值参照；两部门发文推进AI数据资源开发利用</td>
+        <td>产业从"主题投资"转向"量产交付+资本定价"；政策面提供增量催化</td>
+        <td>人形机器人、具身智能、AI数据要素</td>
+        <td><span class="stock-tag">宇树科技 688836.SH 直接受益</span><span class="stock-tag">智元机器人 待核验 间接受益</span><span class="stock-tag">数据要素概念股 情绪映射</span></td>
+        <td>利多</td>
+        <td>中期</td>
+        <td><span class="tag tag-s">S</span></td>
+        <td>Q3出货量数据；启元机器人9月万台级产线落地进度</td>
+      </tr>
+      <tr>
+        <td>06:28/05:52</td>
+        <td>英伟达暂停AI云收入分成协议</td>
+        <td><span class="tag tag-tech">科技/AI</span></td>
+        <td>华尔街日报报道英伟达暂停"AI算力合作伙伴计划"部分协议（涉360亿美元承诺），员工担忧反垄断审查；英伟达发言人驳斥</td>
+        <td>新模式从"信用支持换收入分成"转向"项目调整"，商业化路径有调整但不影响基本面</td>
+        <td>AI云服务商、算力租赁、英伟达产业链</td>
+        <td><span class="stock-tag">NVDA 英伟达 待影响评估</span><span class="stock-tag">光迅科技 002281.SZ 情绪映射</span><span class="stock-tag">中际旭创 300308.SZ 间接受益</span></td>
+        <td>中性偏多</td>
+        <td>短期</td>
+        <td><span class="tag tag-a">A</span></td>
+        <td>AI云合作计划最终形态；反垄断审查风险是否实质化</td>
+      </tr>
+      <tr>
+        <td>07:46/05:59</td>
+        <td>Anthropic考虑收购/融资AI芯片公司MatX</td>
+        <td><span class="tag tag-tech">科技/AI</span></td>
+        <td>Anthropic曾讨论以70亿美元收购MatX后放弃，现转为合作谈判；MatX新一轮融资估值约40亿美元</td>
+        <td>大模型厂商自研芯片趋势延续，AI芯片竞争格局分化</td>
+        <td>AI芯片设计、大模型推理芯片</td>
+        <td><span class="stock-tag">MatX 未上市 待核验</span><span class="stock-tag">寒武纪 688256.SH 情绪映射</span><span class="stock-tag">海光信息 688041.SH 情绪映射</span></td>
+        <td>中性</td>
+        <td>待观察</td>
+        <td><span class="tag tag-b">B</span></td>
+        <td>Anthropic-MatX合作关系最终形态；国产AI芯片替代节奏</td>
+      </tr>
+      <tr>
+        <td>05:24</td>
+        <td>霍尔木兹海峡油轮遇袭+伊朗谈判僵局</td>
+        <td><span class="tag tag-geo">国际地缘</span></td>
+        <td>伊朗外长致信联合国安理会，愿以谅解备忘录换取海峡通行；但英国海军称两艘货船周一遭袭，通航风险仍存</td>
+        <td>与记忆中"通航恢复至200艘"对比：风险事件频发但通航量已回升至600-1000万桶/日，运价创历史新高推高船东冒险动力</td>
+        <td>油运、集运、航运、原油</td>
+        <td><span class="stock-tag">中远海能 600026.SH 直接受益</span><span class="stock-tag">招商轮船 601872.SH 直接受益</span><span class="stock-tag">中远海控 601919.SH 间接受益</span></td>
+        <td>分化</td>
+        <td>短期</td>
+        <td><span class="tag tag-a">A</span></td>
+        <td>海峡实际通航量变化；卡塔尔多首相访德黑兰能否促成谈判</td>
+      </tr>
+      <tr>
+        <td>07:49</td>
+        <td>纽约期金失守4650美元/盎司</td>
+        <td><span class="tag tag-commodity">商品价格</span></td>
+        <td>期金失守4650美元，日内跌0.33%；现货金跌破4600美元，多头趋势首次实质性松动</td>
+        <td>美联储9月维持利率不变概率63.5%+美元99.03点压制，金价短期承压</td>
+        <td>贵金属、黄金股</td>
+        <td><span class="stock-tag">山东黄金 600547.SH 利空</span><span class="stock-tag">紫金矿业 601899.SH 利空</span><span class="stock-tag">西部黄金 601069.SH 利空（前次跌超8%）</span></td>
+        <td>利空</td>
+        <td>短期</td>
+        <td><span class="tag tag-a">A</span></td>
+        <td>金价能否在4600美元企稳；杰克逊霍尔年会沃什演讲内容</td>
+      </tr>
+      <tr>
+        <td>05:39</td>
+        <td>城堡证券Q2创纪录73亿美元交易收入</td>
+        <td><span class="tag tag-macro">宏观政策</span></td>
+        <td>城堡证券Q2交易收入73亿美元创历史新高（去年同期3倍+），净利润33亿美元暴涨250%+</td>
+        <td>反映市场波动率维持高位，量化交易行业景气度验证</td>
+        <td>量化交易、券商、金融市场</td>
+        <td><span class="stock-tag"> Citadel 私有 无A股映射</span><span class="stock-tag">中泰证券 600958.SH 情绪映射</span></td>
+        <td>中性</td>
+        <td>短期</td>
+        <td><span class="tag tag-b">B</span></td>
+        <td>市场波动率能否持续；量化行业竞争格局</td>
+      </tr>
+      <tr>
+        <td>07:40</td>
+        <td>SK海力士考虑深化与日本存储行业合作</td>
+        <td><span class="tag tag-tech">科技/AI</span></td>
+        <td>SK海力士CEO郭鲁正表示正在探索深化与日本存储行业客户及供应商的合作，铠侠控股股权无固定计划</td>
+        <td>存储芯片供应链重组信号，中国存储企业面临竞争压力</td>
+        <td>存储芯片、半导体</td>
+        <td><span class="stock-tag">SK海力士 000660.KS 韩国</span><span class="stock-tag">铠侠 未上市 日本</span><span class="stock-tag">兆易创新 603986.SH 间接受益</span><span class="stock-tag">江波龙 301308.SZ 间接受益</span></td>
+        <td>中性偏空</td>
+        <td>待观察</td>
+        <td><span class="tag tag-b">B</span></td>
+        <td>存储芯片价格走势（DRAMeXchange）；中国存储替代节奏</td>
+      </tr>
+      <tr>
+        <td>07:42</td>
+        <td>美国FTC调查YouTube封禁用户账号</td>
+        <td><span class="tag tag-macro">宏观政策</span></td>
+        <td>美国联邦贸易委员会自去年起调查YouTube是否在封禁用户账号时违反消费者保护法，已进入准备潜在诉讼最后阶段</td>
+        <td>科技平台监管压力升级，类比Meta 167亿美元和解后续影响</td>
+        <td>互联网平台、社交媒体</td>
+        <td><span class="stock-tag">GOOGL/GOOG 美股 直接相关</span><span class="stock-tag">快手 1024.HK 情绪映射</span><span class="stock-tag">Bilibili 9626.HK 情绪映射</span></td>
+        <td>利空</td>
+        <td>待观察</td>
+        <td><span class="tag tag-b">B</span></td>
+        <td>FTC诉讼时间表；法院裁决倾向</td>
+      </tr>
+      <tr>
+        <td>07:59</td>
+        <td>谷歌支付2.6亿英镑和解英国应用开发者集体诉讼</td>
+        <td><span class="tag tag-macro">宏观政策</span></td>
+        <td>谷歌同意支付2.6亿英镑（约合3.54亿美元）就英国集体诉讼达成和解，指控滥用市场支配地位收取过高佣金</td>
+        <td>科技平台垄断监管持续升温，类比Meta 167亿美元和解</td>
+        <td>互联网平台、应用商店</td>
+        <td><span class="stock-tag">GOOGL/GOOG 美股 直接相关</span><span class="stock-tag">苹果 AAPL 美股 情绪映射</span></td>
+        <td>利空</td>
+        <td>短期</td>
+        <td><span class="tag tag-b">B</span></td>
+        <td>美国司法部对谷歌反垄断案进展</td>
+      </tr>
+      <tr>
+        <td>07:18</td>
+        <td>10年期国债收益率重返1.7%上方</td>
+        <td><span class="tag tag-macro">利率/汇率/债券</span></td>
+        <td>股债跷跷板效应再现：A股主要指数收涨，科创50+3.77%，10年期国债收益率时隔10个交易日重返1.7%上方</td>
+        <td>债市承压回调，资金向股市迁移，市场风险偏好提升</td>
+        <td>债券市场、权益市场</td>
+        <td><span class="stock-tag">无直接映射</span><span class="stock-tag">利率敏感型行业 情绪映射</span></td>
+        <td>中性偏多</td>
+        <td>短期</td>
+        <td><span class="tag tag-c">C</span></td>
+        <td>国债收益率能否站稳1.7%上方；股债跷跷板持续性</td>
+      </tr>
+      <tr>
+        <td>06:45</td>
+        <td>工信部等四部门开展汽车产品质量专项整治</td>
+        <td><span class="tag tag-macro">宏观政策</span></td>
+        <td>工信部、公安部、生态环境部、市场监管总局联合印发通知，在全国范围内开展为期1年的道路机动车辆产品生产一致性和质量提升专项行动</td>
+        <td>汽车行业监管收紧，对非理性竞争问题反映多的企业重点检查</td>
+        <td>汽车制造、零部件</td>
+        <td><span class="stock-tag">整车企业 利空</span><span class="stock-tag">小米汽车 688121.SH 待核验 情绪映射</span></td>
+        <td>利空</td>
+        <td>短期</td>
+        <td><span class="tag tag-c">C</span></td>
+        <td>整治行动具体执行力度；受影响企业名单</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 三、主题归纳 -->
+<div class="section">
+  <div class="section-title">三、主题归纳（按交易优先级排序）</div>
+
+  <div class="theme-card s-level">
+    <h3>主题一：AI算力硬件链——从"预期"走向"实证"阶段（S级）</h3>
+    <div class="meta-line">驱动事件：英伟达Q2财报超预期 + 机构目标价上修潮 | 时间：07:49</div>
+    <ul>
+      <li><strong>核心变化：</strong>Q2营收962亿美元(+106%)，Q3指引1080亿美元超预期，机构开始定价"AI算力景气延伸至2028财年"长逻辑</li>
+      <li><strong>交易逻辑：</strong>基本面（订单实锤+业绩验证）+ 政策面（两部门发文推进AI数据资源开发利用）+ 海外传导（美股NVDA创新高）三重共振</li>
+      <li><strong>受益方向：</strong>CPO光模块、PCB印制电路板、液冷散热、服务器代工、半导体设备</li>
+      <li><strong>承压方向：</strong>AI大模型概念股（商业化尚未闭环）、高位消费电子清洁电器</li>
+      <li><strong>代表公司：</strong>中际旭创300308.SZ（CPO龙头，获融资买入17.72亿元）、工业富联601138.SH（服务器代工）、沪电股份002463.SZ（PCB）、润建股份002929.SZ（液冷）</li>
+      <li><strong>市场更可能交易：</strong>基本面（业绩兑现）+ 情绪面（政策催化）混合驱动</li>
+      <li><strong>关键验证：</strong>Q3营收1080亿指引兑现；Hugging Face收购案审批；CPO出货节奏</li>
+    </ul>
+  </div>
+
+  <div class="theme-card s-level">
+    <h3>主题二：人形机器人——从"主题投资"转向"量产交付+资本定价"（S级）</h3>
+    <div class="meta-line">驱动事件：全球双足人形机器人上半年出货量破3000台 + 宇树科技上市 + AI数据要素政策 | 时间：07:48</div>
+    <ul>
+      <li><strong>核心变化：</strong>宇树科技A股上市确立估值参照系，全球双足人形机器人上半年出货量破3000台（同比+150%），政策面两部门发文推进AI数据资源开发利用</li>
+      <li><strong>交易逻辑：</strong>产业从"概念叙事"走向"订单验证"，量产交付能力成为估值锚；私募机构积极衡量赛道长期价值</li>
+      <li><strong>受益方向：</strong>双足人形机器人整机厂、灵巧手/伺服系统/减速器等核心零部件、AI数据要素</li>
+      <li><strong>承压方向：</strong>无明确承压方向</li>
+      <li><strong>代表公司：</strong>宇树科技688836.SH（整机龙头）、智元机器人（待核验，灵巧手OmniHand获7金）、数据要素概念股（情绪映射）</li>
+      <li><strong>市场更可能交易：</strong>基本面（出货量验证）+ 情绪面（政策催化）混合驱动</li>
+      <li><strong>关键验证：</strong>Q3出货量数据；启元机器人9月万台级产线落地进度</li>
+    </ul>
+  </div>
+
+  <div class="theme-card a-level">
+    <h3>主题三：霍尔木兹海峡油运链——风险溢价再升（A级）</h3>
+    <div class="meta-line">驱动事件：伊朗外长致信联合国 + 两艘货船周一遭袭 | 时间：05:24</div>
+    <ul>
+      <li><strong>核心变化：</strong>海峡通航风险事件频发，但当前通航量600-1000万桶/日（约为战前一半），运价创历史新高推高船东冒险动力</li>
+      <li><strong>交易逻辑：</strong>地缘风险溢价 vs 实际通航量回升的博弈；超级油轮运价创历史新高是核心变量</li>
+      <li><strong>受益方向：</strong>油运、集运、航运保险</li>
+      <li><strong>承压方向：</strong>原油进口依赖型制造业</li>
+      <li><strong>代表公司：</strong>中远海能600026.SH（油运龙头）、招商轮船601872.SH（油运+散运）、中远海控601919.SH（集运）</li>
+      <li><strong>市场更可能交易：</strong>情绪面（地缘风险）主导，基本面（运价）支撑</li>
+      <li><strong>关键验证：</strong>海峡实际通航量变化；卡塔尔多首相访德黑兰能否促成谈判</li>
+    </ul>
+  </div>
+
+  <div class="theme-card a-level">
+    <h3>主题四：贵金属——多头趋势首次实质性松动（A级）</h3>
+    <div class="meta-line">驱动事件：纽约期金失守4650美元 + 现货金跌破4600美元 | 时间：07:49</div>
+    <ul>
+      <li><strong>核心变化：</strong>金价从"高位盘整"转向"实质性回调"，美联储9月维持利率不变概率63.5%，美元99.03点压制</li>
+      <li><strong>交易逻辑：</strong>降息预期降温 + 美元走强双重压制，短期回调趋势明确</li>
+      <li><strong>受益方向：</strong>做空黄金股、美元资产</li>
+      <li><strong>承压方向：</strong>黄金股、贵金属开采企业</li>
+      <li><strong>代表公司：</strong>山东黄金600547.SH、紫金矿业601899.SH、西部黄金601069.SH（前次跌超8%）</li>
+      <li><strong>市场更可能交易：</strong>基本面（利率预期）主导</li>
+      <li><strong>关键验证：</strong>金价能否在4600美元企稳；杰克逊霍尔年会沃什演讲内容</li>
+    </ul>
+  </div>
+
+  <div class="theme-card b-level">
+    <h3>主题五：AI云商业模式调整——英伟达暂停收入分成协议（B级）</h3>
+    <div class="meta-line">驱动事件：华尔街日报报道英伟达暂停"AI算力合作伙伴计划"部分协议（涉360亿美元）| 时间：06:28</div>
+    <ul>
+      <li><strong>核心变化：</strong>新模式从"信用支持换收入分成"转向"项目调整"，英伟达发言人驳斥</li>
+      <li><strong>交易逻辑：</strong>商业化路径有调整但不影响基本面，反垄断审查风险是核心变量</li>
+      <li><strong>受益方向：</strong>无明确受益方向</li>
+      <li><strong>承压方向：</strong>AI云服务商（依赖英伟达信用支持的企业）</li>
+      <li><strong>代表公司：</strong>光迅科技002281.SZ（情绪映射）、中际旭创300308.SZ（间接受益）</li>
+      <li><strong>市场更可能交易：</strong>情绪面（反垄断担忧）主导</li>
+      <li><strong>关键验证：</strong>AI云合作计划最终形态；反垄断审查风险是否实质化</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 四、跨市场传导 -->
+<div class="section">
+  <div class="section-title">四、跨市场传导</div>
+  <table class="传导-table">
+    <thead>
+      <tr><th>海外/宏观事件</th><th>美股影响</th><th>港股影响</th><th>A股影响</th><th>传导路径</th><th>强度</th><th>结论</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>英伟达Q2财报超预期+Q3指引1080亿</td>
+        <td>NVDA创历史新高，市值单日+4420亿美元</td>
+        <td>港股AI概念股跟涨，腾讯/百度小幅上涨</td>
+        <td>科创50+3.77%，CPO/PCB/液冷板块联动</td>
+        <td>业绩硬兑现→机构目标价上修→A股映射</td>
+        <td>强</td>
+        <td>A股传导最强，科创芯片设计主题ETF集体收涨</td>
+      </tr>
+      <tr>
+        <td>霍尔木兹海峡油轮遇袭</td>
+        <td>油股上涨，航运股分化</td>
+        <td>港股航运股小幅跟涨</td>
+        <td>A股油运/集运链短线交易机会</td>
+        <td>地缘风险溢价→运价飙升→航运股重估</td>
+        <td>中</td>
+        <td>风险事件频发但通航量已回升，短线博弈为主</td>
+      </tr>
+      <tr>
+        <td>金价跌破4600美元</td>
+        <td>金价走弱，黄金股回调</td>
+        <td>港股黄金股承压</td>
+        <td>A股黄金股调整，山东黄金/紫金矿业下跌</td>
+        <td>美联储利率预期→美元走强→金价承压</td>
+        <td>中</td>
+        <td>多头趋势首次实质性松动，4600美元为关键支撑位</td>
+      </tr>
+      <tr>
+        <td>SK海力士与日本存储行业加深合作</td>
+        <td>存储芯片板块承压</td>
+        <td>港股存储概念股小幅回调</td>
+        <td>A股存储芯片企业面临竞争压力</td>
+        <td>供应链重组→中国存储替代压力</td>
+        <td>弱</td>
+        <td>直接映射较弱，仅情绪面影响</td>
+      </tr>
+      <tr>
+        <td>美国FTC调查YouTube封禁用户</td>
+        <td>GOOGL/GOOG承压</td>
+        <td>港股互联网平台股情绪承压</td>
+        <td>A股互联网概念股情绪承压</td>
+        <td>监管压力→平台股估值重估</td>
+        <td>弱</td>
+        <td>直接映射较弱，仅情绪面影响</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 五、重点交易线索 -->
+<div class="section">
+  <div class="section-title">五、重点交易线索</div>
+  <div class="highlight-box">
+    <strong>1. 最值得关注的3-5个事件/主题（S→A→B排序）：</strong><br>
+    ① 英伟达Q2财报效应延续——机构目标价上修潮（S级）<br>
+    ② 人形机器人产业验证+政策催化（S级）<br>
+    ③ 霍尔木兹海峡油运链风险溢价再升（A级）<br>
+    ④ 金价高位松动，多头趋势承压（A级）<br>
+    ⑤ 英伟达暂停AI云收入分成协议（B级）
+  </div>
+  <div class="highlight-box">
+    <strong>2. 最可能引发板块异动的3个方向：</strong><br>
+    ① <strong>CPO/光模块</strong>——触发因素：英伟达Q3指引超预期；观察标志：中际旭创融资买入额是否持续领先<br>
+    ② <strong>人形机器人</strong>——触发因素：宇树科技股价企稳+政策催化；观察标志：Q3出货量数据<br>
+    ③ <strong>油运/集运</strong>——触发因素：海峡袭击事件升级；观察标志：超灵便型油轮运价指数
+  </div>
+  <div class="highlight-box">
+    <strong>3. 最具持续性的3条产业逻辑：</strong><br>
+    ① AI算力硬件链——验证变量：Q3营收1080亿指引兑现；Hugging Face收购案审批<br>
+    ② 人形机器人量产交付——验证变量：Q3出货量数据；启元机器人9月万台级产线落地<br>
+    ③ 存储芯片供需缺口——验证变量：DRAMeXchange价格走势；铠侠建厂时间表
+  </div>
+  <div class="highlight-box">
+    <strong>4. 需回避或降权的方向：</strong><br>
+    ① <strong>贵金属高位股</strong>——估值风险：金价4600美元破位，多头趋势松动；政策风险：美联储9月维持利率不变概率63.5%<br>
+    ② <strong>AI大模型概念股</strong>——商业化风险：收入尚未闭环，依赖巨额资本开支；监管风险：FTC调查YouTube、Meta和解案后续<br>
+    ③ <strong>化工上游</strong>——需求不足现实压倒供给收缩叙事，乙二醇/对二甲苯跌停延续
+  </div>
+  <div class="noise-list">
+    <div class="noise-item">台风"沙德尔"红色预警（自然灾害，非交易信息）</div>
+    <div class="noise-item">新疆建成超高压电力骨干网（基础设施，无直接交易价值）</div>
+    <div class="noise-item">港珠澳大桥年内客流破2000万人次（旅游消费，无板块联动）</div>
+    <div class="noise-item">墨西哥总统拟提议候选人国籍限制（政治事件，无市场影响）</div>
+    <div class="noise-item">联合国秘书长古特雷斯就美国会费表态（外交事件，无市场影响）</div>
+  </div>
+</div>
+
+<!-- 六、交易总表 -->
+<div class="section">
+  <div class="section-title">六、交易总表</div>
+  <table>
+    <thead>
+      <tr><th>新闻主题</th><th>事件类型</th><th>涉及资产/板块</th><th>代表公司</th><th>影响方向</th><th>驱动性质</th><th>持续性</th><th>优先级</th><th>关键验证点</th><th>备注</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>英伟达Q2财报超预期</td><td>公司公告</td><td>AI算力、CPO、PCB、液冷、半导体设备</td><td>中际旭创、工业富联、沪电股份、润建股份</td><td>利多</td><td>业绩硬兑现+机构目标价上修</td><td>中期</td><td><span class="tag tag-s">S</span></td><td>Q3营收1080亿指引；Hugging Face收购案</td><td>科创50+3.77%，芯片ETF集体收涨</td></tr>
+      <tr><td>人形机器人产业验证</td><td>行业景气+政策催化</td><td>人形机器人、具身智能、AI数据要素</td><td>宇树科技、智元机器人（待核验）</td><td>利多</td><td>量产交付能力验证+政策增量催化</td><td>中期</td><td><span class="tag tag-s">S</span></td><td>Q3出货量；启元机器人9月产线落地</td><td>产业从"主题投资"转向"资本定价"</td></tr>
+      <tr><td>英伟达暂停AI云收入分成协议</td><td>公司公告</td><td>AI云服务商、算力租赁</td><td>光迅科技、中际旭创</td><td>中性偏多</td><td>商业模式调整，反垄断风险待评估</td><td>短期</td><td><span class="tag tag-a">A</span></td><td>AI云合作计划最终形态；反垄断审查风险</td><td>英伟达发言人驳斥"暂停"说法</td></tr>
+      <tr><td>Anthropic考虑收购MatX</td><td>并购重组</td><td>AI芯片设计、大模型推理芯片</td><td>MatX（未上市）、寒武纪、海光信息</td><td>中性</td><td>大模型厂商自研芯片趋势延续</td><td>待观察</td><td><span class="tag tag-b">B</span></td><td>合作关系最终形态；国产AI芯片替代节奏</td><td>估值40亿美元新一轮融资</td></tr>
+      <tr><td>霍尔木兹海峡油轮遇袭</td><td>国际地缘</td><td>油运、集运、航运、原油</td><td>中远海能、招商轮船、中远海控</td><td>分化</td><td>地缘风险溢价 vs 实际通航量回升</td><td>短期</td><td><span class="tag tag-a">A</span></td><td>海峡实际通航量；卡塔尔多首相访德黑兰</td><td>运价创历史新高推高船东冒险动力</td></tr>
+      <tr><td>金价跌破4600美元</td><td>商品价格</td><td>贵金属、黄金股</td><td>山东黄金、紫金矿业、西部黄金</td><td>利空</td><td>美联储利率预期+美元走强双重压制</td><td>短期</td><td><span class="tag tag-a">A</span></td><td>4600美元支撑位；杰克逊霍尔年会</td><td>多头趋势首次实质性松动</td></tr>
+      <tr><td>城堡证券Q2创纪录73亿美元交易收入</td><td>宏观政策</td><td>量化交易、券商、金融市场</td><td>无直接映射</td><td>中性</td><td>市场波动率维持高位</td><td>短期</td><td><span class="tag tag-b">B</span></td><td>市场波动率持续性；量化行业竞争格局</td><td>反映市场活跃度</td></tr>
+      <tr><td>SK海力士与日本存储行业加深合作</td><td>公司公告</td><td>存储芯片、半导体</td><td>SK海力士（韩国）、铠侠（日本）、兆易创新、江波龙</td><td>中性偏空</td><td>供应链重组信号</td><td>待观察</td><td><span class="tag tag-b">B</span></td><td>存储芯片价格走势；中国存储替代节奏</td><td>直接映射较弱</td></tr>
+      <tr><td>美国FTC调查YouTube封禁用户</td><td>宏观政策</td><td>互联网平台、社交媒体</td><td>GOOGL/GOOG、快手、Bilibili</td><td>利空</td><td>科技平台监管压力升级</td><td>待观察</td><td><span class="tag tag-b">B</span></td><td>FTC诉讼时间表；法院裁决倾向</td><td>直接映射较弱</td></tr>
+      <tr><td>谷歌支付2.6亿英镑和解英国集体诉讼</td><td>宏观政策</td><td>互联网平台、应用商店</td><td>GOOGL/GOOG、苹果</td><td>利空</td><td>科技平台垄断监管持续升温</td><td>短期</td><td><span class="tag tag-b">B</span></td><td>美国司法部对谷歌反垄断案进展</td><td>类比Meta 167亿美元和解</td></tr>
+      <tr><td>10年期国债收益率重返1.7%上方</td><td>利率/汇率/债券</td><td>债券市场、权益市场</td><td>无直接映射</td><td>中性偏多</td><td>股债跷跷板效应，资金向股市迁移</td><td>短期</td><td><span class="tag tag-c">C</span></td><td>国债收益率能否站稳1.7%上方</td><td>市场风险偏好提升信号</td></tr>
+      <tr><td>四部门联合开展汽车产品质量专项整治</td><td>宏观政策</td><td>汽车制造、零部件</td><td>整车企业、小米汽车（情绪映射）</td><td>利空</td><td>行业监管收紧，非理性竞争企业重点检查</td><td>短期</td><td><span class="tag tag-c">C</span></td><td>整治行动具体执行力度</td><td>直接映射较弱</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="footer">
+  <p>报告生成时间：2026-08-28 08:13（北京时间） | 数据来源：新浪财经 / 同花顺 / 富途牛牛 / 华尔街见闻 / 东方财富</p>
+  <p>本报告仅供研究参考，不构成投资建议。市场有风险，投资需谨慎。</p>
+</div>
+
+</div>
+</body>
+</html>

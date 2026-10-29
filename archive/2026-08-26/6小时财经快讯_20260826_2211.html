@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6小时财经快讯交易筛选报告</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #1a1a2e; line-height: 1.7; padding: 24px; }
+  .container { max-width: 960px; margin: 0 auto; }
+  .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: #fff; padding: 32px; border-radius: 12px; margin-bottom: 24px; }
+  .header h1 { font-size: 22px; font-weight: 700; margin-bottom: 12px; }
+  .header .meta { font-size: 13px; opacity: 0.85; line-height: 1.8; }
+  .card { background: #fff; border-radius: 12px; padding: 24px; margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .card h2 { font-size: 16px; font-weight: 700; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #e8ecf1; color: #1a1a2e; }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-right: 4px; }
+  .tag-s { background: #fee2e2; color: #dc2626; }
+  .tag-a { background: #fef3c7; color: #d97706; }
+  .tag-b { background: #dbeafe; color: #2563eb; }
+  .tag-c { background: #f3f4f6; color: #6b7280; }
+  .up { color: #dc2626; }
+  .down { color: #16a34a; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 8px; }
+  th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #e8ecf1; vertical-align: top; }
+  th { background: #f8fafc; font-weight: 600; color: #374151; font-size: 12px; }
+  tr:hover td { background: #fafbfc; }
+  .conclusion-list { list-style: none; counter-reset: cl; }
+  .conclusion-list li { counter-increment: cl; padding: 8px 0 8px 36px; position: relative; border-bottom: 1px solid #f0f0f0; font-size: 14px; }
+  .conclusion-list li::before { content: counter(cl); position: absolute; left: 0; top: 8px; width: 24px; height: 24px; background: #1a1a2e; color: #fff; border-radius: 50%; font-size: 12px; display: flex; align-items: center; justify-content: center; font-weight: 600; }
+  .event-block { margin-bottom: 20px; padding: 16px; background: #fafbfc; border-radius: 8px; border-left: 4px solid #3b82f6; }
+  .event-block.s { border-left-color: #dc2626; }
+  .event-block.a { border-left-color: #d97706; }
+  .event-block.b { border-left-color: #2563eb; }
+  .event-title { font-weight: 700; font-size: 14px; margin-bottom: 6px; }
+  .event-meta { font-size: 12px; color: #6b7280; margin-bottom: 8px; }
+  .event-body { font-size: 13px; color: #374151; }
+  .highlight { background: #fef9c3; padding: 1px 4px; border-radius: 2px; }
+  .theme-section { margin-bottom: 24px; }
+  .theme-section h3 { font-size: 15px; font-weight: 700; margin-bottom: 10px; color: #1a1a2e; }
+  .theme-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .theme-card { background: #f8fafc; border-radius: 8px; padding: 14px; border: 1px solid #e8ecf1; }
+  .theme-card h4 { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .theme-card p { font-size: 12px; color: #4b5563; line-height: 1.6; }
+  .stat-bar { display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 16px; }
+  .stat-item { text-align: center; }
+  .stat-num { font-size: 28px; font-weight: 700; color: #1a1a2e; }
+  .stat-label { font-size: 12px; color: #6b7280; }
+  .nav-pills { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .nav-pill { padding: 6px 14px; border-radius: 20px; font-size: 13px; cursor: pointer; border: 1px solid #e8ecf1; background: #fff; color: #374151; text-decoration: none; }
+  .nav-pill:hover { background: #f0f4ff; border-color: #3b82f6; }
+  .footer { text-align: center; font-size: 12px; color: #9ca3af; margin-top: 32px; padding: 16px; }
+  @media (max-width: 640px) {
+    .theme-grid { grid-template-columns: 1fr; }
+    body { padding: 12px; }
+    .header { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <h1>📊 近6小时财经快讯交易筛选报告</h1>
+  <div class="meta">
+    <strong>生成时间：</strong>2026-08-26 22:11（北京时间）<br>
+    <strong>覆盖区间：</strong>2026-08-26 16:11 至 22:11（北京时间）<br>
+    <strong>已读取来源：</strong>新浪财经 / 同花顺 / 富途牛牛 / 华尔街见闻 / 东方财富<br>
+    <strong>统计：</strong>已加载新闻约 80+ 条；时间窗口内约 60 条；去重后约 30 个独立事件；高/中价值事件 12 个；噪音事件约 18 个。
+  </div>
+</div>
+
+<div class="card">
+  <h2>一、先看结论</h2>
+  <ol class="conclusion-list">
+    <li><strong>Meta 167亿美元和解协议落地</strong>，是今晚最重磅事件——类比烟草行业里程碑式和解，可能重塑全球社交媒体监管框架，对Meta、Google、Snap等科技股影响深远。</li>
+    <li><strong>当前优先交易的三条主线：</strong>① AI算力链（MiniMax Q2收入环比+81.8% + Qwen3.8-Flash开源，国产替代加速）；② 有色/贵金属高位震荡（黄金失守4600美元，铜业业绩验证延续）；③ 霍尔木兹海峡博弈持续（原油回落，但供给端不确定性未消）。</li>
+    <li><strong>承压方向：</strong>化工上游（乙二醇跌停、瓶片-5%延续）；贵金属（现货金跌破4600美元，4600为关键支撑）；AI大模型概念股（OpenAI恢复限流，估值修复压力）；出口导向型制造业（人民币维持强势）。</li>
+    <li><strong>次日关键验证变量：</strong>① 英伟达 Q2 财报（今晚盘后，数据中心营收一致预期857亿美元）；② 金价能否在4600美元企稳；③ Meta和解案最终法院批准进度。</li>
+    <li><strong>A股传导最强：</strong>港股创新药景气延续（信达生物涨超10%）+ AI算力链业绩验证（MiniMax/Meta和解催化）+ 有色金属业绩兑现（江西铜业H1净利+107%），A股映射以业绩硬方向为主。</li>
+  </ol>
+</div>
+
+<div class="card">
+  <h2>二、有效事件清单（S/A/B 级）</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>时间</th>
+        <th>事件主题</th>
+        <th>分类</th>
+        <th>事实摘要</th>
+        <th>新增性/核心变量</th>
+        <th>影响资产</th>
+        <th>上市公司映射</th>
+        <th>影响方向</th>
+        <th>持续性</th>
+        <th>优先级</th>
+        <th>需验证事项</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>21:17–22:06</td>
+        <td>Meta 167亿美元和解</td>
+        <td>公司公告</td>
+        <td>Meta与美国多州达成和解，支付167亿美元，18岁以下用户每日限时2小时、夜间禁用、禁止整容滤镜，Q3计提约100亿美元法律费用</td>
+        <td>社交媒体行业里程碑式和解，类比烟草行业；直接改写Meta商业模式+监管框架，影响全行业（Google/Yahoo/Snap等）</td>
+        <td>META/ORCL/SNAP/GOOGL<br>社交媒体板块</td>
+        <td>META（直接）：100亿费用计提短期压制盈利；长期监管压力释放<br>GOOGL（间接）：YtTube被呼吁采取相同措施，潜在成本<br>SNAP（情绪映射）：行业估值逻辑重塑<br>Oracle（情绪映射）：花旗纳入90天催化观察</td>
+        <td>分化：Meta短期承压，长期监管风险出清</td>
+        <td>中期</td>
+        <td><span class="tag tag-s">S</span></td>
+        <td>和解案最终法院批准进度；各州赔偿分配方案落地情况</td>
+      </tr>
+      <tr>
+        <td>21:15–21:46</td>
+        <td>MiniMax Q2业绩爆发</td>
+        <td>公司公告</td>
+        <td>ARR突破8亿美元；Q2收入环比+81.8%；7月Token消耗量达1月的20倍；To B业务占比升至80%；推进M3/H3国产芯片适配</td>
+        <td>国内AI大模型厂商首次披露ARR+8亿，To B占比逆转；国产算力替代加速</td>
+        <td>00100.HK<br>算力/AI应用板块</td>
+        <td>MiniMax-W（直接）：ARR超8亿美元验证商业化能力<br>国产算力链（间接）：华为昇腾/寒武纪等受益国产芯片替代加速</td>
+        <td>利多</td>
+        <td>中期</td>
+        <td><span class="tag tag-s">S</span></td>
+        <td>Q3/Q4国产芯片占比提升节奏；M3 Pro（约3T参数）何时商用</td>
+      </tr>
+      <tr>
+        <td>20:47</td>
+        <td>湖南黄金重大资产重组</td>
+        <td>并购重组</td>
+        <td>拟以43.34亿元发行股份购买黄金天岳及中南冶炼100%股权；配套募资不超10.5亿元；8月27日复牌</td>
+        <td>黄金产业链横向整合，增强冶炼+加工一体化能力；复牌后关注资金博弈</td>
+        <td>002155.SZ<br>黄金/有色板块</td>
+        <td>湖南黄金（直接）：复牌后关注资金方向，黄金链整合逻辑</td>
+        <td>待确认</td>
+        <td>短期</td>
+        <td><span class="tag tag-a">A</span></td>
+        <td>复牌后资金方向；黄金天岳及中南冶炼资产质量与协同效应</td>
+      </tr>
+      <tr>
+        <td>20:33</td>
+        <td>大普微34.91亿元SSD订单</td>
+        <td>公司公告</td>
+        <td>签订企业级PCIe SSD销售订单，总金额约34.91亿元（含税），占2025年主营收入152.70%，18周内交付</td>
+        <td>单一订单超过全年营收，规模罕见；存储芯片需求旺盛验证</td>
+        <td>301666.SZ<br>存储/半导体板块</td>
+        <td>大普微-UW（直接）：订单规模超预期，对2026年业绩有强支撑</td>
+        <td>利多</td>
+        <td>短期</td>
+        <td><span class="tag tag-a">A</span></td>
+        <td>客户A身份待披露；订单实际执行与良率情况</td>
+      </tr>
+      <tr>
+        <td>21:18</td>
+        <td>现货黄金跌破4600美元</td>
+        <td>商品价格</td>
+        <td>现货黄金日内跌幅达1.30%，跌破4600美元/盎司关口，此前已失守4650美元</td>
+        <td>多头趋势首次出现实质性松动；4600为关键支撑位，跌破则技术面转弱</td>
+        <td>黄金/贵金属板块<br>西部黄金/山东黄金</td>
+        <td>西部黄金/山东黄金/中金黄金（情绪映射）：金价波动影响板块情绪；高位不追</td>
+        <td>利空</td>
+        <td>短期</td>
+        <td><span class="tag tag-a">A</span></td>
+        <td>4600美元能否企稳；美联储9月议息预期变化</td>
+      </tr>
+      <tr>
+        <td>20:50</td>
+        <td>美国7月PCE数据</td>
+        <td>宏观政策</td>
+        <td>核心PCE环比+0.2%，同比+3.3%；实际消费支出几乎停滞；Q2 GDP年化修正值1.5%</td>
+        <td>通胀温和但消费停滞，为美联储9月维持利率不变提供依据；美元维持涨势</td>
+        <td>美元指数/美债/原油</td>
+        <td>A股/港股映射较弱；宏观环境变化影响成长股估值</td>
+        <td>中性偏空</td>
+        <td>短期</td>
+        <td><span class="tag tag-b">B</span></td>
+        <td>9月FOMC会议点阵图变化；杰克逊霍尔年会沃什演讲内容</td>
+      </tr>
+      <tr>
+        <td>21:17–21:34</td>
+        <td>霍尔木兹海峡博弈</td>
+        <td>国际地缘</td>
+        <td>特朗普称昨日1000万桶石油通过海峡；伊朗称若美国不接受条件海峡不会开放；伊朗与阿曼协议尚未最终敲定</td>
+        <td>供给端信号分化：特朗普称畅通 vs 伊朗称有条件开放；原油价格日内先跌超3%后跌幅缩窄至1.3%</td>
+        <td>原油/油运/航运板块</td>
+        <td>中远海能/招商南油（情绪映射）：海峡通航量决定运价；A股直接映射较弱</td>
+        <td>分化</td>
+        <td>待观察</td>
+        <td><span class="tag tag-b">B</span></td>
+        <td>卡塔尔首相访德黑兰能否促成谈判；海峡实际通航量与油价联动</td>
+      </tr>
+      <tr>
+        <td>21:55</td>
+        <td>小麦期货创三年新高</td>
+        <td>商品价格</td>
+        <td>芝加哥小麦期货涨2.4%至7.2025美元/蒲式耳，创2023年7月以来最高；本月累计涨幅12%</td>
+        <td>俄乌黑海袭击致出口受阻，食品通胀担忧升温；农产品链成本压力</td>
+        <td>农产品/食品板块</td>
+        <td>海大集团/中牧股份（间接）：饲料成本端压力；A股映射较弱</td>
+        <td>利多（成本端）</td>
+        <td>短期</td>
+        <td><span class="tag tag-b">B</span></td>
+        <td>黑海航道安全状况；全球小麦供需缺口</td>
+      </tr>
+      <tr>
+        <td>22:01</td>
+        <td>杭州银行H1业绩</td>
+        <td>公司公告</td>
+        <td>营收210.48亿元同比+4.75%；净利润128.13亿元同比+9.87%；扣非净利+10.74%；拟10派4.6元</td>
+        <td>城商行业绩稳健，分红率较高；银行业绩分化延续</td>
+        <td>600926.SH<br>银行板块</td>
+        <td>杭州银行（直接）：业绩稳健，分红率高，防御属性强</td>
+        <td>利多</td>
+        <td>短期</td>
+        <td><span class="tag tag-b">B</span></td>
+        <td>NIM（净息差）变化趋势；不良率与拨备覆盖率</td>
+      </tr>
+      <tr>
+        <td>21:52</td>
+        <td>蒙牛乳业H1业绩</td>
+        <td>公司公告</td>
+        <td>营收447.9亿元同比+7.8%（超预期）；净利润23.7亿元同比+15.9%；资本支出同比-51.2%</td>
+        <td>消费场景承压下利润提速，资本开支收缩反映行业理性化</td>
+        <td>02319.HK<br>消费/乳业板块</td>
+        <td>蒙牛乳业（直接）：业绩超预期，利润率改善；伊利股份（情绪映射）：行业龙头业绩对比</td>
+        <td>利多</td>
+        <td>短期</td>
+        <td><span class="tag tag-b">B</span></td>
+        <td>Q3消费旺季表现；原奶价格趋势</td>
+      </tr>
+      <tr>
+        <td>20:37</td>
+        <td>阿里千问Qwen3.8-Flash开源</td>
+        <td>科技/AI</td>
+        <td>发布并开源千亿总参数仅激活6B的新一代架构模型，性能超越Claude Opus 4.6</td>
+        <td>开源模型性能跃升，国产AI生态加速；对Closed源大模型形成竞争压力</td>
+        <td>阿里系/AI应用板块</td>
+        <td>阿里巴巴-W（直接）：AI基础设施投入产出验证；Minimax（间接）：开源生态竞争</td>
+        <td>分化</td>
+        <td>中期</td>
+        <td><span class="tag tag-b">B</span></td>
+        <td>开源模型落地应用速度；企业客户采用情况</td>
+      </tr>
+      <tr>
+        <td>21:44</td>
+        <td>人形机器人运动会破纪录</td>
+        <td>其他</td>
+        <td>智元灵巧手获7金，累计出货超2万台；世界人形机器人运动会百米纪录刷新至8.64秒</td>
+        <td>产业进度验证：国产机器人从"主题投资"进入"量产交付"阶段</td>
+        <td>机器人/自动化板块</td>
+        <td>宇树科技（待核验上市）/ 汇川技术（间接）：产业链核心标的；A股映射以零部件为主</td>
+        <td>利多</td>
+        <td>中期</td>
+        <td><span class="tag tag-b">B</span></td>
+        <td>宇树科技IPO进展；启元机器人9月万台级产线落地情况</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <h2>三、主题归纳（按交易优先级排序）</h2>
+
+  <div class="theme-section">
+    <h3>主题一：Meta 社交媒体监管重塑（S级）</h3>
+    <div class="theme-grid">
+      <div class="theme-card">
+        <h4>驱动事件</h4>
+        <p>Meta与美国多州达成167亿美元和解（21:17起多源覆盖）</p>
+      </div>
+      <div class="theme-card">
+        <h4>核心变化</h4>
+        <p>首次出现针对社交平台"产品危害设计"的系统性司法和解，类比烟草行业；监管从"言论自由"转向"产品设计责任"</p>
+      </div>
+      <div class="theme-card">
+        <h4>交易逻辑</h4>
+        <p>短期：100亿美元Q3费用计提压制盈利；中长期：监管风险出清+商业模式重构（限时/禁滤镜/时间顺序信息流）；全行业（Google/Snap/TikTok）将被要求采取同类措施</p>
+      </div>
+      <div class="theme-card">
+        <h4>受益/承压方向</h4>
+        <p>承压：Meta短期盈利、SNAP/GOOGL行业监管成本<br>受益：网络安全/儿童保护相关服务；Adobe/Salesforce等Enterprise AI（花旗催化观察）</p>
+      </div>
+      <div class="theme-card">
+        <h4>代表公司</h4>
+        <p>META（直接，24小时跌1.2%→涨3%→转跌，波动剧烈）<br>GOOGL（间接，被呼吁采取相同安全措施）<br>SNAP（情绪映射，行业估值逻辑重塑）</p>
+      </div>
+      <div class="theme-card">
+        <h4>关键验证</h4>
+        <p>和解案法院批准进度；各州赔偿分配细节；YouTube等平台是否跟进采取相同措施</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="theme-section">
+    <h3>主题二：AI算力链国产替代加速（S级）</h3>
+    <div class="theme-grid">
+      <div class="theme-card">
+        <h4>驱动事件</h4>
+        <p>MiniMax Q2收入环比+81.8%、ARR破8亿、To B占比80%；阿里Qwen3.8-Flash开源；MiniMax推进国产芯片适配</p>
+      </div>
+      <div class="theme-card">
+        <h4>核心变化</h4>
+        <p>国内AI模型从"烧钱训练"进入"商业化变现"阶段；To B占比逆转（去年30%→今年80%）；国产算力替代从概念走向落地</p>
+      </div>
+      <div class="theme-card">
+        <h4>交易逻辑</h4>
+        <p>MiniMax ARR 8亿美元验证大模型商业化可行性；国产芯片适配加速利好华为昇腾/寒武纪链；开源模型（Qwen）与闭源（OpenAI/Claude）竞争加剧</p>
+      </div>
+      <div class="theme-card">
+        <h4>受益/承压方向</h4>
+        <p>受益：MiniMax链（国产算力）、阿里云/AI应用<br>承压：闭源大模型竞品（OpenAI/Claude依赖度高的公司）</p>
+      </div>
+      <div class="theme-card">
+        <h4>代表公司</h4>
+        <p>MiniMax-W（00100.HK，直接）：ARR 8亿+To B 80%<br>大普微（301666.SZ，间接）：34.91亿元SSD订单验证存储需求<br>寒武纪/海光信息（情绪映射）：国产算力链</p>
+      </div>
+      <div class="theme-card">
+        <h4>关键验证</h4>
+        <p>Q3/Q4国产芯片占比；M3 Pro（约3T参数）商用时间表；Qwen开源生态企业采用率</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="theme-section">
+    <h3>主题三：贵金属高位震荡（A级）</h3>
+    <div class="theme-grid">
+      <div class="theme-card">
+        <h4>驱动事件</h4>
+        <p>现货黄金日内跌幅1.30%，跌破4600美元/盎司；此前已失守4650美元</p>
+      </div>
+      <div class="theme-card">
+        <h4>核心变化</h4>
+        <p>多头趋势首次出现实质性松动；4600美元为关键技术支撑位，跌破则技术面转弱</p>
+      </div>
+      <div class="theme-card">
+        <h4>交易逻辑</h4>
+        <p>美联储9月维持利率不变预期强化（PCE数据支持）→ 黄金无息资产吸引力下降；美元维持涨势（99.03点）进一步压制金价</p>
+      </div>
+      <div class="theme-card">
+        <h4>受益/承压方向</h4>
+        <p>承压：黄金股（西部黄金/山东黄金/中金黄金）<br>受益：美元资产；非农/通胀数据利空黄金</p>
+      </div>
+      <div class="theme-card">
+        <h4>代表公司</h4>
+        <p>西部黄金（601069.SH，情绪映射）<br>山东黄金（600547.SH，情绪映射）<br>A股直接映射较弱，因金价波动传导滞后</p>
+      </div>
+      <div class="theme-card">
+        <h4>关键验证</h4>
+        <p>4600美元能否企稳；美联储9月点阵图；杰克逊霍尔年会沃什演讲（8/28）</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="theme-section">
+    <h3>主题四：霍尔木兹海峡博弈与原油波动（B级）</h3>
+    <div class="theme-grid">
+      <div class="theme-card">
+        <h4>驱动事件</h4>
+        <p>特朗普称1000万桶石油昨日通过海峡；伊朗称若美国不接受条件则不会开放；伊朗与阿曼协议尚未敲定</p>
+      </div>
+      <div class="theme-card">
+        <h4>核心变化</h4>
+        <p>供给端信号分化：美方称畅通 vs 伊方称有条件开放；原油日内先跌超3%后跌幅缩窄至1.3%</p>
+      </div>
+      <div class="theme-card">
+        <h4>交易逻辑</h4>
+        <p>海峡通航量直接决定油运价格；若伊朗升级封锁，油运链将从"霍尔木兹单一逻辑"扩展为"全球关键航道拥堵"双重催化</p>
+      </div>
+      <div class="theme-card">
+        <h4>受益/承压方向</h4>
+        <p>受益：油运/航运链（中远海能/招商南油）若海峡关闭<br>承压：航空/石化下游（油价上行）</p>
+      </div>
+      <div class="theme-card">
+        <h4>代表公司</h4>
+        <p>中远海能（600026.SH，情绪映射）：海峡通航量决定运价<br>A股直接映射较弱</p>
+      </div>
+      <div class="theme-card">
+        <h4>关键验证</h4>
+        <p>卡塔尔首相访德黑兰成果；海峡实际通航量与油价联动；伊朗国内政治动向</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="theme-section">
+    <h3>主题五：人形机器人产业进度验证（B级）</h3>
+    <div class="theme-grid">
+      <div class="theme-card">
+        <h4>驱动事件</h4>
+        <p>华北电力大学遥控宇树G1机器人击败宇树科技自家赛队夺金；智元灵巧手累计出货超2万台；百米纪录8.64秒</p>
+      </div>
+      <div class="theme-card">
+        <h4>核心变化</h4>
+        <p>产业从"主题投资"阶段进入"量产交付+资本定价"阶段；宇树科技IPO成为定价锚（记忆框架持续跟踪）</p>
+      </div>
+      <div class="theme-card">
+        <h4>交易逻辑</h4>
+        <p>国产机器人出货量与竞赛成绩双重验证；万台级产线签约（启元机器人9月发货）推动产业链从概念走向业绩</p>
+      </div>
+      <div class="theme-card">
+        <h4>受益/承压方向</h4>
+        <p>受益：机器人产业链（减速器/伺服电机/传感器）<br>承压：纯概念炒作标的</p>
+      </div>
+      <div class="theme-card">
+        <h4>代表公司</h4>
+        <p>汇川技术（300124.SZ，间接）：伺服系统核心供应商<br>绿的谐波（688017.SH，间接）：减速器<br>宇树科技（待核验上市）</p>
+      </div>
+      <div class="theme-card">
+        <h4>关键验证</h4>
+        <p>启元机器人9月万台级产线落地；宇树科技IPO时间表；国产化率提升节奏</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>四、跨市场传导</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>海外/宏观事件</th>
+        <th>美股影响</th>
+        <th>港股影响</th>
+        <th>A股影响</th>
+        <th>传导路径</th>
+        <th>强度</th>
+        <th>结论</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Meta 167亿美元和解</td>
+        <td>META盘中涨3%后转跌，波动剧烈</td>
+        <td>港股互联网板块承压</td>
+        <td>A股传媒/游戏板块情绪受影响</td>
+        <td>监管案例→全球社交媒体行业监管成本上升→广告平台估值重塑</td>
+        <td>强</td>
+        <td>美股直接传导，港股A股情绪映射</td>
+      </tr>
+      <tr>
+        <td>MiniMax Q2业绩爆发</td>
+        <td>无直接影响</td>
+        <td>00100.HK涨1.13%</td>
+        <td>AI算力链情绪提振</td>
+        <td>国产AI模型商业化验证→算力需求预期提升→国产芯片链受益</td>
+        <td>中</td>
+        <td>港股直接受益，A股间接传导</td>
+      </tr>
+      <tr>
+        <td>现货黄金跌破4600美元</td>
+        <td>黄金股下跌</td>
+        <td>港股黄金股承压</td>
+        <td>A股黄金股（西部/山东/中金）承压</td>
+        <td>金价下跌→黄金股盈利预期下调→板块估值压缩</td>
+        <td>中</td>
+        <td>三市场同步传导，强度中等</td>
+      </tr>
+      <tr>
+        <td>美国PCE数据符合预期</td>
+        <td>美元维持涨势，利率期货小幅回吐</td>
+        <td>港币汇率受压</td>
+        <td>成长股估值承压（无风险利率预期维持高位）</td>
+        <td>通胀温和+消费停滞→美联储9月维持利率不变→美元强势→新兴市场资本流出压力</td>
+        <td>中</td>
+        <td>宏观环境变化，间接影响A股成长股</td>
+      </tr>
+      <tr>
+        <td>霍尔木兹海峡博弈</td>
+        <td>原油跌1.3%，油运股波动</td>
+        <td>港股油运股波动</td>
+        <td>A股油运股（中远海能）情绪波动</td>
+        <td>海峡通航量→原油供给→油运价格→航运股盈利预期</td>
+        <td>待观察</td>
+        <td>供给端不确定性，需持续跟踪</td>
+      </tr>
+      <tr>
+        <td>小麦期货三年新高</td>
+        <td>农产品期货波动</td>
+        <td>港股食品股成本端承压</td>
+        <td>A股饲料/食品股成本压力</td>
+        <td>俄乌黑海袭击→出口受阻→小麦价格↑→饲料成本↑→养殖/食品利润压缩</td>
+        <td>弱</td>
+        <td>A股直接映射较弱，成本传导滞后</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <h2>五、重点交易线索</h2>
+  <ol class="conclusion-list">
+    <li><strong>最值得关注的5个事件/主题（S→A→B排序）：</strong>
+      <br>① Meta 167亿美元和解——社交媒体行业监管里程碑，类比烟草和解，影响全行业
+      <br>② MiniMax ARR破8亿+To B占比80%——国产AI大模型商业化首次完整验证
+      <br>③ 湖南黄金重大资产重组（43.34亿元）——8月27日复牌，关注资金博弈
+      <br>④ 大普微34.91亿元SSD订单——存储芯片需求旺盛，单一订单超全年营收152%
+      <br>⑤ 现货黄金跌破4600美元——多头趋势首次松动，4600为关键支撑
+    </li>
+    <li><strong>最可能引发板块异动的3个方向：</strong>
+      <br>① <span class="highlight">AI算力链</span>：触发因素=MiniMax业绩+Qwen开源+国产芯片适配；观察标志=00100.HK走势、寒武纪/海光信息资金流向
+      <br>② <span class="highlight">黄金股</span>：触发因素=金价跌破4600美元；观察标志=4600是否企稳、西部黄金开盘表现
+      <br>③ <span class="highlight">油运/航运</span>：触发因素=霍尔木兹海峡谈判结果；观察标志=卡塔尔首相访德黑兰进展、原油价格波动
+    </li>
+    <li><strong>最具持续性的3条产业逻辑：</strong>
+      <br>① AI算力链国产替代（MiniMax+Qwen+国产芯片适配）→ 可验证变量：Q3国产芯片占比、M3 Pro商用时间表
+      <br>② 人形机器人量产交付（宇树科技IPO+启元机器人9月发货）→ 可验证变量：万台级产线落地、国产化率
+      <br>③ 港股创新药景气（药明合联涨超11%→信达生物涨超10%）→ 可验证变量：Q3财报业绩兑现、FDA新适应症审批
+    </li>
+    <li><strong>需回避或降权的方向：</strong>
+      <br>❌ 化工上游（乙二醇跌停、瓶片-5%延续，需求不足现实压倒供给收缩叙事）
+      <br>❌ 贵金属高位（现货金失守4600美元，多头趋势松动，4600为关键支撑位）
+      <br>❌ AI大模型概念股（OpenAI恢复限流+Meta和解监管压力，估值修复压力）
+      <br>❌ 出口导向型制造业（人民币维持强势，美元99.03点）
+    </li>
+  </ol>
+</div>
+
+<div class="card">
+  <h2>六、交易总表</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>新闻主题</th>
+        <th>事件类型</th>
+        <th>涉及资产/板块</th>
+        <th>代表公司</th>
+        <th>影响方向</th>
+        <th>驱动性质</th>
+        <th>持续性</th>
+        <th>优先级</th>
+        <th>关键验证点</th>
+        <th>备注</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Meta 167亿美元和解</td>
+        <td>公司公告</td>
+        <td>社交媒体/科技</td>
+        <td>META/GOOGL/SNAP</td>
+        <td>分化</td>
+        <td>监管风险</td>
+        <td>中期</td>
+        <td><span class="tag tag-s">S</span></td>
+        <td>法院批准进度</td>
+        <td>行业里程碑式和解</td>
+      </tr>
+      <tr>
+        <td>MiniMax Q2业绩爆发</td>
+        <td>公司公告</td>
+        <td>AI算力/国产芯片</td>
+        <td>00100.HK/寒武纪</td>
+        <td>利多</td>
+        <td>业绩验证</td>
+        <td>中期</td>
+        <td><span class="tag tag-s">S</span></td>
+        <td>Q3国产芯片占比</td>
+        <td>ARR 8亿+To B 80%</td>
+      </tr>
+      <tr>
+        <td>湖南黄金重大资产重组</td>
+        <td>并购重组</td>
+        <td>黄金/有色</td>
+        <td>002155.SZ</td>
+        <td>待确认</td>
+        <td>产业链整合</td>
+        <td>短期</td>
+        <td><span class="tag tag-a">A</span></td>
+        <td>复牌后资金方向</td>
+        <td>8月27日复牌</td>
+      </tr>
+      <tr>
+        <td>大普微34.91亿元SSD订单</td>
+        <td>公司公告</td>
+        <td>存储/半导体</td>
+        <td>301666.SZ</td>
+        <td>利多</td>
+        <td>业绩支撑</td>
+        <td>短期</td>
+        <td><span class="tag tag-a">A</span></td>
+        <td>客户A身份</td>
+        <td>订单超全年营收152%</td>
+      </tr>
+      <tr>
+        <td>现货黄金跌破4600美元</td>
+        <td>商品价格</td>
+        <td>黄金/贵金属</td>
+        <td>西部黄金/山东黄金</td>
+        <td>利空</td>
+        <td>技术面破位</td>
+        <td>短期</td>
+        <td><span class="tag tag-a">A</span></td>
+        <td>4600美元企稳</td>
+        <td>多头趋势首次松动</td>
+      </tr>
+      <tr>
+        <td>美国7月PCE数据</td>
+        <td>宏观政策</td>
+        <td>美元/美债/成长股</td>
+        <td>A股映射较弱</td>
+        <td>中性偏空</td>
+        <td>宏观环境</td>
+        <td>短期</td>
+        <td><span class="tag tag-b">B</span></td>
+        <td>9月FOMC点阵图</td>
+        <td>支持9月维持利率不变</td>
+      </tr>
+      <tr>
+        <td>霍尔木兹海峡博弈</td>
+        <td>国际地缘</td>
+        <td>原油/油运/航运</td>
+        <td>中远海能（情绪映射）</td>
+        <td>分化</td>
+        <td>供给不确定性</td>
+        <td>待观察</td>
+        <td><span class="tag tag-b">B</span></td>
+        <td>卡塔尔首相访德黑兰</td>
+        <td>供给端信号分化</td>
+      </tr>
+      <tr>
+        <td>小麦期货三年新高</td>
+        <td>商品价格</td>
+        <td>农产品/食品</td>
+        <td>海大集团（间接）</td>
+        <td>利多（成本端）</td>
+        <td>食品通胀</td>
+        <td>短期</td>
+        <td><span class="tag tag-b">B</span></td>
+        <td>黑海航道安全</td>
+        <td>本月累计涨幅12%</td>
+      </tr>
+      <tr>
+        <td>杭州银行H1业绩</td>
+        <td>公司公告</td>
+        <td>银行/城商行</td>
+        <td>600926.SH</td>
+        <td>利多</td>
+        <td>业绩稳健</td>
+        <td>短期</td>
+        <td><span class="tag tag-b">B</span></td>
+        <td>NIM变化趋势</td>
+        <td>10派4.6元，分红率高</td>
+      </tr>
+      <tr>
+        <td>蒙牛乳业H1业绩</td>
+        <td>公司公告</td>
+        <td>消费/乳业</td>
+        <td>02319.HK</td>
+        <td>利多</td>
+        <td>利润提速</td>
+        <td>短期</td>
+        <td><span class="tag tag-b">B</span></td>
+        <td>Q3消费旺季表现</td>
+        <td>资本支出同比-51.2%</td>
+      </tr>
+      <tr>
+        <td>阿里千问Qwen3.8-Flash开源</td>
+        <td>科技/AI</td>
+        <td>AI/云计算</td>
+        <td>阿里巴巴-W</td>
+        <td>分化</td>
+        <td>生态竞争</td>
+        <td>中期</td>
+        <td><span class="tag tag-b">B</span></td>
+        <td>企业客户采用率</td>
+        <td>性能超越Claude Opus 4.6</td>
+      </tr>
+      <tr>
+        <td>人形机器人运动会破纪录</td>
+        <td>其他</td>
+        <td>机器人/自动化</td>
+        <td>汇川技术/绿的谐波</td>
+        <td>利多</td>
+        <td>产业进度</td>
+        <td>中期</td>
+        <td><span class="tag tag-b">B</span></td>
+        <td>宇树科技IPO进展</td>
+        <td>从"主题投资"进入"量产交付"</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <h2>低价值噪音新闻（仅列主题，不展开）</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>主题</th>
+        <th>归类原因</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>中央农办部署农村高额彩礼整治</td><td>社会民生政策，无明确上市公司传导路径</td></tr>
+      <tr><td>西藏财政金融助力自然灾害救灾</td><td>政策性资金拨付，非市场交易信息</td></tr>
+      <tr><td>自然资源部对浙江启动地质灾害防御Ⅳ级响应</td><td>自然灾害应急响应，无交易价值</td></tr>
+      <tr><td>尼泊尔北部山洪遇难人数升至72人</td><td>自然灾害事件，无市场传导</td></tr>
+      <tr><td>亚美尼亚前总统被禁止出境</td><td>外国政治事件，与A/H/美股无关</td></tr>
+      <tr><td>以色列继续追击巴武装人员</td><td>地缘军事行动，无明确大宗商品传导</td></tr>
+      <tr><td>沙特阿美石油公司炼油厂火炬放空作业</td><td>常规工业操作，非供给中断</td></tr>
+      <tr><td>英国BAE Systems获1.5亿美元航母升级合同</td><td>单笔国防合同，对A股无传导</td></tr>
+      <tr><td>格陵兰/加拿大地质考察相关</td><td>无明确交易价值</td></tr>
+      <tr><td>韩国国产自杀式无人机海上试飞失败</td><td>军工测试事件，A股映射极弱</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="footer">
+  本报告由自动化任务生成，仅供研究参考，不构成投资建议。<br>
+  数据来源：新浪财经 / 同花顺 / 富途牛牛 / 华尔街见闻 / 东方财富（截至 2026-08-26 22:11 北京时间）
+</div>
+
+</div>
+</body>
+</html>

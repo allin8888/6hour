@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="I1xz4uihLNXiE728QclsIQ">
+<head data-page-node-id="NpJnSzEazMJDpagUrfzq6l">
+    <meta charset="UTF-8" data-page-node-id="oErGBJM172OopF36SgVn8c">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="p1ofiPjKWyapoyf0bpPP4H">
+    <title>6小时财经快讯交易筛选报告</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #1a1a1a; line-height: 1.7; padding: 24px; }
+        .container { max-width: 1100px; margin: 0 auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); overflow: hidden; }
+        .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color: #fff; padding: 32px 40px; }
+        .header h1 { font-size: 22px; font-weight: 700; margin-bottom: 12px; }
+        .meta { display: flex; flex-wrap: wrap; gap: 16px; font-size: 13px; opacity: 0.9; }
+        .meta span { background: rgba(255,255,255,0.12); padding: 4px 12px; border-radius: 20px; }
+        .section { padding: 28px 40px; border-bottom: 1px solid #eee; }
+        .section:last-child { border-bottom: none; }
+        .section-title { font-size: 16px; font-weight: 700; color: #0f3460; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+        .section-title::before { content: ""; width: 4px; height: 18px; background: #0f3460; border-radius: 2px; }
+        .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 16px; }
+        .summary-card { background: #f0f4ff; border-radius: 8px; padding: 14px 16px; }
+        .summary-card .label { font-size: 12px; color: #666; margin-bottom: 4px; }
+        .summary-card .value { font-size: 20px; font-weight: 700; color: #0f3460; }
+        .highlight-box { background: #fff8e1; border-left: 4px solid #f59e0b; padding: 14px 18px; border-radius: 0 8px 8px 0; margin: 12px 0; }
+        .highlight-box.s { background: #fef2f2; border-left-color: #ef4444; }
+        .highlight-box.a { background: #eff6ff; border-left-color: #3b82f6; }
+        .highlight-box.b { background: #f0fdf4; border-left-color: #22c55e; }
+        .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+        .tag-s { background: #fee2e2; color: #dc2626; }
+        .tag-a { background: #dbeafe; color: #2563eb; }
+        .tag-b { background: #dcfce7; color: #16a34a; }
+        .tag-c { background: #f3f4f6; color: #6b7280; }
+        table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 12px 0; }
+        th { background: #f8fafc; padding: 10px 12px; text-align: left; font-weight: 600; color: #374151; border-bottom: 2px solid #e5e7eb; font-size: 12px; }
+        td { padding: 10px 12px; border-bottom: 1px solid #f3f4f6; vertical-align: top; }
+        tr:hover td { background: #f8fafc; }
+        .主题 { font-weight: 600; color: #0f3460; }
+        .利多 { color: #dc2626; font-weight: 600; }
+        .利空 { color: #16a34a; font-weight: 600; }
+        .中性 { color: #6b7280; }
+        .待确认 { color: #d97706; }
+        .theme-card { background: #f8fafc; border-radius: 10px; padding: 20px; margin: 16px 0; border: 1px solid #e5e7eb; }
+        .theme-card h3 { font-size: 15px; color: #0f3460; margin-bottom: 12px; }
+        .theme-card ul { padding-left: 18px; }
+        .theme-card li { margin: 6px 0; font-size: 13px; }
+        .传导表 th { background: #1a1a2e; color: #fff; }
+        .传导表 td { font-size: 12px; }
+        .噪音 { color: #9ca3af; font-size: 12px; }
+        .footer { background: #f8fafc; padding: 16px 40px; font-size: 12px; color: #6b7280; text-align: center; }
+        .warn { background: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; padding: 10px 14px; font-size: 12px; color: #991b1b; margin: 8px 0; }
+        .good { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; padding: 10px 14px; font-size: 12px; color: #166534; margin: 8px 0; }
+        .note { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; padding: 10px 14px; font-size: 12px; color: #1e40af; margin: 8px 0; }
+    </style>
+</head>
+<body data-page-node-id="mKANEbHwTkTa5KRDWgroUp">
+<div class="container" data-page-node-id="JML5Cnnlj5s9FxOPabEGHw">
+    <div class="header" data-page-node-id="Ce0ttBj1ciFldDEdtAwJAD">
+        <h1 data-page-node-id="9U7vMC71xySH2VKvMNK9SO">📊 近6小时财经快讯交易筛选报告</h1>
+        <div class="meta" data-page-node-id="8UiZp8EgEjj73Np7h6Illk">
+            <span data-page-node-id="I6tYS2oyU6KuV75xy0INDl">🕐 生成时间：2026-09-08 11:34（北京时间）</span>
+            <span data-page-node-id="LEyZBqznMtiTkkoe5YboOI">📅 覆盖区间：2026-09-08 05:32 ~ 11:32（北京时间）</span>
+            <span data-page-node-id="dEHUScRSEBNwjswJArqHZ5">📡 已读取来源：新浪财经 / 同花顺 / 富途牛牛 / 华尔街见闻（数据量偏低，仅115条）/ 东方财富</span>
+        </div>
+    </div>
+
+    <!-- 统计 -->
+    <div class="section" data-page-node-id="KM6IZUqWa5ll96wxRFzUst">
+        <div class="section-title" data-page-node-id="uMmdJsYIIBzc5z7eYoPyEE">数据统计</div>
+        <div class="summary-grid" data-page-node-id="cOLSDKHsroR54fw7vnOgUU">
+            <div class="summary-card" data-page-node-id="7nG6rsizuF06NCoqTjtBk1"><div class="label" data-page-node-id="YKk3xBf9WLCCptEFfjUzh4">已加载新闻</div><div class="value" data-page-node-id="8jgyyIWviRpsKuSBVHl9xm">1,459 条</div></div>
+            <div class="summary-card" data-page-node-id="jvtDPQFHEJ0ZlUnon9KjSA"><div class="label" data-page-node-id="xYBwQ6ilcz8E4TIO8hXHCt">窗口内有效</div><div class="value" data-page-node-id="X56mCmqMmmrFagxm0BNNqG">1,031 条</div></div>
+            <div class="summary-card" data-page-node-id="p4vfCXCIAlFEmGmRywmBfs"><div class="label" data-page-node-id="47nqfpz1sGCH9v1yNbyhX0">去重后事件</div><div class="value" data-page-node-id="uZmM4XFIYd0EMAP304Zhfw">839 个</div></div>
+            <div class="summary-card" data-page-node-id="ArEjNrWYrBd1URSZJ2AFn7"><div class="label" data-page-node-id="22slqU1RlVviGvSagumnw2">多源覆盖事件</div><div class="value" data-page-node-id="tTz77oAx6Mxl7TF7Fw1y37">169 个</div></div>
+            <div class="summary-card" data-page-node-id="SFLYCZ1DVOrOnq8U6vmiQP"><div class="label" data-page-node-id="WqR584XERSNt4Zishtw8QL">高/中价值事件</div><div class="value" data-page-node-id="Oewu0Ra8RGE2AZoVaVzIO0">约 28 个</div></div>
+            <div class="summary-card" data-page-node-id="h2VXnXac3TsWFkLKyvj5Lp"><div class="label" data-page-node-id="ysHnXQID2xvWG79KFWfvrx">窗口类型</div><div class="value" data-page-node-id="zAG3qGDiaNIYwH0QFavjRc">②盘前窗（A股开盘）</div></div>
+        </div>
+        <div class="note" data-page-node-id="xf2CvBY6M47FEFkp6kwt6q">⚠️ 华尔街见闻采集量仅 115 条，显著低于其他源（新浪408/富途144/东财262/同花顺102），标注数据来源不全；核心地缘/商品事件经其他四源交叉验证未遗漏。</div>
+    </div>
+
+    <!-- 结论 -->
+    <div class="section" data-page-node-id="0f7sEmI4UHqQ77at5EF39C">
+        <div class="section-title" data-page-node-id="ITfLo0rmeMRMytFim4wOO0">一、先看结论</div>
+        <div class="highlight-box s" data-page-node-id="SazvTa5REWWg9aR1toqbkt">
+            <strong data-page-node-id="E9FSbrWTxB5S5gO9GpFDqg">🔴 S级主线一：中东地缘冲突性质升级——霍尔木兹海峡成焦点</strong><br data-page-node-id="sWB5OhbwiFAm3v6A8oRkJT">
+            美军中央司令部确认已要求94艘商船改变航向、使3艘丧失航行能力（2源）；霍尔木兹日均通航量周一仅7艘（Kpler数据，5月来最低）；布伦特原油周中升至96美元逼近六周高位。冲突性质从「袭扰油轮」→「直接封锁行动」持续升级，高盛维持2026年布伦特85美元预测（较前期上调5美元）。
+        </div>
+        <div class="highlight-box a" data-page-node-id="y6u5ECu41hsjRiSvJHuMAP">
+            <strong data-page-node-id="D5ny1ijkgNvo5kyc01eFnu">🔵 S级主线二：韩国半导体出口爆发 + 存储超级周期实证强化</strong><br data-page-node-id="8fTMNc323F5eyncKeGvoKE">
+            韩国Q2名义GDP创47年来最快增速（AI投资+强劲出口双驱动），SK海力士库存降至不足10天，三星超半数4nm产能投入HBM4量产。韩元升23个月高位，韩国综指涨2%，SK海力士+4.3%、三星+2.2%。
+        </div>
+        <div class="highlight-box b" data-page-node-id="Rj2OcG8BFfxFjneEFCXgdR">
+            <strong data-page-node-id="EwOlQiEIcUFeX11IeF5VGB">🟢 A级主线三：厄尔尼诺+粮食危机预期→农业/粮食板块集体爆发</strong><br data-page-node-id="nUvi5SH58Ci6yl9KD3Xpgn">
+            WFP确认超强厄尔尼诺将形成，预计加剧全球突发性粮食不安全。A股粮食ETF包揽涨幅榜前10（亚盛集团4连板，中粮糖业/敦煌种业涨停），化肥农药板块集体涨停，糖业板块集体爆发。
+        </div>
+        <div class="highlight-box" data-page-node-id="HHqRVPQdUDBMdNH0AY4Kkk">
+            <strong data-page-node-id="B2R0zRQys7yordm1W3hKw2">⚠️ 关键风险变量（需次日验证）</strong><br data-page-node-id="hkdhjdiaSZXUopH4fWES1b">
+            ① CME 9月加息概率维持60.4%（9/11美国CPI为决定性节点）；② LME铜创历史新高14,617美元/吨（连续4日上涨，年内+17%），但美国对精炼铜进口加征关税预期待验证；③ 沪金/沪银早盘反弹（黄金ETF+0.84%），与8/31「加息定价压倒避险」实证形成背离，需周一收盘验证。
+        </div>
+    </div>
+
+    <!-- 有效事件清单 -->
+    <div class="section" data-page-node-id="lT8u9ts9MK2kmYy5sDAWAu">
+        <div class="section-title" data-page-node-id="pQDAV9i0njT4uxJwPETRjc">二、有效事件清单（S/A/B级）</div>
+        <table data-page-node-id="DCOUrWKwcs3qcwAG381WeY">
+            <thead data-page-node-id="1WGWpuPDfxXrrEVMkARQJS">
+                <tr data-page-node-id="DcabCPO6b1PZeaPuGE3vDu"><th data-page-node-id="NEcCRZfnCE7ikE4beONKzx">时间</th><th data-page-node-id="5besMjGzBExxtaoTNvKIxH">事件主题</th><th data-page-node-id="NMLkBCJkTgknundwfxcBoJ">分类</th><th data-page-node-id="R6jgHelDQDJMiEC3EFAvp1">事实摘要</th><th data-page-node-id="wLRY5DeygrkE5oBLLqmEit">新增性/核心变量</th><th data-page-node-id="Hp2SvF0ps8y12OCSILRFvA">影响行业与资产</th><th data-page-node-id="Cxpt1MUvPKXZ5Nt4NxURoE">上市公司映射</th><th data-page-node-id="Kap0HeelEN6i8AEFNDKPhW">方向</th><th data-page-node-id="172COBPFVJ4ohd3pah2A0B">持续性</th><th data-page-node-id="BqIC6yCVwrRtb2bKdpoVeK">优先级</th><th data-page-node-id="q3xD6p1ZENQUl9NxbyZV1i">需验证事项</th></tr>
+            </thead>
+            <tbody data-page-node-id="pY8hktSY4QriwRZFBAb1RB">
+                <tr data-page-node-id="BMQGqmVWuDWLlWCSomB8kX">
+                    <td data-page-node-id="dubTwomtTRpwHmtcBsRg1F">08:33</td><td class="主题" data-page-node-id="eq0fdU0lIODDZ7DIqOsIhn">美伊海上封锁升级</td><td data-page-node-id="cUxEQay6QyFUoV6bDlwCXQ">国际地缘</td><td data-page-node-id="oDrWEKqrRB9bUlwM7GJuSq">美军中央司令部：截至9/7已要求94艘商船改变航向、3艘丧失航行能力、登船检查2艘；伊朗威胁划定霍尔木兹「禁区」</td><td data-page-node-id="2fzZt24Oixwc6dNRDgPTQj">冲突性质从「袭扰」→「主动封锁」升级；Kpler量化实证周一仅7艘通航（5月来最低）</td><td data-page-node-id="YlwTQlkp24n3CzbRNNA5fa">原油、航运、成品油、煤化工</td><td data-page-node-id="holmGzB8ogpKuMWA1w6LAb">直接：招商南油(+3.37%)、中远海能(+2.68%)、广汇能源(+7.31%)<br data-page-node-id="9uycYHUN5APbG10SythRN2">间接：杰瑞股份、贵州燃气、和顺石油<br data-page-node-id="V6BHhisejuqkxlY0ODNBDI">情绪：中石科技(-14%液冷回调)</td><td class="利多" data-page-node-id="WUkKbqvpN72Aw6VfScXxpY">利多</td><td data-page-node-id="hZFMYBB7kvWVpftx78geNz">短期</td><td class="tag tag-s" data-page-node-id="BqP4HSOPJnU0ejR9gFN94Q">S</td><td data-page-node-id="HLauMHgRLPIHkW4ZsXyUBR">霍尔木兹通航量能否回升至15+艘/日；卡塔尔LNG复产规模</td>
+                </tr>
+                <tr data-page-node-id="p7PVO7n05w23Hcx2nchp6v">
+                    <td data-page-node-id="X6by0ZOPmyYtuEZN7Wxfpc">07:49</td><td class="主题" data-page-node-id="afDpwcSTlS4rQBRhViP11x">韩国Q2名义GDP创47年最快</td><td data-page-node-id="Lt0OvESptAssMMyItFPXIr">宏观政策</td><td data-page-node-id="HRMJDnz6v6PkEMkLPwYyzy">韩国央行：Q2名义GDP季环比+1.3%（实际+0.6%），受AI投资+出口双驱动；韩元升23个月高位</td><td data-page-node-id="IWvR89gUWr8yQcJhTRSxfE">强基本面数据在加息周期中被读作「加息理由」vs「盈利利好」的分歧仍存；此前9/1窗口韩国出口+72.5%而KOSPI -1%</td><td data-page-node-id="5HCP3GOSMyBdAVtkESKMlW">韩国股市、半导体、韩元、全球流动性预期</td><td data-page-node-id="gsF3mXZX5NNLlP4Sx3ysbQ">直接：SK海力士(+4.3%)、三星电子(+2.2%)<br data-page-node-id="J4CFkOOj1hbYxeDR6z1y0X">A股映射：存储芯片概念延续反弹（盈新发展涨停、香农芯创、雅克科技）<br data-page-node-id="KuDZwF4YHTWwNrbsDrBkZE">待核验：A股直接映射偏弱（韩国增长传导需经汇率+风险偏好）</td><td class="利多" data-page-node-id="HSdFXJH3G2q5iUwV0f3LTX">分化</td><td data-page-node-id="aPxUyNv5zfVYmmVDIzlgtk">中期</td><td class="tag tag-a" data-page-node-id="7H7MGTaDHE3gGDAsjEvEgm">A</td><td data-page-node-id="OScDFdODvjFbXiEO0aiuM5">9/11美国CPI数据（决定性节点）；韩元是否回落至1250-1300区间</td>
+                </tr>
+                <tr data-page-node-id="692Z6ZlHMU5REFp7gse38S">
+                    <td data-page-node-id="sOS0DGHFkOA7X68qZUNXbb">10:49</td><td class="主题" data-page-node-id="2WumIm5Jrjeisu9HI74j5z">超强厄尔尼诺逼近+WFP预警</td><td data-page-node-id="NSDpkUrXP241K8O2RMxDTz">行业景气</td><td data-page-node-id="j4mi9mFdiWocfBNDEsOh7R">世界气象组织确认超强厄尔尼诺将形成；WFP预警将加剧全球突发性粮食不安全、推高粮食价格</td><td data-page-node-id="zDDMOqY9E5PoOkKpYBQRQB">气候异常+粮库收紧双重催化，泰国食糖产量下降17%；A股粮食ETF包揽涨幅榜前10</td><td data-page-node-id="nS0ghFf6GFZBpzC0HekmRU">农业、粮食、糖业、化肥、农药</td><td data-page-node-id="8a0Jj3kdfwPd54OhXXnkXT">直接：亚盛集团(4连板)、中粮糖业(涨停)、敦煌种业(涨停)、海南橡胶(涨停)<br data-page-node-id="742YvvuyK0Hxn1oAOlHbQR">化肥：川发龙蟒、泸天化、金正大、和邦生物、潞化科技(均涨停)<br data-page-node-id="IOrC6HUdBiIqi2SEvxMuEr">糖业：*ST广糖、红棉股份(涨停)<br data-page-node-id="QINTECVq4VfX7GOKf44LJ2">情绪映射：供销社板块（天禾股份涨停）</td><td class="利多" data-page-node-id="r8WxtzBDdbrqjZ61pVckpA">利多</td><td data-page-node-id="yzYZU2KQld28vxWxq2K1Df">中期</td><td class="tag tag-a" data-page-node-id="6YYzuKnultvMoCbbYrfNWz">A</td><td data-page-node-id="PdKkCL32fWHAvLBAgyRFSF">厄尔尼诺实际影响作物产量幅度；泰国食糖减产17%是否持续</td>
+                </tr>
+                <tr data-page-node-id="oun92ceCCQHwaBFh2UthGy">
+                    <td data-page-node-id="gWZvL2aodxqXwOJcwL85hJ">09:38</td><td class="主题" data-page-node-id="og3sWdoHH9sd6VmvUzDVR6">三星超半数4nm产能投HBM4量产</td><td data-page-node-id="uk3iRHlUKs15NrkEyQncWK">科技/AI</td><td data-page-node-id="loqYt5DHrJHCzu1AJsb6mB">消息人士：三星电子4nm总产能50%+已分配给HBM4芯片，Q3起大幅提升供应量；SK海力士股价+4.3%</td><td data-page-node-id="nN3i6rDuHMnw5KUFikCEga">存储超级周期实证强化：DRAM Q2营收同比+385%（9/7窗口已记录），SK海力士/三星库存均<10天；HBM4量产进度是关键验证点</td><td data-page-node-id="7slvsThXjtcwChImu1NQJG">半导体、存储芯片、PCB、先进封装</td><td data-page-node-id="Y9pSIzdWCzIoS238Gwt1YO">直接：SK海力士(+4.3%)、三星电子(+2.2%)<br data-page-node-id="wSwBX0xxl7SCO0ToYoosH1">A股：存储芯片概念（盈新发展涨停、强一股份、香农芯创、普冉股份、太极实业、雅克科技）<br data-page-node-id="RdW16OSrdj5QhrhVNXEqex">先进封装：崇达技术涨停、兴森科技、中京电子<br data-page-node-id="nw1tO1NwGp3g3Grqzn7v0L">CPO：剑桥科技涨停（两连板）</td><td class="利多" data-page-node-id="Fc3h98kr48ztMfViyCpRXA">利多</td><td data-page-node-id="ETMXAv8mGcfM4iR332AO2A">长期</td><td class="tag tag-a" data-page-node-id="wFPo8TNjDp3b3nW73ErGSc">A</td><td data-page-node-id="9dV8NKyieXNXjqhDsomhbx">HBM4实际良率/出货量；三星硅光子PIC晶圆年底前测试进度</td>
+                </tr>
+                <tr data-page-node-id="dSPF1N1Bxjfvlc3A35AKyh">
+                    <td data-page-node-id="CC8aIhCXr3CyBDvroUfDRL">09:58</td><td class="主题" data-page-node-id="SNedW9Rs0LfUmvIu8DiorK">LME铜创历史新高14,617美元/吨</td><td data-page-node-id="6pVTEMowWadD0xJUEwqGuM">商品价格</td><td data-page-node-id="EpvIpktcj6C7pwaaeCrxz0">LME三个月期铜连续第4日上涨触及14,617美元/吨历史新高；年内累计+17%；供应紧张+美国可能加征精炼铜进口关税</td><td data-page-node-id="7E5bwZQ7EcXLtiE4hHBlBj">「铜博士」价格铁律或将被打破（镍价已低于铜价）；数据中心/可再生能源/电网需求与矿山供应受限的长期供需不匹配</td><td data-page-node-id="LCMckfnDOQhQkG6VE84752">工业有色、铜、铝土矿、矿业</td><td data-page-node-id="DpHBfCCPRFA4qT8gT3vkkv">直接：北方铜业涨停、江西铜业(+5.15%)、云南铜业(+4.64%)、西部矿业、洛阳钼业<br data-page-node-id="6GPYpogPGjXOxo6DkMmH8b">间接：力拓收购Aurukun铝土矿项目（嘉能可+三菱出售）<br data-page-node-id="W7AYHyXPI06oE5TTnEtio4">情绪映射：工业有色ETF+1.52%</td><td class="利多" data-page-node-id="YcoXiWtg4N88BpoVpx2U3a">利多</td><td data-page-node-id="A0Y0x19MO2pzjAsA1cwYzA">中期</td><td class="tag tag-a" data-page-node-id="s70saoFqsFUzct8CCmwhwM">A</td><td data-page-node-id="tIsVPuhYE0gkbjHR9CubiP">美国对精炼铜进口加征关税政策是否落地；海外库存错配格局持续时间</td>
+                </tr>
+                <tr data-page-node-id="IU7fRosQ4PBKaQD2tk1YkK">
+                    <td data-page-node-id="4Ew6w73PBjnD0qCEceHOSM">07:47</td><td class="主题" data-page-node-id="skOcAuDWcU1owor1IparRy">日本名义工资创1997年来最大升幅</td><td data-page-node-id="7YQmOxnWCa0sK35IVPZSt3">利率/汇率</td><td data-page-node-id="IsAW1gQwJtRboN1B2TRpVa">日本7月名义工资同比+4.7%（远超预期3.8%），连续6个月>3%；支持日央行下周加息预期</td><td data-page-node-id="ztBWApGTWkCyZLQe56zPF0">全球利率共振从「欧美扩展至亚洲」升级为「美日同步破位」；日元升6个月新高（153关口）</td><td data-page-node-id="X7zBAp4evy0CNUBbmBy1BF">日元、美债、日本股市、汽车业</td><td data-page-node-id="hSK9TyVQBMmlvCjNn6IQEB">间接：丰田等日系车企盈利承压（日元每升1日元年利润-500亿日元）<br data-page-node-id="3sGAHvYH1JbF98cskyiBX7">港股映射：小米涨（花旗维持买入评级，目标价34港元）</td><td class="待确认" data-page-node-id="a8pC6xmxxN1pcBQjhkLJ5t">待确认</td><td data-page-node-id="lucjzFTuI6ATV8EOvHGBRv">短期</td><td class="tag tag-b" data-page-node-id="l1sRSK5tjCGRvEBjD0dhF1">B</td><td data-page-node-id="t0yU6SVydZbjXikOaxSQwk">日央行9/18决议是否按预期加息；日本财务大臣是否干预汇市</td>
+                </tr>
+                <tr data-page-node-id="gcqLaDCHBcJmAnaXlKb3bc">
+                    <td data-page-node-id="V8NxeGTT0zhrqaE0NHn1KC">10:30</td><td class="主题" data-page-node-id="TqV3MeesHgT6p8PseGf7nv">中国前8个月外贸增长17.6%</td><td data-page-node-id="w1FyBwz3wYhASiu0f9g0YI">宏观政策</td><td data-page-node-id="xdzVEAI9fRYnv312OHSfXl">海关总署：1-8月进出口34.78万亿元，同比+17.6%；8月当月进出口4.65万亿元，同比+19.8%；8月集成电路出口+129.8%至407亿美元</td><td data-page-node-id="hxlkzg6KL9AicyocVWKTEJ">出口数据持续超预期；集成电路出口翻倍增长是最大亮点；汽车出口+43%</td><td data-page-node-id="cnoBDvs4yLrBYtNyUCpgnK">外贸、集成电路、汽车出口</td><td data-page-node-id="IZQsGD6GTgJT9djpJb4Opr">直接：中际旭创获融资买入42.51亿元居首<br data-page-node-id="ENCCdjARKpFYd6JcDREqiE">产业链：兴森科技、兆易创新、摩尔线程获主力资金净流入<br data-page-node-id="izFxmbO0OFgfsUQiJI8d8m">待核验：A股出口链业绩兑现程度</td><td class="利多" data-page-node-id="5ItcTIB4GsDPXy1c2bpTPk">利多</td><td data-page-node-id="oe4Ibflo7Txm0XgsuEOb81">中期</td><td class="tag tag-b" data-page-node-id="ZOf0nEPfnbdo0aVvwXGBJH">B</td><td data-page-node-id="8u4VAS9DfElLg2UjcfgfLM">9/11美国CPI数据对外贸预期的影响；人民币中间价6.7804（下调9点）</td>
+                </tr>
+                <tr data-page-node-id="64hrDuNSuWcc0l25MZfTkT">
+                    <td data-page-node-id="JUH8iA24OlHiJjdUanoZ8n">09:46</td><td class="主题" data-page-node-id="dtSX2GAgZDgABBejpmdjfi">河南15条房地产新政</td><td data-page-node-id="oR4FksAcIrbwDCGoHSMZyc">宏观政策</td><td data-page-node-id="FnjxHwgwDgEe7VBoYVgMME">河南9部门发文：控增量去库存优供给，推进存量商品房收购、「收旧换新」、购房补贴、贷款贴息、差异化供地管控</td><td data-page-node-id="twPSAv4J5sAVqoTABzCsKR">地方政策力度加大，但定性仍为「政策脉冲」非「基本面反转」；此前记录地产为承压方向，本轮仅限政策弹性标的</td><td data-page-node-id="Ziv4YAHu7696u9FuraVeJY">房地产、物业管理、建材</td><td data-page-node-id="GVOVXNap9OcRiRym4fatLR">直接：世联行、我爱我家、深物业A涨停<br data-page-node-id="vF7Ccxl051fkEW2A7nHMrv">情绪映射：房地产板块整体走高<br data-page-node-id="kyAx0esfnPcA5ycNYqoGJi">⚠️ 需甄别：政策弹性标的≠基本面反转</td><td class="中性" data-page-node-id="p6o9mk09in3m5B4qYmHos2">分化</td><td data-page-node-id="fSD8T3Ccv6iz8DQkPNInBR">短期</td><td class="tag tag-b" data-page-node-id="rMN0Jg0UslBD6E8EdBZOcu">B</td><td data-page-node-id="RTYYPjaTYQlHwihjqa5caj">其他省份是否跟进；8月北京二手住宅网签+4.1%是否可持续</td>
+                </tr>
+                <tr data-page-node-id="Mj0CNACV7z8ZHEPqEuhiuv">
+                    <td data-page-node-id="Bz4JgFf5KNaPdpIz8o295B">09:03</td><td class="主题" data-page-node-id="7QkUaNvoeCqMDYKNGOT0uu">小鹏机器人生产线正式启用</td><td data-page-node-id="Thgi9abD4NJE4KZmYhSGi9">科技/AI</td><td data-page-node-id="4NyDseMdBOD8YT4b2DJUVl">小鹏汽车：人形机器人完成自动化总装并自主走下产线，年底进入规模量产，2027年上市交付</td><td data-page-node-id="G4bO2LoqfPPtJj9XFcEzyN">人形机器人从「主题投资」→「量产交付+资本定价」持续升级；宇树科技东北首家具身智能产业学院同日揭牌</td><td data-page-node-id="qsxWn3Qe03z07BW94pq0Kc">人形机器人、智能驾驶</td><td data-page-node-id="UZWabHdGMyy5OaPdnh4knM">直接：宁波华翔（H1为智元远征生产1800台整机+10万台关节模组，下半年放量）<br data-page-node-id="sJNqrzuSxrt6shDZGqjDcO">间接：小鹏汽车产业链、具身智能产业链<br data-page-node-id="RUMmUl9lW7NsFLoXtmctjl">情绪映射：机器人板块</td><td class="利多" data-page-node-id="9h963o8xEFgDbrmMW0wGow">利多</td><td data-page-node-id="7L5GTp7kSjMmXM4weCb3Ru">长期</td><td class="tag tag-b" data-page-node-id="W0MqDXClQr05vRpF0F1N2v">B</td><td data-page-node-id="BNEI4Zmk9uKsEGGfvutWiN">量产进度与实际订单规模；2027年交付时间表能否兑现</td>
+                </tr>
+                <tr data-page-node-id="DNY49b4Gc57cNhU166Irm3">
+                    <td data-page-node-id="j3nPrkPgOTq4ECRm1hcrr2">10:34</td><td class="主题" data-page-node-id="WtugNC45FXS1OKpRfv2V4x">央行连续22个月增持黄金</td><td data-page-node-id="6v4C53Nh0e1wrv3bvXAZYd">利率/汇率</td><td data-page-node-id="gXuRoIlRgN4rYF0zKKroEb">我国8月外储规模稳中有升，黄金储备连续22个月增持；黄金ETF博时(+0.84%)；现货黄金站上4440美元/盎司</td><td data-page-node-id="l3Hd17Q9h5wziGcz88PTHO">⚠️ 与8/31「布伦特+3.84%而沪金-1%」「加息定价压倒避险」实证形成背离；9/3沪金+2.28%反弹已在9/4被推翻为昙花一现；本窗需验证是否再次昙花一现</td><td data-page-node-id="5x6nn2IKWF9UOjwq7lghBx">黄金、贵金属、有色</td><td data-page-node-id="9mVFl8PXkHD8GvNSdmhEME">直接：紫金矿业、江西铜业强势上涨<br data-page-node-id="LLvGppo0pgARNkwMEHMW0I">ETF：黄金ETF博时(+0.84%)、有色矿业ETF(+1.56%)<br data-page-node-id="gl2x6VlYnj5lDF0cUmBpuk">港股：潼关黄金(+6%)、中国黄金国际(+4%)</td><td class="待确认" data-page-node-id="BJBBW4GwpuaPAxvMLWakNU">待确认</td><td data-page-node-id="6Bv4ASa28wRpA17usd8CFY">待观察</td><td class="tag tag-b" data-page-node-id="RHBmWMK8cFGI2b9nn21qjq">B</td><td data-page-node-id="zOhrWKUZO07ZdJg2DqafcW">周一收盘黄金方向；CME 9月加息概率60.4%是否压制金价</td>
+                </tr>
+                <tr data-page-node-id="brbbLdIk1vFEtxeDcdIc23">
+                    <td data-page-node-id="XmPsojV3Mw2YMUXHwCCpFi">08:47</td><td class="主题" data-page-node-id="hC4TAIZR7cqWZ7xdDTt1Zo">两市融资余额增加115.28亿元</td><td data-page-node-id="wS3gmg0OM4JIyxXIgFJyJj">公司公告</td><td data-page-node-id="rdm3szUFiJ3oKkjCE7GDgD">截至9/7，两市融资余额26123.03亿元，较上日增加115.28亿元；中际旭创获买入42.51亿元居首</td><td data-page-node-id="KeXe4n84tgGMQBIA7aidoT">融资资金情绪边际回暖，但仍处相对低位；ETF资金净流出4.48亿元</td><td data-page-node-id="OqHGoyx3zDrCyNn0EOA6Pj">市场情绪、科技成长</td><td data-page-node-id="VWobq9babNeLPhS32bagZy">直接：中际旭创、长鑫科技、新易盛融资买入前三<br data-page-node-id="wwErgEHOiD5StSy5F7PH55">ETF：宽基型净流入3.00亿元，双创ETF流入157亿元</td><td class="中性" data-page-node-id="heXbzaazENz9603sTIjE4g">中性</td><td data-page-node-id="N1upyORTeoH2wXFXCrebRk">短期</td><td class="tag tag-c" data-page-node-id="ivg6EXaUWwulmJuhy9I7dT">C</td><td data-page-node-id="EM3gSkOIkMZDsHwnkEYFSM">融资余额是否持续回升；ETF资金流向变化</td>
+                </tr>
+                <tr data-page-node-id="SfZO7TT8Fa0emTs5prxg8z">
+                    <td data-page-node-id="Ni5nUB91OQFJaUE4rDOC2Z">07:56</td><td class="主题" data-page-node-id="Ek5dHLFdXMMCCAcDFDaWgz">德银警告通胀-利率预期错位</td><td data-page-node-id="LFbd0ym29K0f4GJYAxDTiK">利率/汇率</td><td data-page-node-id="2a8ZQMbk1AMGxR7ILsB4Ce">德银研究部：金融市场正面临日益加剧的脱节——通胀压力上升而央行仅有限紧缩，股票和信贷资产恐遭冲击</td><td data-page-node-id="5xLwvJo3Faa2MxfCnTH5Eh">与东方汇理「10年期美债或闯5%」警告呼应；法兴预警10Y美债5.5%为股市临界点</td><td data-page-node-id="K7FHcBKkQtHELqKaYXgO74">美股、全球股市、债券</td><td data-page-node-id="KsTQsaFptZlrsihvzNO2BU">间接：美股公用事业、高估值成长板块承压</td><td class="利空" data-page-node-id="aOZeMHaUdMvr2BMAoMRz6p">利空</td><td data-page-node-id="Rn0LyiTdCGczbNoQd0kqEO">中期</td><td class="tag tag-c" data-page-node-id="mrFBGJUfxsqitejBShDLw2">C</td><td data-page-node-id="DU3GkWI5WTGy8nKpqdOcq0">9/11美国CPI数据是否超预期；美联储9月加息概率60.4%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 主题归纳 -->
+    <div class="section" data-page-node-id="EAxh5UrdkaJhrJa7IfBwgN">
+        <div class="section-title" data-page-node-id="K2wVRbF0tioFtW8WCT83mT">三、主题归纳（按交易优先级排序）</div>
+
+        <div class="theme-card" data-page-node-id="qy8OMxyyrG9lnboKdOfC4l">
+            <h3 data-page-node-id="0bXfIjQiyS7m0zBi2S8IeF">🔴 主题一：中东地缘冲突升级 + 霍尔木兹航运危机</h3>
+            <ul data-page-node-id="id3vcHGuWTWWTH75I3WB8N">
+                <li data-page-node-id="bGPdfJGDJ7KscUjLvdyjq5"><strong data-page-node-id="yDXvSBPiX5aklOgQRWs5hA">驱动事件：</strong>美军中央司令部确认海上封锁94艘商船改变航向（08:33，2源）；Kpler数据周一霍尔木兹仅7艘通航（11:14，1源）；伊朗威胁划定「禁区」（05:51，3源）</li>
+                <li data-page-node-id="6e5OL1hfvXZF4BqsYcT18O"><strong data-page-node-id="si6t134jUkbl0ACL0KUaZp">核心变化：</strong>冲突性质从「袭扰油轮」→「主动军事封锁行动」升级；美军已要求3艘商船丧失航行能力；伊朗议长卡利巴夫9/6称进入「新抵抗模式」延续</li>
+                <li data-page-node-id="fdeHvjfmyQFpX2ysFlHVot"><strong data-page-node-id="qx2oB3FF8FQMQRZUKGJgIR">交易逻辑：</strong>供应链中断风险溢价 → 原油/成品油/航运价格上涨 → 煤化工成本传导</li>
+                <li data-page-node-id="MhAri31bEhEgbgwD05Y3yJ"><strong data-page-node-id="5Geb0QGnZyPwO07tWiP9uL">受益方向：</strong>航运（招商南油、中远海能）、石油石化（广汇能源、贵州燃气）、煤化工（甲醇+3.57%）</li>
+                <li data-page-node-id="bhtoSPCYCIjRt5y2l0UQaQ"><strong data-page-node-id="qqK62kX57F3dRHLCAiqijZ">承压方向：</strong>液冷概念（中石科技-14%）、航空（维多预测2026全球石油需求-150万桶/日）</li>
+                <li data-page-node-id="zXhsOIvlfhBHIImUe9RMzB"><strong data-page-node-id="BG1Fc1PGfVTqZaiR6u4N46">代表公司：</strong>招商南油（直接受益/航运）、广汇能源（直接受益/油气）、中石科技（情绪映射/液冷调整）</li>
+                <li data-page-node-id="r79lqaDJystQjnc1RFxpkn"><strong data-page-node-id="8lzjDeVLiQph8INkXupMsi">关键验证：</strong>霍尔木兹通航量能否回升至15+艘/日；卡塔尔LNG实际复产规模；纽约原油能否突破92美元</li>
+                <li data-page-node-id="NcJt8wEZrfu4HG2l8YoHnm"><strong data-page-node-id="QFna1Gmc40sGfbTexHbE3X">优先级：</strong>S</li>
+            </ul>
+        </div>
+
+        <div class="theme-card" data-page-node-id="AxUXFby2RxvcAQlAfYeiBs">
+            <h3 data-page-node-id="RP5UDkKjnbmq4vUdONjehT">🔵 主题二：厄尔尼诺+粮食危机预期 → 农业/粮食/化肥板块爆发</h3>
+            <ul data-page-node-id="58oB1I1pGs9kNfGMoJ6JDE">
+                <li data-page-node-id="MQ2ShCAHAzOdQ3QWS68XbB"><strong data-page-node-id="RARalGNZueCGM8OutARwml">驱动事件：</strong>WFP确认超强厄尔尼诺将形成（10:49，3源）；泰国食糖产量下降17%（10:19，1源）；粮食ETF包揽涨幅榜前10（11:31，1源）</li>
+                <li data-page-node-id="OArrinphCY6vONjDaBxYw9"><strong data-page-node-id="5bCjLURi17yitJnvFry063">核心变化：</strong>气候异常+全球粮库收紧双重催化，从「预警」进入「价格反应」阶段</li>
+                <li data-page-node-id="cnwyH7MPFFVxyzrRqPic8K"><strong data-page-node-id="FkbV0QTfYw9nVaP9imRSCC">交易逻辑：</strong>供给收缩预期 → 粮食/糖/化肥价格上涨 → 农业板块估值重估</li>
+                <li data-page-node-id="ZtBx3F8wjOF2fFygDsWKkP"><strong data-page-node-id="FnEWI1YEFucT7VKZqQb6E0">受益方向：</strong>粮食（亚盛集团4连板、中粮糖业涨停）、化肥农药（川发龙蟒、泸天化、金正大、和邦生物涨停）、糖业（*ST广糖、红棉股份涨停）</li>
+                <li data-page-node-id="vfv3K71Y3PaSlsrvYaZHCJ"><strong data-page-node-id="wd1fTmOaIt0HTYZ6hxymsF">承压方向：</strong>无明确承压方向；消费端成本压力待后续传导</li>
+                <li data-page-node-id="24tiHX8nJgdUJoUsDZDATU"><strong data-page-node-id="5jDunWXpGMQBRC6AbU9Dab">代表公司：</strong>亚盛集团（直接受益/种植业）、中粮糖业（直接受益/糖业）、川发龙蟒（直接受益/磷肥）</li>
+                <li data-page-node-id="jquTLwbdxNLEwqnsSs3ASe"><strong data-page-node-id="SFGYCpS6sQACJzwX3Uaq7O">关键验证：</strong>厄尔尼诺实际作物减产幅度；泰国食糖减产17%是否持续；粮食价格是否持续上涨</li>
+                <li data-page-node-id="1T5Iy0s0cRp44bow5nAa1U"><strong data-page-node-id="GKCMt90lM5oKIvNp7wS080">优先级：</strong>A</li>
+            </ul>
+        </div>
+
+        <div class="theme-card" data-page-node-id="eJHsgKrpsftNFBHIVkf3yE">
+            <h3 data-page-node-id="0Guo6qEPSOMQRyDePOal2B">🟢 主题三：存储超级周期实证强化 + 韩国半导体出口爆发</h3>
+            <ul data-page-node-id="0qUKgmStermB5BAITrX9ga">
+                <li data-page-node-id="q6bA3QJ56e9afmswmKZ5kr"><strong data-page-node-id="aMc0w3EebJiyDushdZCdY9">驱动事件：</strong>三星超半数4nm产能投HBM4量产（09:38，3源）；SK海力士/三星库存<10天（10:13，1源）；韩国Q2名义GDP创47年最快（07:47，2源）</li>
+                <li data-page-node-id="9J8aOtXS1P6XAidLVFeHst"><strong data-page-node-id="v9QDE8aQU0f1y5GBEHbCP9">核心变化：</strong>从「产能紧张」→「HBM4量产爬坡」进入「业绩兑现」阶段；DRAM Q2营收+385%（9/7窗口已记录）+ 韩国Q2名义GDP+1.3%形成双重实证</li>
+                <li data-page-node-id="6DtysbELx0yS1GX5gSBI7Y"><strong data-page-node-id="i5uOm7R4gWL363FfFNLC3I">交易逻辑：</strong>高端芯片供不应求 → 存储价格持续上涨 → 业绩兑现确定性高</li>
+                <li data-page-node-id="RTFnFBTNak0XInJfb1vq0v"><strong data-page-node-id="PvYkrIjalFFwkgBW8s6RXw">受益方向：</strong>存储芯片（盈新发展涨停）、PCB/先进封装（崇达技术涨停）、CPO（剑桥科技两连板）、半导体设备</li>
+                <li data-page-node-id="trE9IL8sr8bIhF1N2ykPjY"><strong data-page-node-id="mGEymfd0qc1Wq4soevG2Qh">承压方向：</strong>成熟制程晶圆代工（燕东微之前已记录-7.87%）</li>
+                <li data-page-node-id="uYfV3Kcu4oEYJYBS80AqPW"><strong data-page-node-id="2bvqCZHTXtHRgF67ymWLSs">代表公司：</strong>SK海力士（直接受益/HBM4量产）、三星电子（直接受益/HBM4量产）、盈新发展（A股直接受益/存储）、剑桥科技（A股情绪映射/CPO）</li>
+                <li data-page-node-id="gX8DC9Ub7nNahXhKS5emND"><strong data-page-node-id="YFUAcbgUrwEkq1CdPQZqEw">关键验证：</strong>HBM4实际良率/出货量；三星硅光子PIC晶圆年底前测试进度；9/11美国CPI对全球流动性预期影响</li>
+                <li data-page-node-id="lJFvk5iTiCSOSwBLHW3vgN"><strong data-page-node-id="ntpALk2205oN2p9ToS979H">优先级：</strong>A</li>
+            </ul>
+        </div>
+
+        <div class="theme-card" data-page-node-id="XwWezv8vrRt32Wt3wb1fvA">
+            <h3 data-page-node-id="D0GSUhnxuXhwgZFVCAbcZI">🟡 主题四：LME铜创历史新高 + 有色板块爆发</h3>
+            <ul data-page-node-id="XGCedDZ2iGpLIZxXsK4NM3">
+                <li data-page-node-id="AXVTsbSV8GozoaDG00YEyy"><strong data-page-node-id="4QreHEQnN58C85jd9SHQTE">驱动事件：</strong>LME铜触及14,617美元/吨历史新高（09:58，2源）；今年累计+17%；矿山供应受限+数据中心/可再生能源需求增长</li>
+                <li data-page-node-id="DfPNVzmVkWBsNlBgQntV4t"><strong data-page-node-id="tmvHdwkqwxDD0uWMRoHNor">核心变化：</strong>「铜博士」价格铁律或将被打破（镍价已低于铜价）；美国可能对精炼铜进口加征关税预期加剧短期供应紧张</li>
+                <li data-page-node-id="CGb16QeZ3bK8yUHNnG5ELM"><strong data-page-node-id="ecsV3uAyE8zCBNOx7Nmy9p">交易逻辑：</strong>供给约束+需求扩张 → 铜价中枢抬升 → 矿业龙头业绩重估</li>
+                <li data-page-node-id="nFB87aNqPoafTYBUSzuUvX"><strong data-page-node-id="xjtGUzC4V9ltF7WsIZX3Hy">受益方向：</strong>铜矿（北方铜业涨停、江西铜业+5%）、有色矿业ETF(+1.56%)</li>
+                <li data-page-node-id="uRCaSrvgs1o6aTvgF3hZRt"><strong data-page-node-id="ImLW5hcivfDOV6Ena2V3YV">承压方向：</strong>无明确承压方向；下游制造业成本压力待观察</li>
+                <li data-page-node-id="YplLoGoUaYsk4BNOQ3fLsL"><strong data-page-node-id="jOTuKVohEWtOJSHKsIOnlp">代表公司：</strong>北方铜业（直接受益/铜矿）、江西铜业（直接受益/铜矿）、紫金矿业（直接受益/金+铜双受益）</li>
+                <li data-page-node-id="3WAkG3gXen9XNtp8RG1NUh"><strong data-page-node-id="aPyNAW3xLUBPcvMnjoqbBJ">关键验证：</strong>美国对精炼铜进口加征关税政策是否落地；海外库存错配格局持续时间</li>
+                <li data-page-node-id="sVD3RiGOBwA3NTgy82GVkh"><strong data-page-node-id="RwcimYkGm5O4CK8hYxNS8m">优先级：</strong>A</li>
+            </ul>
+        </div>
+
+        <div class="theme-card" data-page-node-id="Jc0zscvKFV3SJLvrXGHUzA">
+            <h3 data-page-node-id="50O9lvQCxOV2CP7lQWlkkD">🟠 主题五：人形机器人量产交付加速</h3>
+            <ul data-page-node-id="eJtGOadbHG3Iu3I2IEVnz8">
+                <li data-page-node-id="LWtmTGVllQNJFJELA5ePnm"><strong data-page-node-id="rlNccAbtAr6OaiBEs78v2D">驱动事件：</strong>小鹏机器人生产线正式启用（09:03，2源）；东北首家具身智能产业学院在大连揭牌（11:11，2源）；宁波华翔H1为智元远征生产1800台整机+10万台关节模组</li>
+                <li data-page-node-id="03GUdjLLaX07G7KiSsAUil"><strong data-page-node-id="IExfGtCaHFX5TbiU1PlrXF">核心变化：</strong>产业从「量产交付」→「订单兑现期」持续升级；宇树科技、小鹏双龙头并行推进</li>
+                <li data-page-node-id="JZB98Ge1IVsJHXMywiSxQE"><strong data-page-node-id="38jsrJdjmCB91jeDdWmpIX">交易逻辑：</strong>量产交付加速 → 产业链业绩兑现 → 从主题投资转向业绩定价</li>
+                <li data-page-node-id="DD2opaHXC8Ujlwj1BFHCXF"><strong data-page-node-id="NxoJJsEjnM0oXu1fkChKxf">受益方向：</strong>机器人零部件（宁波华翔）、减速器（福达股份为程天科技/中坚科技批量供货）</li>
+                <li data-page-node-id="EcpFigatwuUXUatvE7wd9C"><strong data-page-node-id="vY67YT0bKin8T0vl8IWZdc">代表公司：</strong>宁波华翔（直接受益/整机代工+关节模组）、福达股份（直接受益/减速器）、小鹏汽车（直接受益/量产交付）</li>
+                <li data-page-node-id="hyyK8YDv6T4clZSntMMTXH"><strong data-page-node-id="aNhAKtb58UI3e73lBEQGJt">关键验证：</strong>量产进度与实际订单规模；2027年交付时间表能否兑现</li>
+                <li data-page-node-id="gLzXK0DxDuNh3HulQCd1lW"><strong data-page-node-id="Smx1ZaTADkrvuVvtQjw9jE">优先级：</strong>B</li>
+            </ul>
+        </div>
+
+        <div class="theme-card" data-page-node-id="NJsszjHxp4GJbfymc4O1en">
+            <h3 data-page-node-id="F2Fn2zogTUIxEy3GY5uwev">⚪ 主题六：日本加息预期升温 + 日元升6个月新高</h3>
+            <ul data-page-node-id="4aZ1NEUTcWPFI2ubec7Ddf">
+                <li data-page-node-id="MOwZuHgJxcm2HoSGtpR6fa"><strong data-page-node-id="EVWh3RU23DsgW71Gu5vCJf">驱动事件：</strong>日本7月名义工资同比+4.7%（创1997年来最大升幅，07:56，2源）；日元兑美元升破153关口（10:27，1源）</li>
+                <li data-page-node-id="5jdC4DllCJgyW94xkdvHqh"><strong data-page-node-id="e73LevEm6E5rAYYE8DVF10">核心变化：</strong>全球利率共振从「欧美扩展至亚洲」升级为「美日同步破位」；日央行9/18决议在即</li>
+                <li data-page-node-id="uIJkUpv3DcdEDTSNuGRa9k"><strong data-page-node-id="yFtGrm4VSU47MsA9ErypDJ">交易逻辑：</strong>日元升值 → 日本车企盈利承压（丰田年利润-500亿日元/1日元升值）→ 风险偏好变化</li>
+                <li data-page-node-id="2OjnM4IWfM0nXImBM3fHkr"><strong data-page-node-id="65h1HrVECIacWZuyFrajSa">受益方向：</strong>无明确受益方向；日元升值压制出口竞争力</li>
+                <li data-page-node-id="S1fL0fiA7nLEZElcrXFmTu"><strong data-page-node-id="TGHUiIPEeoYhORUgsEeJGC">承压方向：</strong>日系车企（丰田、本田）、出口导向型日本企业</li>
+                <li data-page-node-id="Yl9R7jlBCWQRiKxJq0FIn1"><strong data-page-node-id="cJbUukANtFcFyaF7qPk5kA">代表公司：</strong>丰田汽车（承压/日元升值）、小米（间接受益/花旗维持买入评级目标价34港元）</li>
+                <li data-page-node-id="kECK2d2reUdIvc7BXCVmrq"><strong data-page-node-id="si05qrG2CtgwBnhhvjANLN">关键验证：</strong>日央行9/18决议是否按预期加息；日本财务大臣是否干预汇市</li>
+                <li data-page-node-id="2mtZNsbZgN4EgnEhe7TvFA"><strong data-page-node-id="MWVVkt5GBCAgFotQrj5TnY">优先级：</strong>B</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 跨市场传导 -->
+    <div class="section" data-page-node-id="bxMFeERvGDULDK7MCFIisY">
+        <div class="section-title" data-page-node-id="Kbqbk70zZbB9pYXWExSDYD">四、跨市场传导</div>
+        <table class="传导表" data-page-node-id="lIXShb2WomGx38HmeJ038W">
+            <thead data-page-node-id="tjkBVaNE93RAmtmVrvG8ce">
+                <tr data-page-node-id="DCAoUeRVHiAyGxlLomQMoY"><th data-page-node-id="6od6rC6ihfqxlR3dKCg4R1">海外/宏观事件</th><th data-page-node-id="7KowKH0WyDYHa89mN2Twzi">美股影响</th><th data-page-node-id="2WvMebpkAAjadJwkpkjY9B">港股影响</th><th data-page-node-id="Ae4eRun1yYvXE16GEnoeS7">A股影响</th><th data-page-node-id="YxlgcLn3jQTWLq0x1YTVN2">传导路径</th><th data-page-node-id="JJOqmjsGfR4gpQkuSkhJai">强度</th><th data-page-node-id="yYgtowWFspAjd0XtguLJDT">结论</th></tr>
+            </thead>
+            <tbody data-page-node-id="kMkVvBcPB6ky18lxeiIem6">
+                <tr data-page-node-id="7inFlr5sTP4sWylmTtwAw5">
+                    <td data-page-node-id="v6TBqljT66sp1Om9vsz94D">美伊冲突升级/霍尔木兹封锁</td><td data-page-node-id="Aiyh3Oy6loBjkHHcaB029m">能源股上涨（XLE+1.5%）、航运股上涨</td><td data-page-node-id="9rKvxYCX5pym1fiqVXNGkC">油气股震荡走强（中石化+3.6%、中海油+3%）、航运股走强</td><td data-page-node-id="Jf7hflS8LGF9mFwyE1vTI3">石油ETF+1.55%、招商南油+3.37%、中远海能+2.68%、贵州燃气涨停</td><td data-page-node-id="IZYmydeko7ZgwKtwW9caV3">地缘风险溢价→原油价格上涨→航运/煤化工成本传导</td><td data-page-node-id="VkQ9NEy2ovU546cX1dNFWf">强</td><td data-page-node-id="ErC2kjDBu1VMv2BiA9F6LD">直接映射明确，能源/航运板块持续受益</td>
+                </tr>
+                <tr data-page-node-id="YvkvlTplBAB2idcvGDTqep">
+                    <td data-page-node-id="gE7RX7h9bqBXg0aqxC7hE6">韩国Q2名义GDP创47年最快</td><td data-page-node-id="0zkh1rjcWX5xvLYPNOvo9h">无明显传导（美股已定价）</td><td data-page-node-id="b2IcNYyjKQxt7XNpJRak9H">SK海力士+4.3%、三星+2.2%、韩元升23个月高位</td><td data-page-node-id="HIp8RtPVJnUiMJlZG0Zjzf">存储芯片概念延续反弹（盈新发展涨停）、科创50-0.42%（分化）</td><td data-page-node-id="2pzam6FkcHoDFEwj0L81ie">韩国半导体出口强劲→全球存储需求确认→A股存储产业链传导</td><td data-page-node-id="QvsBNtaLc6T5Hg29HjP1iI">中</td><td data-page-node-id="5EwMf8iLRH9P7hWvj7gMDQ">存储板块受益明确，但A股整体传导需经风险偏好</td>
+                </tr>
+                <tr data-page-node-id="sDOHUx3jSglLkGnVYolKY5">
+                    <td data-page-node-id="bGsXAGaHDzvOe1DBIXCABL">超强厄尔尼诺+WFP预警</td><td data-page-node-id="gBTCLrY8dtM6KqvzCuSuY4">农产品期货价格上涨（CBOT玉米/小麦+2%）</td><td data-page-node-id="JTNmbGjT4PwMnS3lJTz3e9">农产品股震荡</td><td data-page-node-id="6PgKLbkjPIxIMLB6Acwsqv">粮食ETF包揽涨幅榜前10、农业股全线爆发（亚盛4连板）、化肥农药板块集体涨停</td><td data-page-node-id="KXfcjD7np20ClzA4IGwI4M">气候异常→粮食减产预期→农产品价格上涨→农业板块估值重估</td><td data-page-node-id="1IPbIxmvBDn9aLdSZHGlwE">强</td><td data-page-node-id="wC0boC96e7EBtL8qYGlp9S">A股直接映射明确，农业/粮食/化肥板块持续受益</td>
+                </tr>
+                <tr data-page-node-id="oQWgsQCpLIdtZetLA1ReWX">
+                    <td data-page-node-id="rgYLCjTHkrU9qKV1tpso6E">LME铜创历史新高</td><td data-page-node-id="fPFFslVceyaMA37RHKJE5d">矿业股上涨（Freeport+3%）、能源股上涨</td><td data-page-node-id="fAvOgCCZ2bbu7RbQGhqGBN">有色股走强（紫金矿业+2.78%、江西铜业+4.7%）</td><td data-page-node-id="XES0CFqAvXVSGAtlYMFmqY">铜板块持续走高（北方铜业涨停、江西铜业+5%）、有色矿业ETF+1.56%</td><td data-page-node-id="rPeABMBC9rdzoI9OgTiaSx">铜价上涨→矿业龙头业绩重估→A股有色板块受益</td><td data-page-node-id="Q4b4yoiUlCdV7YXBOrKSxC">强</td><td data-page-node-id="vjBFmYsxlOlhXqbeswQ0Bj">直接映射明确，有色/铜矿板块持续受益</td>
+                </tr>
+                <tr data-page-node-id="D8Djzld7IABQImSRniiKB8">
+                    <td data-page-node-id="u26fg9bUTvUtOjS57s5eEv">日本名义工资+4.7%/日元升153</td><td data-page-node-id="FtBHbm2E7AmqLNSaiEBckm">日元升值压制美股科技股风险偏好</td><td data-page-node-id="nuhw4eoghKb4FdFezRhNgZ">无明显传导</td><td data-page-node-id="KCCAUZbmgUkQGpFra3llCr">小米涨（花旗买入评级）、日系车企承压</td><td data-page-node-id="K0U71ZemOg2eb9hPM5K2Mz">日元升值→日本车企盈利承压→风险偏好变化→A股消费电子受益</td><td data-page-node-id="XjhE8IHtcQ02qxacV8j3gz">弱</td><td data-page-node-id="3hjyG0qDxOrtrc2rxG4LNB">直接映射较弱，A股仅小米等个别标的受益</td>
+                </tr>
+                <tr data-page-node-id="Pv0WffFxdQMM03aFyrBvg3">
+                    <td data-page-node-id="y1QVw0HBU8cLOtzhGg8Yjm">CME 9月加息概率60.4%</td><td data-page-node-id="xJxQOhj0l3QBOHxMVAVXoP">美股承压（道指-0.5%、纳指-0.8%）</td><td data-page-node-id="lNh0V3bIIjsBEZSlgDtcIh">港股承压（恒指-0.63%、恒生科技-0.56%）</td><td data-page-node-id="jMvEpvrHVMgm8ON9AYgepJ">A股分化（沪指+0.36%、创业板-0.15%）、科创50-0.42%</td><td data-page-node-id="gCmlvkwl0CIiIKMqr04RoF">加息预期→美元走强→新兴市场资金流出→A股/港股风险偏好压制</td><td data-page-node-id="QX5yDb70LkhypNASz0vLFi">中</td><td data-page-node-id="tOYJsOo69sCkZy1fN8vUbR">传导路径明确但A股韧性较强，需9/11 CPI验证</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 重点交易线索 -->
+    <div class="section" data-page-node-id="eEad2JGQiWDFouzADwiDJL">
+        <div class="section-title" data-page-node-id="W5eH6YFarQuoaCMDnLcE75">五、重点交易线索</div>
+        <p style="font-size:14px;font-weight:600;color:#0f3460;margin-bottom:12px;" data-page-node-id="ohDRSg2aJXiXPEMNF4z5Gx">1. 最值得关注的3-5个事件/主题（S→A→B排序）</p>
+        <ol style="padding-left:20px;font-size:13px;line-height:2;" data-page-node-id="r2cQFrfVvhlHeCAvZKnqW7">
+            <li data-page-node-id="xQu4J8YVpRCXrGFsQ1NKS8"><strong style="color:#dc2626;" data-page-node-id="RT4EsI6HP5dXQXwfCeIdco">S级：美伊冲突升级+霍尔木兹航运危机</strong>——冲突性质从「袭扰」→「主动封锁」升级，94艘商船改变航向量化实证，布伦特96美元逼近六周高位。可交易性：强；持续性：短期（1-3交易日）。</li>
+            <li data-page-node-id="j4I32Tt8syIUAzhWs9r44q"><strong style="color:#dc2626;" data-page-node-id="ELOzr24AmlglKxaCEe7zZl">S级：存储超级周期实证强化</strong>——三星HBM4量产+SK海力士库存<10天+韩国Q2名义GDP创47年最快，三重实证叠加。可交易性：强；持续性：长期（1个月以上）。</li>
+            <li data-page-node-id="4uROPUg3NODg1MYy5KT9dS"><strong style="color:#2563eb;" data-page-node-id="EcFAxisfGTG1IUvw9sqZuM">A级：厄尔尼诺+粮食危机预期</strong>——WFP预警+泰国食糖减产17%+粮食ETF包揽涨幅榜前10。可交易性：中强；持续性：中期（1-4周）。</li>
+            <li data-page-node-id="DA45cfMSnRFHDxnpuz74dG"><strong style="color:#2563eb;" data-page-node-id="5Fsn31hBPYYvGyQ2SkcTDT">A级：LME铜创历史新高</strong>——连续4日上涨+年内+17%+美国关税预期加剧供应紧张。可交易性：中强；持续性：中期。</li>
+            <li data-page-node-id="9H7ltj2OJmCNfJCusS45UR"><strong style="color:#16a34a;" data-page-node-id="9qPUmkj2mx9C79Ifd4wWhW">B级：日本加息预期升温</strong>——名义工资+4.7%创28年新高，日央行9/18决议在即。可交易性：中；持续性：短期。</li>
+        </ol>
+
+        <p style="font-size:14px;font-weight:600;color:#0f3460;margin:16px 0 12px;" data-page-node-id="eLhl28nORukIv0KE6yhzj2">2. 最可能引发板块异动的3个方向</p>
+        <ol style="padding-left:20px;font-size:13px;line-height:2;" data-page-node-id="8HoZGKFKUjeyIKoXX2cqOS">
+            <li data-page-node-id="AjdaXklC40BhBTsdGZ79Ij"><strong data-page-node-id="BCFOzO2YiHA38jNVd9HrHT">能源/航运板块</strong>——触发因素：霍尔木兹通航量数据（每日更新）；观察标志：布伦特原油是否突破100美元、航运价格是否继续上涨50%+</li>
+            <li data-page-node-id="0n3dX11vwl64BQFTiEuZzx"><strong data-page-node-id="r0tOfnCJ9YiwFlicZfmjTq">农业/粮食板块</strong>——触发因素：厄尔尼诺实际作物减产数据（季度级）；观察标志：粮食价格是否持续上涨、WFP援助规模是否扩大</li>
+            <li data-page-node-id="yqGx1iZAwiCWLBQi19vpdI"><strong data-page-node-id="I2VQf1DWC1CFSXv9qTggc8">存储/半导体板块</strong>——触发因素：HBM4良率/出货量数据（季度级）；观察标志：三星/SK海力士季报业绩、DRAM现货价格</li>
+        </ol>
+
+        <p style="font-size:14px;font-weight:600;color:#0f3460;margin:16px 0 12px;" data-page-node-id="hcXj7i0wtODhtC61vmVk3q">3. 最具持续性的3条产业逻辑</p>
+        <ol style="padding-left:20px;font-size:13px;line-height:2;" data-page-node-id="UXgClBLLFR5O2j4mVY5DnT">
+            <li data-page-node-id="KyznFgyNauCYBDcsQCchpH"><strong data-page-node-id="6JIlGYk48MenZGlXImcj0H">存储超级周期</strong>——验证变量：DRAM Q3价格、HBM4良率/出货量、三星/SK海力士Q3季报（10月中下旬）</li>
+            <li data-page-node-id="SVh4WV4ePkFv7zjwnu3PKy"><strong data-page-node-id="6GqWFBsjxbq5pAzA3IYw8m">人形机器人量产交付</strong>——验证变量：小鹏/宇树/智元订单规模、2027年交付时间表兑现度</li>
+            <li data-page-node-id="tsOL9D9DUY5QTkG1S1cWfT"><strong data-page-node-id="I4tjvuIChSEUW5WWRrKSyS">铜价中枢抬升</strong>——验证变量：美国对精炼铜进口加征关税政策、海外库存去化速度、数据中心/可再生能源需求增速</li>
+        </ol>
+
+        <p style="font-size:14px;font-weight:600;color:#0f3460;margin:16px 0 12px;" data-page-node-id="dl3n0Lrs8cpEDUVL8gDLGc">4. 需回避或降权的方向</p>
+        <ul style="padding-left:20px;font-size:13px;line-height:2;" data-page-node-id="PyMy53Tm6v1YCCUHb0fPAr">
+            <li data-page-node-id="OAn0yT4GmtA3aO8z2ENR9x"><strong data-page-node-id="fQWOH9WZPUwCjqWOaoJfx2">液冷概念</strong>——中石科技-14%、集泰股份7天6板后波动剧烈，高位题材股风险加大</li>
+            <li data-page-node-id="CWA20femS4vac0Agl6Q8un"><strong data-page-node-id="DtcrSUVpMOSll5aFxk0vnN">高估值成长股</strong>——「加息定价压倒避险定价」实证持续生效（9/3黄金反弹已被9/4推翻），CME 9月加息概率60.4%压制风险偏好</li>
+            <li data-page-node-id="HWD65gRYuwBjZwNwE1Fsva"><strong data-page-node-id="NEGw9ZlssFoeiZIfIHQUTp">日系车企产业链</strong>——日元升6个月新高（153关口），丰田年利润-500亿日元/1日元升值，盈利承压</li>
+            <li data-page-node-id="HELbVpzAVf7NCaSWKLiyhk"><strong data-page-node-id="4SW1ga9ideKCfmq1ekc6Bz">成熟制程晶圆代工</strong>——燕东微-7.87%（此前窗口已记录），12英寸折旧压力+6/8英寸代工价格承压</li>
+        </ul>
+
+        <p style="font-size:14px;font-weight:600;color:#0f3460;margin:16px 0 12px;" data-page-node-id="vemFI9WGiZQ559iB5kDYSt">5. 低价值噪音新闻（仅列主题及归类原因）</p>
+        <ul style="padding-left:20px;font-size:12px;color:#6b7280;line-height:1.8;" data-page-node-id="ujIv3PlMfylFfLNpMlNgPn">
+            <li data-page-node-id="SPyAOJ7O4WNM7sH28caEpL">霸王茶姬开卖茶叶蛋——无明确上市公司/行业传导路径</li>
+            <li data-page-node-id="ykaFLDoJ6CCcTIsmDK2mHV">豆包担任湖北省博物馆AI讲解员——无交易价值</li>
+            <li data-page-node-id="dmBoIH4DsDWgicVb4YXHbz">波司登投资成立农业发展公司——无明确业务关联/传导路径</li>
+            <li data-page-node-id="qNMyApImf3RRprBzqt8g6n">恒而达捐赠300万元支援莆田抗洪——无交易价值</li>
+            <li data-page-node-id="Bvn00c6IOUivAi7WcwKiBE">辽宁省委社会工作部副部长被查——无市场传导</li>
+            <li data-page-node-id="837hF4OIHoAKkAF9niI0wA">张新当选中国羽毛球协会主席——无市场传导</li>
+            <li data-page-node-id="0YbezmQwFrwoiQDYAhajkh">神剑股份高管被立案调查——个案风险，无板块传导</li>
+            <li data-page-node-id="mDvoB2ZMD5SBpPlVoSXv1x">交通银行总务部副总经理被查——个案风险，无板块传导</li>
+            <li data-page-node-id="DivlCNcW19BoohTMT0VaDJ">高德回应开发扫雷榜——无交易价值</li>
+            <li data-page-node-id="6wK4kJDEAvIQkFGBLVHJAn">支付微信智能眼镜SDK上线——早期阶段，无明确业绩贡献</li>
+        </ul>
+    </div>
+
+    <!-- 交易总表 -->
+    <div class="section" data-page-node-id="eRFkcA9NYIswdFWhC9Wtyj">
+        <div class="section-title" data-page-node-id="WRl6azywW83tK20mqOKq5P">六、交易总表</div>
+        <table data-page-node-id="Wuru9qTxnq9UHpSnblpx4W">
+            <thead data-page-node-id="b1gljGhYZ3vtGqX37vrYVH">
+                <tr data-page-node-id="YgTbqwoOmtiVVUyON5URg2"><th data-page-node-id="1qM2NiDWSgtfNIAtiGWKQH">新闻主题</th><th data-page-node-id="mdLc5RTcRBxM6sBboH2oWF">事件类型</th><th data-page-node-id="e9Lpq2EjrWHPrD495bsNXc">涉及资产/板块</th><th data-page-node-id="un2lEYKjWT9c0T3zubvdU0">代表公司</th><th data-page-node-id="iI7gGzDE4B12QxmKauNpsz">影响方向</th><th data-page-node-id="fQ14lLRfNhPmncFkqmUcVP">驱动性质</th><th data-page-node-id="PU0jCNVO74kv4c6bwKKLAH">持续性</th><th data-page-node-id="LBFPdBn2ulnSpfBIdGBeeW">优先级</th><th data-page-node-id="x9GHobnAlb5jDqnogGrZ1N">关键验证点</th><th data-page-node-id="mbq8QKRFxfaCXUKVVkkFrl">备注</th></tr>
+            </thead>
+            <tbody data-page-node-id="gkpsZ5frIHRTJE6G9cx2Iu">
+                <tr data-page-node-id="sSaEubgK0AAbISWSdWZguU">
+                    <td class="主题" data-page-node-id="CRH3h04VxIQ3NFrYccmMmS">美伊冲突升级/霍尔木兹封锁</td><td data-page-node-id="B0bN08cYHquFebbJZlhmdQ">国际地缘</td><td data-page-node-id="Tv2qkpdDZEQW6d5HJbQUdR">原油、航运、成品油、煤化工</td><td data-page-node-id="jE0g6hEJsBubqxUn6UGAlU">招商南油、中远海能、广汇能源、贵州燃气</td><td class="利多" data-page-node-id="xWpxwjND5sj8wSLkgzwQtR">利多</td><td data-page-node-id="4Q1MUtQXFClRAGZdPmjGHQ">地缘风险溢价</td><td data-page-node-id="WSuUsrDEPncmSGpHHMJ1TO">短期</td><td class="tag tag-s" data-page-node-id="b6H01oZWSDfBjOGBb2JxVU">S</td><td data-page-node-id="4sWH8b4HkgOw3gkDSv96qb">霍尔木兹通航量、布伦特原油价格</td><td data-page-node-id="krQWvf4Q07Y207CR8KOTyF">冲突性质升级，94艘商船改变航向量化实证</td>
+                </tr>
+                <tr data-page-node-id="nniRNeb04dgMMznuBbKhLc">
+                    <td class="主题" data-page-node-id="2vrTrJHjKjfYlVHcJcTx73">超强厄尔尼诺+粮食危机</td><td data-page-node-id="7DmpcAzIT9KeWTXBc6dSie">行业景气</td><td data-page-node-id="Cjs6txty513twgxeE10wWS">农业、粮食、糖业、化肥、农药</td><td data-page-node-id="QM91yvFkLunju1yg75WE3s">亚盛集团、中粮糖业、川发龙蟒、泸天化</td><td class="利多" data-page-node-id="34hDJw4EaFRyY89ksB4yyh">利多</td><td data-page-node-id="C73Qg710jZ5LyK17k5PCQN">气候异常+供给收缩</td><td data-page-node-id="Wcf2PblYMuylElDIDAzSHH">中期</td><td class="tag tag-a" data-page-node-id="vPzI1MPhtJl7qO1sE4jr9D">A</td><td data-page-node-id="FDKi3a813uT9vVU1Vh7YbM">厄尔尼诺作物减产幅度、泰国食糖减产持续性</td><td data-page-node-id="u2leCAAB81lpuZVnsmK5dj">粮食ETF包揽涨幅榜前10，农业股全线爆发</td>
+                </tr>
+                <tr data-page-node-id="m9FejQKhdVFVzDAnOdVeBd">
+                    <td class="主题" data-page-node-id="5Gfll1sRlT3tJubZYvJtqG">存储超级周期实证强化</td><td data-page-node-id="FzJLOGU2fXQuakBxMzbwlf">科技/AI</td><td data-page-node-id="D9rgXd7LVEqIDqTUmkF369">半导体、存储芯片、PCB、CPO</td><td data-page-node-id="Z6kSc8zKgrFVYeco43tjUU">SK海力士、三星电子、盈新发展、剑桥科技</td><td class="利多" data-page-node-id="tuzxZLeTPN4RNQYEu5T4EE">利多</td><td data-page-node-id="AEDKkYguHIvJw5GJlUHRHK">高端芯片供不应求</td><td data-page-node-id="HwQqaiJtU1uB7psoZPisS1">长期</td><td class="tag tag-a" data-page-node-id="Q58u640Dgji0YbTEZ2tjeC">A</td><td data-page-node-id="GKiETR9BI8lc3bvzVipRnd">HBM4良率/出货量、DRAM Q3价格</td><td data-page-node-id="U1jcOiSjL6jeg9W3rNcsHt">三星超半数4nm产能投HBM4，库存<10天</td>
+                </tr>
+                <tr data-page-node-id="APtTe7r0x66GqVqtVJ6CIF">
+                    <td class="主题" data-page-node-id="llcCwLBSGX8j4duskBL8d3">LME铜创历史新高</td><td data-page-node-id="aoy0m8tz3HFALB5NP3RXvw">商品价格</td><td data-page-node-id="F99lmYEty7yWBAImHuwSC8">工业有色、铜、铝土矿</td><td data-page-node-id="63FuU8sPbYRP2r7ytVQuoh">北方铜业、江西铜业、紫金矿业</td><td class="利多" data-page-node-id="mL932W2NNF0IrJMfn7tyTk">利多</td><td data-page-node-id="uD3qGkDZgylAGX9T5Gxj5c">供给约束+需求扩张</td><td data-page-node-id="Pziz4DGYBkZmwi9FHRvw7h">中期</td><td class="tag tag-a" data-page-node-id="5smpdqrYCAfKfNJBowWwO0">A</td><td data-page-node-id="VP4AkgQFGxe1Tk0ZXRitAr">美国对精炼铜进口加征关税政策</td><td data-page-node-id="GGgSIpCmqzhJtlhY005hhN">连续4日上涨，年内+17%，「铜博士」铁律或将被打破</td>
+                </tr>
+                <tr data-page-node-id="kD0pQYAZhNV50iJL0Xiw3c">
+                    <td class="主题" data-page-node-id="hcZwkuf1AuqrDQx6mHcmGv">韩国Q2名义GDP创47年最快</td><td data-page-node-id="5oycCtmQG3d0QIeZdOHiZt">宏观政策</td><td data-page-node-id="L2RhV5A8uhEypdrS1VF8Mc">韩国股市、半导体、韩元</td><td data-page-node-id="wka23mmoLanDxPqfXZ0l01">SK海力士(+4.3%)、三星电子(+2.2%)</td><td class="待确认" data-page-node-id="pn2iG21svUdV0qNNoXgRCq">分化</td><td data-page-node-id="3YKcarcBhme2Ra5XSiyLIz">出口+AI投资双驱动</td><td data-page-node-id="m1dzMzqKyd6ykWYivm1IZy">中期</td><td class="tag tag-a" data-page-node-id="DXZcBG4lNLhHKyeh44QFof">A</td><td data-page-node-id="KYjEH7FzWHC0l1M9wtB9OE">9/11美国CPI数据；韩元是否回落至1250-1300</td><td data-page-node-id="7DXxDiyMGk4HygdksPvA9t">强数据在加息周期中可能被读作「加息理由」</td>
+                </tr>
+                <tr data-page-node-id="MAd8puUWAiYbgIn6OyCXqO">
+                    <td class="主题" data-page-node-id="uMssXJVHtx07DL5m0vdvU4">日本名义工资+4.7%/日元升153</td><td data-page-node-id="UYUc0jI37O90XHrTdQ9dAe">利率/汇率</td><td data-page-node-id="j3RpmBVFqSTI19aQYZHmqB">日元、美债、日本股市、汽车业</td><td data-page-node-id="RzTL9p1AJQhE4AiD8LKHfM">丰田（承压）、小米（间接受益）</td><td class="待确认" data-page-node-id="mECO62xt7GNLYTR2HO8AOM">待确认</td><td data-page-node-id="2RtB066GrsDcOmxGmOHXqg">工资-通胀螺旋</td><td data-page-node-id="TXfNCN3iWqsaMcvGAiOgTQ">短期</td><td class="tag tag-b" data-page-node-id="QVA94v2Vwkt9tHoJvKZ5X9">B</td><td data-page-node-id="SsxcESVVbgMAgMY4oTXaEc">日央行9/18决议；日本财务大臣是否干预</td><td data-page-node-id="FzOzxJC6tIPVZFZ2FVlbds">全球利率共振从「欧美」扩展至「亚洲」</td>
+                </tr>
+                <tr data-page-node-id="E4GLcKffyeDtbjDf4SD0wy">
+                    <td class="主题" data-page-node-id="76LdHSUP5ij0D1Aqlb5I5G">中国前8月外贸增长17.6%</td><td data-page-node-id="dDZZ5R7LP7QeYSjUdZJ3Xd">宏观政策</td><td data-page-node-id="ewHSPOblPVlvW3bQdwKyC7">外贸、集成电路、汽车出口</td><td data-page-node-id="omMH7sEpnJnhGOmUMqN5Px">中际旭创、兴森科技、兆易创新</td><td class="利多" data-page-node-id="F5lpGoNdmBmACsmIefv7nq">利多</td><td data-page-node-id="D0F4zwCkTwZwIq59t6hfMU">出口超预期</td><td data-page-node-id="PZF9BFX2OsfUTJLzeCi4Rm">中期</td><td class="tag tag-b" data-page-node-id="oye9r35mRa5zXGpOltog2Q">B</td><td data-page-node-id="lpcFanDf52UcKzvWbHvP1u">9/11美国CPI数据；人民币中间价6.7804</td><td data-page-node-id="ACICCxA9Jz7UDb6XDkAinK">集成电路出口+129.8%是最大亮点</td>
+                </tr>
+                <tr data-page-node-id="BLDHY96xNeL8yCuLqXydur">
+                    <td class="主题" data-page-node-id="89fJK3N2XSlVPczfaHuGGA">河南15条房地产新政</td><td data-page-node-id="tBnZGd47lnrlZdRVfDchvT">宏观政策</td><td data-page-node-id="XRxCyuISsvdHPWGWulOgZB">房地产、物业管理、建材</td><td data-page-node-id="bmE5SqbgxOWI48EFRhF3pl">世联行、我爱我家、深物业A</td><td class="中性" data-page-node-id="wa6pgPaPFwb5gh9s1A0DO2">分化</td><td data-page-node-id="TqwavUUimboSzbrC5f6PxE">政策脉冲</td><td data-page-node-id="HBx5dT0DDjZFc2f0NmD6sw">短期</td><td class="tag tag-b" data-page-node-id="ChK3bEIS49DTKECTR7JYV8">B</td><td data-page-node-id="ZbVehFXg362YXedota1mzC">其他省份是否跟进；8月北京二手住宅网签+4.1%</td><td data-page-node-id="4d2WizeHHL3pZZJka64xeu">定性仍为「政策脉冲」非「基本面反转」</td>
+                </tr>
+                <tr data-page-node-id="HsQjgJ3tb4hbgTbHRyzXwA">
+                    <td class="主题" data-page-node-id="F5tVPNNfNZDZkmGIh1H7mx">小鹏机器人生产线启用</td><td data-page-node-id="sXMIoWhKDP4Nk2JT6YLBDT">科技/AI</td><td data-page-node-id="3bEbShbgUqT6FTnMjwOQu3">人形机器人、智能驾驶</td><td data-page-node-id="eccmolyIMzqlLpdVSfj0vZ">宁波华翔、福达股份、小鹏汽车</td><td class="利多" data-page-node-id="CNn3cFfaYxAP6l1NivPRG3">利多</td><td data-page-node-id="b0huD3SPYcSliuV5g4EeGo">量产交付加速</td><td data-page-node-id="5BftkjcYqzNGHvEulFFos2">长期</td><td class="tag tag-b" data-page-node-id="zuHQobFc2GeTIuMrCcddy8">B</td><td data-page-node-id="IBaKXGxJI4ZIUXwJo3JMdZ">量产进度、2027年交付时间表兑现度</td><td data-page-node-id="SCsOO8BdzuTLbH0whmvusA">人形机器人从「主题投资」→「订单兑现期」升级</td>
+                </tr>
+                <tr data-page-node-id="YoM4WBMo7SCFX4ErzVU913">
+                    <td class="主题" data-page-node-id="8s8zGBhQOpknyz9dwOrjLz">央行连续22个月增持黄金</td><td data-page-node-id="jMtPVxXJdb5CLp5f1oSNWJ">利率/汇率</td><td data-page-node-id="q7FdAvlVD9IBOVRjt7YAmt">黄金、贵金属、有色</td><td data-page-node-id="R7CdIST9Lnnt4WgV73CZIu">紫金矿业、江西铜业、潼关黄金</td><td class="待确认" data-page-node-id="RVct6jsAoo1VepiRNX32Nm">待确认</td><td data-page-node-id="l6sPgrFSELM1Q9EmwuyM7v">官方储备配置</td><td data-page-node-id="fnTizobOTVjuvPTOKqMS5W">待观察</td><td class="tag tag-b" data-page-node-id="X8tNmH1bma3PWhwvtrsjeB">B</td><td data-page-node-id="IZLrjHBLNV4NShs2jN76CJ">周一收盘黄金方向；CME 9月加息概率60.4%</td><td data-page-node-id="6Wd3Rj1El7Jxpkkx06JhUR">⚠️ 与8/31「加息定价压倒避险」实证形成背离，需验证</td>
+                </tr>
+                <tr data-page-node-id="vXy4TRnCZgztI9SVqPjMxk">
+                    <td class="主题" data-page-node-id="AQaoMMO9NqjeFOuKvOcLOz">两市融资余额增加115亿</td><td data-page-node-id="KNV0FSnmdTsV9GgfV3uW1x">公司公告</td><td data-page-node-id="IUN1IAXGOnnNxY3Xe4uYWC">市场情绪、科技成长</td><td data-page-node-id="2c3FGlb7hF2aBdli5gVJyg">中际旭创、长鑫科技、新易盛</td><td class="中性" data-page-node-id="duCILo8PkhOgrh8XDddnyh">中性</td><td data-page-node-id="4eY9dReDxn8stz16UTwEr0">资金情绪边际回暖</td><td data-page-node-id="oOHz6rVyTcTpjLdWlS6WCe">短期</td><td class="tag tag-c" data-page-node-id="Dnv3VEaGHGLK1lEz0rSJDT">C</td><td data-page-node-id="5A6q9AF52XMIFA6mqf5B6c">融资余额是否持续回升；ETF资金流向</td><td data-page-node-id="jh6alRE37ezcWELVBD1Jxp">但仍处相对低位</td>
+                </tr>
+                <tr data-page-node-id="2YQ51dT1IruECb6PmYyyPs">
+                    <td class="主题" data-page-node-id="yPmkGnUAD4fi2gr2mAy88L">德银警告通胀-利率预期错位</td><td data-page-node-id="O5TEZx69o4beKrLp7qzys5">利率/汇率</td><td data-page-node-id="Srp6uiu2nCk0vF0QjuyhcE">美股、全球股市、债券</td><td data-page-node-id="MXYw7CDxi2fLRfQ4WwkVHl">间接：美股公用事业、高估值成长板块承压</td><td class="利空" data-page-node-id="uZgKcFnQzGGRRJuBmVMAVH">利空</td><td data-page-node-id="LXQSeN4Y3L1l5PHIWlkEni">预期脱节</td><td data-page-node-id="bwZ7FflDOCRudaF3j3ydyL">中期</td><td class="tag tag-c" data-page-node-id="AYAUMruI7CKSel4J1CA2lz">C</td><td data-page-node-id="Knsl1aQncnITJ8oeiQD9tI">9/11美国CPI数据；美联储9月加息概率60.4%</td><td data-page-node-id="v68lgcwPTdogdKv8rj1FLA">与东方汇理「10Y美债或闯5%」警告呼应</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 已推翻判断更新 -->
+    <div class="section" data-page-node-id="yuBxYjuTrf3ehEpuPGdQ9i">
+        <div class="section-title" data-page-node-id="tV4tHJhy2fxGfQe3diEo5y">七、已推翻/失效判断更新（本次窗口新增）</div>
+        <table data-page-node-id="heSlX62VT8r4AnOZgON28l">
+            <thead data-page-node-id="tlvuZrDsQv1b6b3WPPwtFB">
+                <tr data-page-node-id="6UnZoFp13YCZV0c4sYqeVQ"><th data-page-node-id="Q0guRKyXKYSbmoWSJBQnN8">曾记录的判断</th><th data-page-node-id="HtTBVZJ4rfqKxX6d9PxSFo">推翻时间与证据</th><th data-page-node-id="nfrZQlVaDLASIDnYqZDQqL">本次窗口状态</th></tr>
+            </thead>
+            <tbody data-page-node-id="ba2c5tCiCCT2ZHfEZRqlJ2">
+                <tr data-page-node-id="1QBOLZyEAnLcO0MwQgmCjV">
+                    <td data-page-node-id="FAgaOaS0KZhfLUl3XgMnO2">「地缘风险 → 买黄金」</td>
+                    <td data-page-node-id="zzFRrLCAXK7TgPUNAtKeoW">8/31 推翻：布伦特+3.84%而沪金-1%；9/3反弹9/4被推翻为昙花一现</td>
+                    <td class="待确认" data-page-node-id="MDusPUfafE1BIxx0bxt1YZ">待验证</td>
+                </tr>
+                <tr data-page-node-id="bONSWKsUgR440alrWEGGen">
+                    <td data-page-node-id="gvKkCiEmdp4J3FUyASkAyx">「中报强 = A 股涨」</td>
+                    <td data-page-node-id="wYm8QKcggCEaLH4RyFxbSF">9/1 推翻：韩国出口+72.5%而KOSPI -1%；日本名义GDP+1.3%而日经-0.4%</td>
+                    <td class="待确认" data-page-node-id="JrydbfaVrvGYS2RHnCsaRO">分歧未裁定</td>
+                </tr>
+                <tr data-page-node-id="5bTtsga2th8YmYaQFV1OzC">
+                    <td data-page-node-id="Ms7yx1CTfG2Eh8FTPFadFA">「黑色（焦煤焦炭）与能化同向」</td>
+                    <td data-page-node-id="TWdRLNlzkd2i4jDbc26HBr">9/1 推翻、9/2 二次实证：能化普涨而焦煤焦炭逆势跌</td>
+                    <td class="利空" data-page-node-id="KZCAwDvCGXG1cREAScq2qD">二次实证：焦煤-2% vs 原油/乙二醇+2~3%</td>
+                </tr>
+                <tr data-page-node-id="Q6I6v8DlwZOOFlhbwxzmSY">
+                    <td data-page-node-id="d5WEXvJLmKe63FjX9qukCr">「贵金属反弹 = 避险需求回归」</td>
+                    <td data-page-node-id="h9pGk7CUKiFFZnO9TeQwr0">9/4 推翻：非农+16.2万超预期→黄金-2.35%、白银-3%</td>
+                    <td class="待确认" data-page-node-id="8ao0A6Df5s7O1B23NokZoV">⚠️ 本窗出现背离信号（黄金ETF+0.84%、现货黄金4440美元），需周一验证是否为昙花一现</td>
+                </tr>
+                <tr data-page-node-id="vezOG9vKpuXGUy2TfGzqUt">
+                    <td data-page-node-id="qUM175gdkgA7VAP6MaVIxZ">「A 股相对抗跌（跌幅为日韩 1/3~1/5）」</td>
+                    <td data-page-node-id="1B6BqzCFHClC6MgkAC6x9B">8/31 推翻：科创50开盘-2.34%</td>
+                    <td class="待确认" data-page-node-id="g65eSNCmjdfUWrc4GJ6oSX">本窗A股韧性较强（沪指+0.36%），但科创50-0.42%、创业板-0.15%，分化格局持续</td>
+                </tr>
+                <tr data-page-node-id="xrhhj3EqG3X4iPesahxcjQ">
+                    <td data-page-node-id="bU1chwYxHpw3SPLgQcIEPM">「煤炭持续逆势亮点」（兖矿+47.75%、山煤+54.13%）</td>
+                    <td data-page-node-id="upcsxj5A7dQlx7sYHAmQsB">9/1 新增背离信号：焦煤/焦炭逆势跌超1%</td>
+                    <td class="待确认" data-page-node-id="hMIx3QTMSCBw30SELmHHeO">本窗煤炭板块震荡拉升（云煤能源涨停），但需重新按窗口实测，不可外推</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="warn" data-page-node-id="1ErbU2ZaykTXjFmT5Fm8ZV">⚠️ 本窗口贵金属出现反弹信号（现货黄金4440美元+0.77%、黄金ETF+0.84%），与8/31「布伦特+3.84%而沪金-1%」及9/3「沪金+2.28%→9/4被推翻」实证形成背离。若周一收盘黄金继续走强，则「加息定价压倒避险定价」范式需重新评估；若周一回落，则9/3反弹再次确认为昙花一现。</div>
+    </div>
+
+    <!-- 待跟进 -->
+    <div class="section" data-page-node-id="bCg2WMh5hCfpaRoOg0dpek">
+        <div class="section-title" data-page-node-id="YMlv4Ze6sssx29M7hLNcO7">八、待跟进事项</div>
+        <div class="highlight-box" data-page-node-id="1eGjwIMFdOxrCxMOBHfD89">
+            <strong data-page-node-id="nf591dBzyQzaHoKuGRjkio">决定性节点（按时间排序）：</strong><br data-page-node-id="itrVBoinpsQ228647oiqt8">
+            1. <strong data-page-node-id="kUUWsYRCbj8Eh7SPI7cTKj">9/9（周一）A股开盘</strong>——验证贵金属反弹是否为昙花一现、粮食/农业板块持续性、能源板块延续性<br data-page-node-id="fqCiMIBb8eRsVEuzN1ttQK">
+            2. <strong data-page-node-id="DiE1cBc7DnK9RTFyWyNMBI">9/11 美国8月CPI数据</strong>——决定性节点，影响CME 9月加息概率（当前60.4%）及全球风险偏好<br data-page-node-id="bkz1AB9AzQo3JuS8099AWu">
+            3. <strong data-page-node-id="JECRGpd67Nqh0mAJJbciC6">9/18 日央行决议</strong>——日本名义工资+4.7%支撑加息预期，关注是否按预期加息<br data-page-node-id="YGO6yIambqDU5nq84mdLze">
+            4. <strong data-page-node-id="JG3onZL1n6hVdBqCNiK2uJ">霍尔木兹通航量每日数据</strong>——Kpler周一数据7艘（5月来最低），若回升至15+艘/日则风险溢价回落<br data-page-node-id="UOxlZ38gPUtRgSpeLmJcRu">
+            5. <strong data-page-node-id="oREgKb7coCSZntIO1bceFH">三星/SK海力士Q3 HBM4良率/出货量</strong>——存储超级周期实证强化的关键验证点<br data-page-node-id="jW2it4ExB6hDwrTBvXlFfW">
+            6. <strong data-page-node-id="aZHkV9UuwhHAHl16RLDKb5">卡塔尔LNG实际复产规模</strong>——霍尔木兹风险溢价的对冲变量
+        </div>
+    </div>
+
+    <div class="footer" data-page-node-id="AB4GyzZM0mgDF1zY4FhWpI">
+        报告生成时间：2026-09-08 11:34（北京时间） | 数据来源：新浪财经 / 同花顺 / 富途牛牛 / 东方财富（华尔街见闻数据量偏低）<br data-page-node-id="THP4EIlm3hzuhHoVXDSg3f">
+        脚本采集：fetched=1459 / inWindow=1031 / mergedEvents=839 / multiSource=169 | 归档：O:/quark/automation/6小时财经快讯/
+    </div>
+</div>
+</body>
+</html>

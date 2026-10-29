@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6小时财经快讯交易筛选报告</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #1a1a1a; line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+        .header { background: linear-gradient(135deg, #1e3a5f 0%, #0d7bbd 100%); color: white; padding: 32px; border-radius: 12px; margin-bottom: 24px; }
+        .header h1 { font-size: 28px; margin-bottom: 12px; }
+        .meta { font-size: 14px; opacity: 0.9; }
+        .meta p { margin: 4px 0; }
+        .summary-box { background: white; border-left: 4px solid #0d7bbd; padding: 20px; border-radius: 8px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .summary-box h2 { font-size: 20px; margin-bottom: 16px; color: #1e3a5f; }
+        .summary-box ul { list-style: none; }
+        .summary-box li { padding: 8px 0; border-bottom: 1px solid #f0f0f0; font-size: 14px; }
+        .summary-box li:last-child { border-bottom: none; }
+        .summary-box li strong { color: #c0392b; }
+        .section { background: white; border-radius: 12px; padding: 24px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .section h2 { font-size: 20px; color: #1e3a5f; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #e8f4f8; }
+        .section h3 { font-size: 17px; color: #2c3e50; margin: 20px 0 12px; }
+        table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 12px 0; }
+        th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #e8e8e8; vertical-align: top; }
+        th { background: #f8fafc; font-weight: 600; color: #34495e; }
+        tr:hover { background: #fafcfd; }
+        .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+        .tag-s { background: #fee2e2; color: #991b1b; }
+        .tag-a { background: #fef3c7; color: #92400e; }
+        .tag-b { background: #dbeafe; color: #1e40af; }
+        .tag-c { background: #f3f4f6; color: #6b7280; }
+        .tag-long { background: #dcfce7; color: #166534; }
+        .tag-short { background: #fee2e2; color: #991b1b; }
+        .tag-neutral { background: #f3f4f6; color: #6b7280; }
+        .topic-card { background: #f8fafc; border-radius: 8px; padding: 16px; margin: 12px 0; }
+        .topic-card h4 { font-size: 16px; color: #1e3a5f; margin-bottom: 8px; }
+        .topic-card p { font-size: 14px; margin: 4px 0; }
+        .topic-card strong { color: #374151; }
+        .conclusion-table th { background: #1e3a5f; color: white; }
+        .conclusion-table tr:nth-child(even) { background: #f8fafc; }
+        .noise-list { list-style: none; font-size: 13px; color: #6b7280; }
+        .noise-list li { padding: 4px 0; }
+        .footer { text-align: center; font-size: 12px; color: #9ca3af; padding: 16px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>近6小时财经快讯交易筛选报告</h1>
+            <div class="meta">
+                <p><strong>生成时间：</strong>2026-08-28 10:17（北京时间）</p>
+                <p><strong>覆盖区间：</strong>2026-08-28 04:17 至 10:17（北京时间）</p>
+                <p><strong>已读取来源：</strong>新浪财经 / 同花顺 / 富途牛牛 / 东方财富</p>
+                <p><strong>统计：</strong>已加载新闻约 100 条；时间窗口内有效新闻约 85 条；去重后约 55 个独立事件；S级 3、A级 7、B级 10、C级 若干</p>
+            </div>
+        </div>
+
+        <div class="summary-box">
+            <h2>一、先看结论</h2>
+            <ul>
+                <li><strong>近6小时最重要变化：</strong>杰克逊霍尔年会前瞻——美联储官员通胀信号矛盾分化加剧，沃什今晚演讲成关键变量；现货金失守4600美元，多头趋势首次实质性承压。</li>
+                <li><strong>当前优先交易的1-3条主线：</strong>① 英伟达Q2财报效应持续发酵（机构目标价上修潮）+ AI算力链业绩验证；② 人形机器人产业化从"主题投资"转向"量产交付+资本定价"；③ 霍尔木兹海峡油运链风险溢价再升（两艘货船周一遭袭）。</li>
+                <li><strong>明显承压方向：</strong>贵金属高位（4600美元破位）、化工上游（乙二醇/对二甲苯跌停延续）、AI大模型概念股（Meta和解监管压力）。</li>
+                <li><strong>需次日继续验证的关键变量：</strong>沃什杰克逊霍尔演讲内容、金价能否在4600美元企稳、英伟达Q3营收1080亿指引是否兑现、Hugging Face收购案审批进度。</li>
+                <li><strong>A股传导最强：</strong>英伟达财报带动CPO/PCB/液冷板块联动（科创50+3.77%），AI算力硬件链为A股传导最强硬主线。</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>二、有效事件清单</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>时间</th>
+                        <th>事件主题</th>
+                        <th>分类</th>
+                        <th>事实摘要</th>
+                        <th>新增性/核心变量</th>
+                        <th>影响行业与资产</th>
+                        <th>上市公司映射</th>
+                        <th>影响方向</th>
+                        <th>持续性</th>
+                        <th>优先级</th>
+                        <th>需验证事项</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>07:48</td>
+                        <td>英伟达Q2财报超预期+机构目标价上修潮</td>
+                        <td>公司公告</td>
+                        <td>Q2营收962亿美元(+106%)，Q3指引1080亿美元超预期；瑞杰金融喊出515美元目标价；至少13家机构集体上调目标价</td>
+                        <td>首次明确AI算力供给短缺延续至2028财年末，长逻辑得到定价</td>
+                        <td>AI算力硬件链（CPO/PCB/液冷/服务器）</td>
+                        <td>直接受益：中际旭创（获融资买入17.72亿元居首）、胜宏科技（订单排至2027年）<br>间接受益：华正新材、沪电股份<br>情绪映射：工业富联、海光信息</td>
+                        <td><span class="tag tag-long">利多</span></td>
+                        <td>中期</td>
+                        <td><span class="tag tag-s">S</span></td>
+                        <td>Q3营收1080亿指引是否兑现</td>
+                    </tr>
+                    <tr>
+                        <td>07:42</td>
+                        <td>人形机器人产业化验证期</td>
+                        <td>行业景气</td>
+                        <td>全球双足人形机器人上半年出货量破3000台（同比+150%）；南山智尚自研高强传动腱绳实现小批量订单；三花智控仿生机器人机电执行器产品获客户好评并稳步推进批量交付</td>
+                        <td>产业从"主题投资"转向"量产交付+人才储备"双轮驱动</td>
+                        <td>人形机器人产业链（传感器/执行器/新材料）</td>
+                        <td>直接受益：三花智控、南山智尚<br>情绪映射：宇树科技-W（待核验代码）</td>
+                        <td><span class="tag tag-long">利多</span></td>
+                        <td>中期</td>
+                        <td><span class="tag tag-s">S</span></td>
+                        <td>Q3出货量数据；量产交付进度</td>
+                    </tr>
+                    <tr>
+                        <td>07:57</td>
+                        <td>霍尔木兹海峡油运链风险溢价再升</td>
+                        <td>国际地缘</td>
+                        <td>两艘货船周一遭袭；美国中央司令部确认部队已清除伊朗革命卫队布置的水雷，海峡已开放，过境交通量持续增加；5万名美军正在执行海上封锁</td>
+                        <td>风险事件频发但通航量恢复，运价创历史新高推高船东冒险动力</td>
+                        <td>油运/集运链、航运板块</td>
+                        <td>直接受益：东方海外国际（港股）<br>情绪映射：中远海能（待核验）</td>
+                        <td><span class="tag tag-long">利多</span></td>
+                        <td>短期</td>
+                        <td><span class="tag tag-a">A</span></td>
+                        <td>实际通航量变化；袭击者身份是否明确</td>
+                    </tr>
+                    <tr>
+                        <td>08:17</td>
+                        <td>美联储官员通胀信号矛盾分化</td>
+                        <td>利率/汇率/债券</td>
+                        <td>堪萨斯城联储行长施密德、克利夫兰联储行长哈马克主张加息；波士顿联储行长柯林斯认为利率仍具限制性；沃什今晚杰克逊霍尔演讲成关键变量</td>
+                        <td>央行分歧加剧，市场定价博弈升温</td>
+                        <td>美元、美债、黄金、风险资产</td>
+                        <td>A股直接映射较弱；港股医药/CXO承压（美元走强）</td>
+                        <td><span class="tag tag-neutral">中性</span></td>
+                        <td>短期</td>
+                        <td><span class="tag tag-a">A</span></td>
+                        <td>沃什演讲内容；9月加息概率变化</td>
+                    </tr>
+                    <tr>
+                        <td>07:50</td>
+                        <td>日本东京通胀加速，9月加息预期升温</td>
+                        <td>利率/汇率/债券</td>
+                        <td>东京核心CPI同比上涨1.8%，连续第三个月加速；隔夜指数掉期显示9月加息概率约82%</td>
+                        <td>强化日元升值预期，压制A股出口链</td>
+                        <td>日元、日本国债、出口导向型制造业</td>
+                        <td>A股直接映射较弱；间接影响：汽车/电子出口</td>
+                        <td><span class="tag tag-short">利空</span></td>
+                        <td>短期</td>
+                        <td><span class="tag tag-a">A</span></td>
+                        <td>日本央行9月是否如期加息</td>
+                    </tr>
+                    <tr>
+                        <td>08:58</td>
+                        <td>发改委等印发《物流网建设实施方案》</td>
+                        <td>宏观政策</td>
+                        <td>到2030年推动社会物流总费用与GDP比率降至13.1%（较"十四五"末降低0.8个百分点）</td>
+                        <td>政策催化物流降本增效，利好多式联运/冷链装备</td>
+                        <td>物流、冷链装备、多式联运</td>
+                        <td>直接受益：中铁特货（待核验）、广船国际（待核验）<br>情绪映射：顺丰控股（待核验）</td>
+                        <td><span class="tag tag-long">利多</span></td>
+                        <td>长期</td>
+                        <td><span class="tag tag-b">B</span></td>
+                        <td>政策落地节奏；企业业绩兑现情况</td>
+                    </tr>
+                    <tr>
+                        <td>08:18</td>
+                        <td>国家医保局召开医药产业高质量发展座谈会</td>
+                        <td>宏观政策</td>
+                        <td>医保"十五五"期间将推进医保综合价值评价，加大对创新药械和创新服务项目的支持</td>
+                        <td>创新药械获政策增量催化</td>
+                        <td>医药、创新药械</td>
+                        <td>直接受益：科伦药业、石药集团、中国生物制药<br>情绪映射：药明康德（待核验）</td>
+                        <td><span class="tag tag-long">利多</span></td>
+                        <td>中期</td>
+                        <td><span class="tag tag-b">B</span></td>
+                        <td>创新药械支持细则落地进度</td>
+                    </tr>
+                    <tr>
+                        <td>09:16</td>
+                        <td>台风"沙德尔"登陆浙江</td>
+                        <td>其他</td>
+                        <td>台风级（12级）8时05分在浙江台州玉环市沿海登陆，9时10分在温州龙湾区再次登陆</td>
+                        <td>对浙江沿海物流、港口运营产生短期扰动</td>
+                        <td>港口、物流、农业</td>
+                        <td>A股直接映射较弱；间接影响：浙江地区物流企业</td>
+                        <td><span class="tag tag-neutral">中性</span></td>
+                        <td>短期</td>
+                        <td><span class="tag tag-c">C</span></td>
+                        <td>台风路径变化；灾后重建需求</td>
+                    </tr>
+                    <tr>
+                        <td>07:36</td>
+                        <td>股债跷跷板效应再现</td>
+                        <td>利率/汇率/债券</td>
+                        <td>10年期国债收益率时隔十个交易日重返1.7%上方；国债期货全线收跌；科创50指数+3.77%</td>
+                        <td>资金从债市流向股市，风险偏好回升</td>
+                        <td>国债、A股权益资产</td>
+                        <td>直接受益：A股权益市场（科创50、创业板）</td>
+                        <td><span class="tag tag-long">利多</span></td>
+                        <td>短期</td>
+                        <td><span class="tag tag-b">B</span></td>
+                        <td>收益率能否持续上行；债市压力测试</td>
+                    </tr>
+                    <tr>
+                        <td>07:56</td>
+                        <td>人民币跨境支付系统覆盖192个国家</td>
+                        <td>利率/汇率/债券</td>
+                        <td>人民币跨境支付系统覆盖192个国家和地区，直接参与者210家、间接参与者1619家</td>
+                        <td>人民币国际化持续推进</td>
+                        <td>跨境支付、银行</td>
+                        <td>直接受益：中国银行、工商银行（待核验）<br>情绪映射：跨境支付概念股</td>
+                        <td><span class="tag tag-long">利多</span></td>
+                        <td>长期</td>
+                        <td><span class="tag tag-b">B</span></td>
+                        <td>跨境支付业务量增长数据</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>三、主题归纳（按交易优先级排序）</h2>
+
+            <div class="topic-card">
+                <h4>主题：AI算力硬件链（英伟达财报效应延续）</h4>
+                <p><strong>驱动事件：</strong>英伟达Q2营收962亿美元(+106%)，Q3指引1080亿美元超预期；瑞杰金融喊出515美元目标价；至少13家机构集体上调目标价</p>
+                <p><strong>核心变化：</strong>首次明确AI算力供给短缺延续至2028财年末，市场开始定价长逻辑</p>
+                <p><strong>交易逻辑：</strong>基本面（订单实锤）+ 政策面（工信部"十五五"近200项AI标准）+ 估值（业绩硬兑现）</p>
+                <p><strong>受益方向：</strong>CPO（铭普光磁涨停）、PCB（胜宏科技订单排至2027年）、液冷服务器（康盛股份4连板）、服务器（工业富联、海光信息）</p>
+                <p><strong>承压方向：</strong>高位CPO/半导体（杰普特-10%/淳中科技跌停）</p>
+                <p><strong>代表公司：</strong>中际旭创（融资买入17.72亿元）、胜宏科技（订单能见度历史高位）、康盛股份（4连板）、华正新材、沪电股份</p>
+                <p><strong>市场更可能交易：</strong>基本面 + 情绪面混合</p>
+                <p><strong>关键验证：</strong>英伟达Q3营收1080亿指引兑现情况；Hugging Face 130亿美元收购案审批进度</p>
+                <p><strong>优先级：</strong><span class="tag tag-s">S</span></p>
+            </div>
+
+            <div class="topic-card">
+                <h4>主题：人形机器人产业化验证期</h4>
+                <p><strong>驱动事件：</strong>全球双足人形机器人上半年出货量破3000台（同比+150%）；三花智控仿生机器人机电执行器获客户好评；南山智尚自研高强传动腱绳实现小批量订单</p>
+                <p><strong>核心变化：</strong>产业从"主题投资"转向"量产交付+人才储备"双轮驱动</p>
+                <p><strong>交易逻辑：</strong>产业化进度验证 + 宇树科技A股上市确立估值参照系 + 政策催化</p>
+                <p><strong>受益方向：</strong>执行器（三花智控）、新材料（南山智尚）、传感器</p>
+                <p><strong>承压方向：</strong>概念股炒作退潮后的估值回归</p>
+                <p><strong>代表公司：</strong>三花智控（直接受益）、南山智尚（直接受益）、宇树科技-W（待核验）</p>
+                <p><strong>市场更可能交易：</strong>基本面主导</p>
+                <p><strong>关键验证：</strong>Q3出货量数据；量产交付进度</p>
+                <p><strong>优先级：</strong><span class="tag tag-s">S</span></p>
+            </div>
+
+            <div class="topic-card">
+                <h4>主题：霍尔木兹海峡油运链风险溢价</h4>
+                <p><strong>驱动事件：</strong>两艘货船周一遭袭；美国中央司令部确认清除水雷，海峡已开放；5万名美军执行海上封锁</p>
+                <p><strong>核心变化：</strong>风险事件频发但通航量恢复（600-1000万桶/日），运价创历史新高</p>
+                <p><strong>交易逻辑：</strong>地缘风险溢价 + 运价飙升 + 船东冒险动力</p>
+                <p><strong>受益方向：</strong>油运、集运板块</p>
+                <p><strong>承压方向：</strong>航运成本敏感型制造业</p>
+                <p><strong>代表公司：</strong>东方海外国际（港股，直接受益）</p>
+                <p><strong>市场更可能交易：</strong>事件驱动型</p>
+                <p><strong>关键验证：</strong>实际通航量变化；袭击者身份</p>
+                <p><strong>优先级：</strong><span class="tag tag-a">A</span></p>
+            </div>
+
+            <div class="topic-card">
+                <h4>主题：贵金属多头趋势首次实质性松动</h4>
+                <p><strong>驱动事件：</strong>现货金失守4600美元/盎司，日内跌幅1.30%；纽约期金失守4640美元；SPDR Gold Trust持仓增加1.14吨</p>
+                <p><strong>核心变化：</strong>多头趋势首次出现实质性松动，美联储9月维持利率不变预期强化（63.5%）</p>
+                <p><strong>交易逻辑：</strong>美元走强 + 实际利率预期上升 + 风险偏好回升</p>
+                <p><strong>受益方向：</strong>美元资产、新兴市场货币</p>
+                <p><strong>承压方向：</strong>黄金股、贵金属高位股（西部黄金跌超8%）</p>
+                <p><strong>代表公司：</strong>西部黄金（直接承压）、山金文化（待核验）</p>
+                <p><strong>市场更可能交易：</strong>宏观驱动型</p>
+                <p><strong>关键验证：</strong>沃什杰克逊霍尔演讲内容；金价能否在4600美元企稳</p>
+                <p><strong>优先级：</strong><span class="tag tag-a">A</span></p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>四、跨市场传导</h2>
+            <table class="conclusion-table">
+                <thead>
+                    <tr>
+                        <th>海外/宏观事件</th>
+                        <th>美股影响</th>
+                        <th>港股影响</th>
+                        <th>A股影响</th>
+                        <th>传导路径</th>
+                        <th>强度</th>
+                        <th>结论</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>英伟达Q2财报超预期</td>
+                        <td>NVDA涨，科技股回暖</td>
+                        <td>港股AI概念股承压（OpenAI恢复限流）</td>
+                        <td>科创50+3.77%，CPO/PCB/液冷联动</td>
+                        <td>业绩硬兑现→供应链订单验证→A股传导</td>
+                        <td>强</td>
+                        <td>A股传导最强，AI算力硬件链为硬主线</td>
+                    </tr>
+                    <tr>
+                        <td>美联储官员通胀信号分化</td>
+                        <td>美元指数99.14，美债收益率上行</td>
+                        <td>港股医药/CXO承压（美元走强）</td>
+                        <td>股债跷跷板，10年期国债收益率重返1.7%上方</td>
+                        <td>利率预期→汇率→资金流向</td>
+                        <td>中</td>
+                        <td>沃什演讲成关键变量，待观察</td>
+                    </tr>
+                    <tr>
+                        <td>日本东京通胀加速</td>
+                        <td>日元贬值压力缓解</td>
+                        <td>间接影响出口链</td>
+                        <td>A股出口导向型制造业承压</td>
+                        <td>加息预期→日元升值→出口竞争力变化</td>
+                        <td>弱</td>
+                        <td>直接映射较弱，间接影响为主</td>
+                    </tr>
+                    <tr>
+                        <td>霍尔木兹海峡油运链风险</td>
+                        <td>油运股波动</td>
+                        <td>东方海外国际等航运股波动</td>
+                        <td>油运/集运链短线交易机会</td>
+                        <td>地缘风险→运价飙升→船东冒险动力</td>
+                        <td>中</td>
+                        <td>事件驱动型，需跟踪实际通航量</td>
+                    </tr>
+                    <tr>
+                        <td>现货金跌破4600美元</td>
+                        <td>贵金属股承压</td>
+                        <td>港股黄金股承压</td>
+                        <td>黄金股承压（西部黄金跌超8%）</td>
+                        <td>美元走强+实际利率上升→贵金属承压</td>
+                        <td>中</td>
+                        <td>多头趋势首次实质性松动，待观察</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>五、重点交易线索</h2>
+            <p><strong>1. 最值得关注的3-5个事件/主题（按S→A→B排序）：</strong></p>
+            <ol style="margin-left: 20px; font-size: 14px;">
+                <li style="padding: 6px 0;"><strong>S级：</strong>英伟达Q2财报效应持续发酵——机构目标价上修潮（至少13家），首次明确AI算力短缺延续至2028财年，A股科创50+3.77%已率先反应</li>
+                <li style="padding: 6px 0;"><strong>S级：</strong>人形机器人产业化验证期——上半年出货量破3000台（同比+150%），三花智控/南山智尚业绩兑现</li>
+                <li style="padding: 6px 0;"><strong>A级：</strong>沃什杰克逊霍尔演讲（今晚22:00）——美联储官员通胀信号矛盾分化，演讲内容成关键变量</li>
+                <li style="padding: 6px 0;"><strong>A级：</strong>霍尔木兹海峡油运链风险溢价——两艘货船周一遭袭，但通航量已恢复至600-1000万桶/日</li>
+                <li style="padding: 6px 0;"><strong>B级：</strong>日本9月加息预期升温（概率82%）——东京核心CPI连续第三个月加速</li>
+            </ol>
+
+            <p style="margin-top: 16px;"><strong>2. 最可能引发板块异动的3个方向：</strong></p>
+            <ol style="margin-left: 20px; font-size: 14px;">
+                <li style="padding: 6px 0;"><strong>CPO/光模块：</strong>英伟达财报效应+胜宏科技订单排至2027年→铭普光磁涨停、CPO概念低开高走</li>
+                <li style="padding: 6px 0;"><strong>液冷服务器：</strong>康盛股份4连板、海鸥股份2连板，AI算力基建资本开支扩张验证</li>
+                <li style="padding: 6px 0;"><strong>人形机器人产业链：</strong>出货量破3000台+三花智控/南山智尚业绩兑现→执行器/新材料板块异动</li>
+            </ol>
+
+            <p style="margin-top: 16px;"><strong>3. 最具持续性的3条产业逻辑：</strong></p>
+            <ol style="margin-left: 20px; font-size: 14px;">
+                <li style="padding: 6px 0;"><strong>AI算力硬件链涨价逻辑闭环：</strong>中钨高新Q2净利+280% → 英伟达服务器涨价超15% → 石头科技H1扣非净利+60.74%，"业绩硬、股价软"背离仍在延续</li>
+                <li style="padding: 6px 0;"><strong>人形机器人从"主题投资"转向"量产交付+资本定价"：</strong>宇树科技A股上市确立估值参照系，三花智控/南山智尚业绩兑现</li>
+                <li style="padding: 6px 0;"><strong>港股医药/CXO景气验证延续：</strong>药明合联涨超11%，CDMO在手订单同比增超五成，从订单端传向收入端</li>
+            </ol>
+
+            <p style="margin-top: 16px;"><strong>4. 需回避或降权的方向：</strong></p>
+            <ul style="margin-left: 20px; font-size: 14px;">
+                <li style="padding: 4px 0;"><strong>贵金属高位股：</strong>现货金跌破4600美元，多头趋势首次实质性松动；西部黄金跌超8%</li>
+                <li style="padding: 4px 0;"><strong>化工上游：</strong>乙二醇/对二甲苯跌停延续，需求不足现实压倒供给收缩叙事</li>
+                <li style="padding: 4px 0;"><strong>AI大模型概念股：</strong>Meta 167亿美元和解监管压力 + OpenAI恢复限流</li>
+                <li style="padding: 4px 0;"><strong>出口导向型制造业：</strong>人民币中间价调高29点至6.7811，日元升值预期升温</li>
+            </ul>
+
+            <p style="margin-top: 16px;"><strong>5. 低价值噪音新闻（主题名称 + 归类原因）：</strong></p>
+            <ul class="noise-list">
+                <li>巴西总统卢拉之子涉游说案——无上市公司关联，属外国政治新闻</li>
+                <li>谷歌2.6亿英镑和解——英国集体诉讼，对中国市场直接影响弱</li>
+                <li>三星生物制剂配股募资22亿美元——港股医药板块，但非A股直接相关</li>
+                <li>电通综研要约收购——日本上市公司并购，无A股传导路径</li>
+                <li>软银关联企业收购澳大利亚智能电表业务——海外基础设施投资，无A股映射</li>
+                <li>韩国加速布局多元题材短剧——内容产业，无明确A股标的</li>
+                <li>西藏吉隆泥石流灾害——自然灾害，无持续交易价值</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>六、交易总表</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>新闻主题</th>
+                        <th>事件类型</th>
+                        <th>涉及资产/板块</th>
+                        <th>代表公司</th>
+                        <th>影响方向</th>
+                        <th>驱动性质</th>
+                        <th>持续性</th>
+                        <th>优先级</th>
+                        <th>关键验证点</th>
+                        <th>备注</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>英伟达Q2财报超预期</td>
+                        <td>公司公告</td>
+                        <td>AI算力硬件链、CPO/PCB/液冷</td>
+                        <td>中际旭创、胜宏科技、康盛股份</td>
+                        <td><span class="tag tag-long">利多</span></td>
+                        <td>业绩硬兑现</td>
+                        <td>中期</td>
+                        <td><span class="tag tag-s">S</span></td>
+                        <td>Q3营收1080亿指引</td>
+                        <td>机构目标价上修潮（至少13家）</td>
+                    </tr>
+                    <tr>
+                        <td>人形机器人产业化验证</td>
+                        <td>行业景气</td>
+                        <td>人形机器人产业链</td>
+                        <td>三花智控、南山智尚</td>
+                        <td><span class="tag tag-long">利多</span></td>
+                        <td>量产交付+资本定价</td>
+                        <td>中期</td>
+                        <td><span class="tag tag-s">S</span></td>
+                        <td>Q3出货量数据</td>
+                        <td>上半年出货量破3000台</td>
+                    </tr>
+                    <tr>
+                        <td>霍尔木兹海峡油运链风险</td>
+                        <td>国际地缘</td>
+                        <td>油运/集运链</td>
+                        <td>东方海外国际（港股）</td>
+                        <td><span class="tag tag-long">利多</span></td>
+                        <td>事件驱动型</td>
+                        <td>短期</td>
+                        <td><span class="tag tag-a">A</span></td>
+                        <td>实际通航量变化</td>
+                        <td>两艘货船周一遭袭</td>
+                    </tr>
+                    <tr>
+                        <td>美联储官员通胀信号分化</td>
+                        <td>利率/汇率/债券</td>
+                        <td>美元、美债、黄金</td>
+                        <td>A股直接映射较弱</td>
+                        <td><span class="tag tag-neutral">中性</span></td>
+                        <td>宏观驱动型</td>
+                        <td>短期</td>
+                        <td><span class="tag tag-a">A</span></td>
+                        <td>沃什演讲内容</td>
+                        <td>今晚22:00杰克逊霍尔年会</td>
+                    </tr>
+                    <tr>
+                        <td>日本东京通胀加速</td>
+                        <td>利率/汇率/债券</td>
+                        <td>日元、出口导向型制造业</td>
+                        <td>A股直接映射较弱</td>
+                        <td><span class="tag tag-short">利空</span></td>
+                        <td>宏观驱动型</td>
+                        <td>短期</td>
+                        <td><span class="tag tag-a">A</span></td>
+                        <td>日本央行9月加息决策</td>
+                        <td>加息概率82%</td>
+                    </tr>
+                    <tr>
+                        <td>现货金跌破4600美元</td>
+                        <td>商品价格</td>
+                        <td>贵金属、黄金股</td>
+                        <td>西部黄金（承压）</td>
+                        <td><span class="tag tag-short">利空</span></td>
+                        <td>宏观驱动型</td>
+                        <td>短期</td>
+                        <td><span class="tag tag-a">A</span></td>
+                        <td>金价能否在4600美元企稳</td>
+                        <td>多头趋势首次实质性松动</td>
+                    </tr>
+                    <tr>
+                        <td>发改委物流网建设方案</td>
+                        <td>宏观政策</td>
+                        <td>物流、冷链装备、多式联运</td>
+                        <td>中铁特货（待核验）</td>
+                        <td><span class="tag tag-long">利多</span></td>
+                        <td>政策催化型</td>
+                        <td>长期</td>
+                        <td><span class="tag tag-b">B</span></td>
+                        <td>政策落地节奏</td>
+                        <td>社会物流总费用/GDP降至13.1%</td>
+                    </tr>
+                    <tr>
+                        <td>国家医保局医药产业座谈会</td>
+                        <td>宏观政策</td>
+                        <td>医药、创新药械</td>
+                        <td>科伦药业、石药集团</td>
+                        <td><span class="tag tag-long">利多</span></td>
+                        <td>政策催化型</td>
+                        <td>中期</td>
+                        <td><span class="tag tag-b">B</span></td>
+                        <td>创新药械支持细则落地</td>
+                        <td>医保"十五五"规划</td>
+                    </tr>
+                    <tr>
+                        <td>股债跷跷板效应</td>
+                        <td>利率/汇率/债券</td>
+                        <td>国债、A股权益</td>
+                        <td>科创50、创业板</td>
+                        <td><span class="tag tag-long">利多</span></td>
+                        <td>资金流向型</td>
+                        <td>短期</td>
+                        <td><span class="tag tag-b">B</span></td>
+                        <td>收益率能否持续上行</td>
+                        <td>10年期国债收益率重返1.7%上方</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="footer">
+            <p>报告生成时间：2026-08-28 10:17（北京时间） | 数据来源：新浪财经 / 同花顺 / 富途牛牛 / 东方财富</p>
+            <p>注：本报告仅供研究参考，不构成投资建议。市场有风险，投资需谨慎。</p>
+        </div>
+    </div>
+</body>
+</html>
