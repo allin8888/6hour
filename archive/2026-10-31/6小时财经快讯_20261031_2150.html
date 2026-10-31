@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6小时财经快讯</title>
+<style>
+:root{--bg:#f7f8fa;--card:#ffffff;--text:#1f2328;--muted:#5b6570;--line:#e3e6ea;--accent:#1a56db;--head:#f0f3f8;--up:#e0463e;--down:#1aa05a;--flat:#5b6570;}
+*{box-sizing:border-box;}
+body{margin:0;padding:28px 16px 60px;background:var(--bg);color:var(--text);
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+font-size:15px;line-height:1.75;}
+.wrap{max-width:1500px;margin:0 auto;background:var(--card);border:1px solid var(--line);
+border-radius:10px;padding:32px 34px 48px;box-shadow:0 1px 3px rgba(16,24,40,.05);}
+h1{font-size:26px;margin:0 0 18px;padding-bottom:14px;border-bottom:3px solid var(--accent);letter-spacing:.5px;}
+h2{font-size:20px;margin:34px 0 14px;padding-left:11px;border-left:5px solid var(--accent);}
+h3{font-size:17px;margin:26px 0 10px;color:#243b7a;}
+h4{font-size:15px;margin:18px 0 8px;color:var(--muted);}
+p{margin:9px 0;}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0;}
+ul,ol{margin:9px 0 9px 22px;padding:0;}
+li{margin:5px 0;}
+code{background:#f2f4f7;border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:13px;}
+strong{color:#0b2f6b;}
+/* MP-3/MP-4 引用块与链接 */
+blockquote{margin:10px 0;padding:8px 14px;border-left:4px solid var(--accent);background:#f8fafc;color:var(--muted);border-radius:0 6px 6px 0;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;}
+/* P1-1 目录导航 */
+.toc{background:#f8fafc;border:1px solid var(--line);border-radius:8px;padding:14px 18px;margin:0 0 26px;}
+.toc-title{font-weight:600;margin-bottom:8px;color:var(--accent);}
+.toc ul{list-style:none;margin:0;padding-left:0;}
+.toc li{margin:4px 0;}
+.toc li.lv1{font-weight:600;}
+.toc li.lv3{padding-left:18px;font-size:13.5px;color:var(--muted);}
+.toc a{color:var(--accent);text-decoration:none;}
+.toc a:hover{text-decoration:underline;}
+/* P1-2 宽表横向滚动 + 首列冻结 + 可滚动阴影提示 */
+.tw{overflow-x:auto;margin:16px 0;border:1px solid var(--line);border-radius:8px;
+box-shadow:inset -14px 0 12px -14px rgba(16,24,40,.18);}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:900px;}
+th{background:var(--head);font-weight:600;text-align:left;padding:10px 12px;border-bottom:2px solid var(--line);
+white-space:nowrap;color:#1c2b45;}
+td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;}
+table th:first-child,table td:first-child{position:sticky;left:0;z-index:2;background:var(--card);}
+table th:first-child{background:var(--head);z-index:3;}
+tbody tr:nth-child(even){background:#fafbfc;}
+tbody tr:hover{background:#f0f5ff;}
+em{color:var(--muted);font-style:italic;}
+/* P0 sparkline 价格迷你图（明暗自适应，SVG 用 var(--accent)） */
+.spark{margin:14px 0;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);}
+.spark svg{display:block;width:100%;}
+.spark-empty{color:var(--muted);font-size:13px;}
+/* P1-1 涨跌语义（A 股惯例：涨红跌绿），统一 token */
+.move-up{color:var(--up);font-weight:600;}
+.move-down{color:var(--down);font-weight:600;}
+.move-flat{color:var(--flat);}
+/* P0-2 决策卡：一眼可见的交易结论 */
+.decision-card{margin:16px 0;padding:16px 18px;border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:10px;background:linear-gradient(180deg,#fbfdff,#fff);}
+.decision-card.stance-up{border-left-color:var(--up);}
+.decision-card.stance-down{border-left-color:var(--down);}
+.decision-card.stance-flat,.decision-card.stance-watch{border-left-color:var(--muted);}
+.decision-card.stance-watch{border-left-color:#d98a00;}
+.dc-head{margin-bottom:6px;}
+.dc-stance{font-size:17px;font-weight:700;}
+.dc-stance.stance-up{color:var(--up);} .dc-stance.stance-down{color:var(--down);} .dc-stance.stance-flat,.dc-stance.stance-watch{color:var(--muted);} .dc-stance.stance-watch{color:#d98a00;}
+.dc-summary{margin:4px 0 10px;color:var(--text);}
+.dc-levels{display:flex;flex-wrap:wrap;gap:10px 18px;margin-bottom:8px;}
+.dc-kv{display:flex;flex-direction:column;}
+.dc-k{font-size:12px;color:var(--muted);}
+.dc-v{font-size:15px;font-weight:600;}
+.dc-tlabel{font-size:12px;color:var(--muted);margin:4px 0 6px;}
+.dc-tickers{display:flex;flex-wrap:wrap;gap:8px;}
+.dc-tag{background:#f2f4f7;border:1px solid var(--line);border-radius:999px;padding:2px 10px;font-size:13px;}
+.dc-tag i{color:var(--muted);font-style:normal;font-size:12px;}
+.decision-empty{color:var(--muted);border-left-color:var(--muted);}
+/* P0-2 数据不全横幅 */
+.banner-warn{margin:14px 0;padding:10px 14px;border:1px solid #f0c8c4;background:#fdf3f2;color:#b42318;border-radius:8px;font-weight:600;}
+/* P1-2 看板互链 */
+.dash-link{margin:14px 0;padding:9px 14px;border:1px solid var(--line);background:#f3f8ff;border-radius:8px;font-weight:600;}
+.dash-link a{color:var(--accent);}
+@media(prefers-color-scheme:dark){.banner-warn{background:#2a1c1b;border-color:#5b2a26;color:#ff9a8f;}.decision-card{background:linear-gradient(180deg,#1a2027,#1c2027);}.dash-link{background:#16202e;}}
+/* P2-4 移动端：表格不再强制 900px 最小宽度，表头允许换行（table 规则须置于块首） */
+@media(max-width:768px){table{min-width:0;font-size:12.5px;}th{white-space:normal;}body{padding:12px 6px;}.wrap{padding:18px 12px 32px;}h1{font-size:21px;}h2{font-size:17px;}.toc{padding:10px 12px;}}
+/* P2-2 深色模式（跟随系统） */
+@media(prefers-color-scheme:dark){
+:root{--bg:#15181d;--card:#1c2027;--text:#e6e9ef;--muted:#9aa4b2;--line:#2c323c;--accent:#6aa2ff;--head:#232a34;}
+code{background:#252b34;border-color:var(--line);}
+strong{color:#a9c6ff;}
+h3{color:#b9cdff;}
+.toc{background:#1a1f27;}
+blockquote{background:#1a1f27;}
+tbody tr:nth-child(even){background:#20252d;}
+tbody tr:hover{background:#26303d;}
+}
+/* P2-2 打印 / 导出 PDF */
+@media print{
+body{background:#fff;padding:0;}
+.wrap{border:0;box-shadow:none;max-width:none;padding:0;}
+.tw{overflow:visible;border:0;box-shadow:none;}
+table{min-width:0;font-size:11px;}
+th,td{padding:6px 8px;}
+table th:first-child,table td:first-child{position:static;}
+.toc{display:none;}
+h2{page-break-after:avoid;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="toc"><div class="toc-title">目录</div><ul><li class="lv1"><a href="#s1">近6小时财经快讯交易筛选报告（增量确认窗）</a></li><li class="lv2"><a href="#s2">〇、关注池命中与闭环命中率（路线B增强，并入）</a></li><li class="lv3"><a href="#s3">关注池命中（10/31 21:50）</a></li><li class="lv3"><a href="#s4">闭环命中率统计（跨窗聚合）</a></li><li class="lv2"><a href="#s5">一、先看结论</a></li><li class="lv2"><a href="#s6">二、主题演进闭环表（上期验证项 × 本窗结果）</a></li><li class="lv2"><a href="#s7">三、有效事件清单</a></li><li class="lv2"><a href="#s8">四、主题归纳（按交易优先级排序）</a></li><li class="lv2"><a href="#s9">五、跨市场传导</a></li><li class="lv2"><a href="#s10">六、重点交易线索</a></li></ul></nav>
+<h1 id="s1">近6小时财经快讯交易筛选报告（增量确认窗）</h1>
+<p><strong>生成时间：</strong> 2026-10-31 21:50（北京时间）</p>
+<p><strong>覆盖区间：</strong> 2026-10-31 21:44 至 21:49（北京时间，增量收敛窗——距上次执行 21:44 不足 6 小时，窗口收敛为「上次执行时刻→现在」）</p>
+<p><strong>模板版本：</strong> v2（2026-10-13 生效）</p>
+<p><strong>已读取来源：</strong> 新浪财经 / 同花顺 / 富途 / 华尔街见闻 / 东方财富。<strong>本窗数据说明</strong>：5 分钟增量内，新浪/同花顺/华尔街见闻/东方财富四源最新新闻时间戳均早于 21:44（分别为 21:41/21:40/21:42/21:36），窗口内 0 条；仅富途 2 条窗口内新闻。<strong>此非源故障</strong>，系 5 分钟增量极小、四源在该时段未发新稿，已照实标注，未静默忽略。</p>
+<p><strong>统计：</strong> 已加载新闻 580 条；时间窗口内 2 条；去重后 2 个事件；多源 0。高/中价值 0；噪音 2。</p>
+<blockquote>⚠️ <strong>本跑性质说明</strong>：上次执行（21:44）与本次触发仅相隔约 5 分钟，属近邻重复触发。按增量收敛规则窗口压缩为 21:44→21:49，仅 2 条窗口内新闻且均无交易价值。<strong>本期无新增 S/A/B 级事件</strong>，全部实质性结论（长鑫 4F² 突破、阿里×Apple 千问、霍尔木兹 risk premium、面板整合、银行重估、俄柴油禁令、X1–X8 闭环）以 21:44 主报告为准，本窗仅为增量确认，不重复展开。</blockquote>
+<h2 id="s2">〇、关注池命中与闭环命中率（路线B增强，并入）</h2>
+<blockquote>以下由 <code>run_enhance.py</code> 自动生成，数据源 <code>event_store</code> / <code>judgments.json</code>。</blockquote>
+<h3 id="s3">关注池命中（10/31 21:50）</h3>
+<div class="tw"><table><thead><tr>
+<th>标的</th>
+<th>市场/代码</th>
+<th>命中数</th>
+<th>最近命中（时间 + 摘要）</th>
+</tr></thead><tbody>
+<tr>
+<td>中际旭创</td>
+<td>A股 300308</td>
+<td>67</td>
+<td>20:44 公募头号重仓中际旭创；21:09 兴全轻资产Q3净值-23.68%跑输；21:46 近10家A股AI科技龙头集体发布经营公告</td>
+</tr>
+<tr>
+<td>贵州茅台</td>
+<td>A股 600519</td>
+<td>20</td>
+<td>18:38 前三季度茅台酒收入1129.25亿元；21:34 陈华调研茅台酒下沙生产</td>
+</tr>
+<tr>
+<td>中国海油</td>
+<td>A股 600938</td>
+<td>16</td>
+<td>18:52 海油发展前三季归母+4.38%；22:07 海油发展Q3归母+8.42%</td>
+</tr>
+<tr>
+<td>宁德时代</td>
+<td>A股 300750</td>
+<td>115</td>
+<td>21:21 华为引望加入宁德巧克力换电生态；21:24 宁德回购进展8亿元</td>
+</tr>
+<tr>
+<td>比亚迪</td>
+<td>A股 002594</td>
+<td>47</td>
+<td>19:24 比亚迪商用车与密尔克卫合作；19:49 高管回应订购10艘汽车运输船</td>
+</tr>
+<tr>
+<td>北方华创</td>
+<td>A股 002371</td>
+<td>11</td>
+<td>17:57 前三季归母53.92亿元+5.10%；20:44 公募头号重仓中际旭创</td>
+</tr>
+<tr>
+<td>兆易创新</td>
+<td>A股 603986</td>
+<td>30</td>
+<td>19:41 净利增逾9倍、私募重仓未动；20:42 近一周融资净偿还CPO/存储</td>
+</tr>
+<tr>
+<td>苹果</td>
+<td>美股 AAPL</td>
+<td>238</td>
+<td>22:00 iPhone Duo加价空间缩水；23:03 纳指100/标普500涨1%、费半涨3%</td>
+</tr>
+<tr>
+<td>费城半导体指数</td>
+<td>美股 SOX</td>
+<td>57</td>
+<td>23:02 美股延续涨势、费半涨3%；23:04 英伟达+3.11%/博通+2.83%/美光+3.4%</td>
+</tr>
+</tbody></table></div>
+<blockquote>注：关注池命中时间为 <code>event_store</code> 历史分片时间，部分晚于本窗截口（如 22:00/23:03），反映标的跨窗热度，非本窗内新增事实；本窗 2 条新闻（青海地震、伊朗外长旧表态）未触发任何关注池标的命中。</blockquote>
+<h3 id="s4">闭环命中率统计（跨窗聚合）</h3>
+<blockquote>数据源：judgments.json（权威判断库单一源）。净成立率 =（成立 + 0.5×部分成立）/（成立+部分成立+证伪+失效）。</blockquote>
+<div class="tw"><table><thead><tr>
+<th>维度</th>
+<th>成立</th>
+<th>部分成立</th>
+<th>证伪</th>
+<th>失效</th>
+<th>未知</th>
+<th>合计</th>
+<th>净成立率</th>
+</tr></thead><tbody>
+<tr>
+<td>全部</td>
+<td>2</td>
+<td>1</td>
+<td>4</td>
+<td>0</td>
+<td>0</td>
+<td>7</td>
+<td>36%</td>
+</tr>
+<tr>
+<td>其他</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>汇率/利率/贵金属</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>油价/能源</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>3</td>
+<td>50%</td>
+</tr>
+<tr>
+<td>算力/AI/半导体</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+<td>50%</td>
+</tr>
+</tbody></table></div>
+<blockquote>⚠️ 样本量 7 &lt; 10，命中率仅供参考，不宜过度解读（待积累更多窗口）。本窗无新判断入库。</blockquote>
+<hr>
+<h2 id="s5">一、先看结论</h2>
+<ul>
+<li><strong>近 5 分钟增量窗口最重要的市场变化</strong>：无。窗口内仅 2 条新闻（青海 3.4 级地震属 C 级噪音；伊朗外长「无美伊会面计划/多哈磋商」表态与上窗 21:44 已覆盖内容完全重复），经增量去重后无新增事实。
+</li>
+<li><strong>当前优先交易的 1—3 条主线</strong>：维持上窗（21:44）结论——① 国产存储（长鑫 4F² 突破，待 11/2 A股开盘定价 X3）；② 阿里×Apple 千问生态（11/4 测试）；③ 霍尔木兹 risk premium 延续偏强（待 11/4 特朗普打击落地 X4）。
+</li>
+<li><strong>明显承压或应回避的方向</strong>：维持上窗——高估值科技成长修复待验、贵金属/加密「加息主导破位」未反转、地产基本面未反转。
+</li>
+<li><strong>需次日（11/2 周一）继续验证的关键变量</strong>：维持上窗 X1（A股算力链开盘背离）、X2（内盘 SC/燃油净价）、X3（存储开盘）、X4（11/4 特朗普对伊打击）、X5（11/5 燃油附加费）、X6（面板方案）、X7（贵金属收复）、X8（俄乌油价联动）。
+</li>
+<li><strong>A股、港股、美股中哪一市场的传导最强</strong>：本窗无新增信号；上窗结论为周六休市、三市传导落点均顺延至 11/2 开盘。
+</li>
+</ul>
+<hr>
+<h2 id="s6">二、主题演进闭环表（上期验证项 × 本窗结果）</h2>
+<p>对照上一窗口（2026-10-31 21:44）X1–X8 验证项（本窗 5 分钟增量无任何相关新闻，全部「证据不足」顺延）：</p>
+<div class="tw"><table><thead><tr>
+<th>上期窗口</th>
+<th>待验证项</th>
+<th>本窗证据（时间 + 事实）</th>
+<th>裁定</th>
+<th>对交易判断的影响</th>
+</tr></thead><tbody>
+<tr>
+<td>2026-10-31 21:44</td>
+<td>X1：11/2 09:30 A股算力链开盘对美股AI重挫 vs 回购护盘背离定价</td>
+<td>本窗无相关新闻（仅青海地震+伊朗外长旧表态重复）</td>
+<td>证据不足</td>
+<td>顺延至 11/2 开盘判定，维持「头号变量」</td>
+</tr>
+<tr>
+<td>2026-10-31 21:44</td>
+<td>X2：11/2 09:00 内盘SC/燃油净价对霍尔木兹risk premium反应</td>
+<td>本窗无相关新闻</td>
+<td>证据不足</td>
+<td>顺延至 11/2 开盘确认</td>
+</tr>
+<tr>
+<td>2026-10-31 21:44</td>
+<td>X3：11/2 A股存储开盘对长鑫4F²突破+英特尔-29%背离</td>
+<td>本窗无相关新闻</td>
+<td>证据不足</td>
+<td>顺延至 11/2（⑤维持）</td>
+</tr>
+<tr>
+<td>2026-10-31 21:44</td>
+<td>X4：霍尔木兹risk premium + 11/4 特朗普对伊打击落地</td>
+<td>本窗无相关新闻（伊朗外长表态与上窗重复，无新增）</td>
+<td>证据不足</td>
+<td>顺延至 11/4 落地裁定（N2/V4/X4 偏强待验）</td>
+</tr>
+<tr>
+<td>2026-10-31 21:44</td>
+<td>X5：11/5 燃油附加费上调对航空成本传导</td>
+<td>本窗无相关新闻</td>
+<td>证据不足</td>
+<td>待 11/5 落地</td>
+</tr>
+<tr>
+<td>2026-10-31 21:44</td>
+<td>X6：面板整合方案披露（TCL华星/中环）</td>
+<td>本窗无相关新闻</td>
+<td>证据不足</td>
+<td>顺延至方案披露</td>
+</tr>
+<tr>
+<td>2026-10-31 21:44</td>
+<td>X7：贵金属3900破位后收复否+SPDR</td>
+<td>本窗无相关新闻</td>
+<td>证据不足</td>
+<td>待 11/2 内盘/外盘新价</td>
+</tr>
+<tr>
+<td>2026-10-31 21:44</td>
+<td>X8：乌恢复袭俄后俄乌谈判与油价联动</td>
+<td>本窗无相关新闻</td>
+<td>证据不足</td>
+<td>顺延待 11/2 内盘确认</td>
+</tr>
+</tbody></table></div>
+<blockquote>说明：本窗 5 分钟增量对所有 X1–X8 均无新增证据，全部「证据不足」原样带入下期继续跟踪。本窗无「全新推翻」项，已证伪五项（①金4000守 ②乌暂停袭俄 ③碳酸锂10万 ④内盘能化背离 ⑤AI硬件映射让位现金流）维持失效。</blockquote>
+<hr>
+<h2 id="s7">三、有效事件清单</h2>
+<p>近 5 分钟增量窗口内<strong>无 S/A/B 级新增事件</strong>。</p>
+<div class="tw"><table><thead><tr>
+<th>时间</th>
+<th>事件主题</th>
+<th>分类</th>
+<th>事实摘要</th>
+<th>新增性/核心变量</th>
+<th>上市公司映射</th>
+<th>影响方向/持续性</th>
+<th>优先级/需验证事项</th>
+</tr></thead><tbody>
+<tr>
+<td>21:47</td>
+<td>青海海西州唐古拉地区 3.4 级地震</td>
+<td>其他</td>
+<td>中国地震台网测定 21:38 青海海西州唐古拉地区 3.4 级地震、震源深度 10km</td>
+<td>无资产传导路径，非交易事件</td>
+<td>无</td>
+<td>无/—</td>
+<td>C｜仅记录不展开</td>
+</tr>
+<tr>
+<td>21:44</td>
+<td>伊朗外长称无美伊会面计划、多哈继续磋商</td>
+<td>国际地缘</td>
+<td>伊朗外长重申无与美官员会面计划，代表团已赴多哈就伊方条件磋商</td>
+<td>与上窗 21:44 报告已覆盖内容完全重复，增量去重后无新增事实</td>
+<td>无（与上窗 X4 相同逻辑）</td>
+<td>无新增/—</td>
+<td>C｜重复信息，不重复展开</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="s8">四、主题归纳（按交易优先级排序）</h2>
+<p>本增量窗口无新增有效事件支撑任何新主题。<strong>全部主题结论与上窗（21:44）报告一致</strong>，不再重复罗列，摘要如下（详见 21:44 主报告「四、主题归纳」）：</p>
+<ul>
+<li>国产存储超级周期（S，技术代际突破，待 11/2 A股开盘）
+</li>
+<li>阿里×Apple 千问生态（A，11/4 测试）
+</li>
+<li>霍尔木兹地缘风险溢价（A，待 11/4 特朗普打击落地）
+</li>
+<li>银行「高确定性权益资产」重估（A，风格切红利占优）
+</li>
+<li>面板整合与 OLED 产线推进（A，X6）
+</li>
+<li>AI 算力基建向被动元件/液冷下沉（B）
+</li>
+</ul>
+<hr>
+<h2 id="s9">五、跨市场传导</h2>
+<p>本增量窗口无新增跨市场传导事件。<strong>上窗（21:44）已列示的传导路径（长鑫存储→A股存储链、阿里×Apple→港股阿里/美股苹果、霍尔木兹→三桶油/内盘原油、俄柴油禁令→成品油、银行重估→A股银行、国新诚通→国家队托底）维持不变</strong>，本窗无新证据需修正。</p>
+<hr>
+<h2 id="s10">六、重点交易线索</h2>
+<ol>
+<li><strong>最值得关注的 3—5 个事件/主题（按 S→A→B，维持上窗）：</strong> S 长鑫 4F² DRAM 突破；A 阿里×Apple 千问集成；A 霍尔木兹 risk premium；A 银行重估；A 俄柴油禁令。本窗无新增。
+</li>
+<li><strong>最可能引发板块异动的 3 个方向（维持上窗）：</strong> 国产存储链（11/2 开盘）、三桶油/内盘原油（11/2 09:00 净价）、银行板块（11/2 开盘相对收益）。
+</li>
+<li><strong>最具持续性的 3 条产业逻辑（维持上窗）：</strong> 存储超级周期（长鑫量产/美光HBM价格/A股存储Q4）、霍尔木兹地缘（11/4 特朗普打击/Brent守90+/内盘SC净价）、风格切红利占优（11/2 结构/公募持仓/ETF流入）。
+</li>
+<li><strong>需回避或降权的方向（维持上窗）：</strong> 高估值科技成长修复待验、贵金属/加密加息主导破位未反转、地产基本面未反转；傅成玉被查（中石化原董事长，已退休）属低价值治理信号，不展开。
+</li>
+<li><strong>低价值噪音新闻（本窗仅 2 条）：</strong> 青海 3.4 级地震（无资产传导）；伊朗外长旧表态（与上窗重复）。均不交易。
+</li>
+</ol>
+<hr>
+<blockquote><strong>纪律声明</strong>：本窗为近邻重复触发的 5 分钟增量确认，统计照抄 <code>fetch_6h.js</code>/<code>condense2.js</code> 真实输出（已加载 580 / 窗口内 2 / 去重 2 / 多源 0），未估算。实质性结论以 2026-10-31 21:44 主报告为准。已失效判断五项维持失效，本窗无新推翻。</blockquote>
+</div>
+</body>
+</html>
